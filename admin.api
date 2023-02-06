@@ -1,0 +1,13 @@
+syntax = "v1"
+
+info(
+    title: "后台管理系统"
+    desc: "标准后台管理系统，用户-角色-权限，jwt，casbin"
+    author: "master joy"
+)
+
+import "api/login.api"
+import "api/user.api"
+import "api/role.api"
+import "api/auth.api"
+import "api/base.api"

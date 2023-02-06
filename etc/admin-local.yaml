@@ -1,0 +1,26 @@
+Server:
+  Name: admin
+  Host: 0.0.0.0
+  Port: 8888
+
+Jwt:
+  Secret: 99fb6dae-caa4-45d1-8635-8ce8e2078d76
+  Expire: 24
+
+Log:
+  Dir: /var/logs/admin-template
+  Level: debug
+
+Mysql:
+  Host: 127.0.0.1
+  Port: 3306
+  User: root
+  Pwd: 123456
+  Db: admin-template
+
+Redis:
+  Host: 127.0.0.1
+  Port: 6379
+  User:
+  Pwd:
+  Db: 0

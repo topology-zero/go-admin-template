@@ -1,0 +1,66 @@
+syntax = "v1"
+
+type (
+    AuthListResponse {
+        Tree []Auth `json:"tree"` // 节点树
+    }
+
+    Auth {
+        Id int `json:"id"`
+        Pid int `json:"pid"`
+        Key string `json:"key"`       // 权限标识
+        Name string `json:"name"`     // 节点名
+        IsMenu int `json:"isMenu"`    // 是否是菜单栏 0：否 1：是
+        Api string `json:"api"`       // 接口
+        Action string `json:"action"` // 操作方法
+        Child []Auth `json:"child"`   // 子节点
+    }
+
+    AuthAddRequest {
+        Pid int `json:"pid" binding:"min=0"`
+        Name string `json:"name" binding:"required"`      // 节点名
+        Key string `json:"key" binding:"required"`        // 权限标识
+        IsMenu int `json:"isMenu" binding:"oneof=0 1"`    // 是否是菜单栏 0：否 1：是
+        Api string `json:"api"`                           // 接口
+        Action string `json:"action"`                     // 操作方法
+    }
+
+    AuthEditRequest {
+        Id int `path:"id"`
+        Pid int `json:"pid"  binding:"min=0"`
+        Key string `json:"key" binding:"required"`        // 权限标识
+        Name string `json:"name" binding:"required"`      // 节点名
+        IsMenu int `json:"isMenu" binding:"oneof=0 1"`    // 是否是菜单栏 0：否 1：是
+        Api string `json:"api"`                           // 接口
+        Action string `json:"action"`                     // 操作方法
+    }
+
+    AuthDeleteRequest {
+        Id int `path:"id"`
+    }
+)
+
+@server(
+    jwt: Jwt
+    middleware: Auth
+    group: adminAuth
+    swtags: 后台权限相关
+)
+
+service admin {
+    @doc "权限列表"
+    @handler list
+    get /auth returns (AuthListResponse)
+
+    @doc "添加权限"
+    @handler add
+    post /auth (AuthAddRequest)
+
+    @doc "编辑权限"
+    @handler edit
+    put /auth/:id (AuthEditRequest)
+
+    @doc "删除权限"
+    @handler del
+    delete /auth/:id (AuthDeleteRequest)
+}

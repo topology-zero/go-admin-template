@@ -1,0 +1,38 @@
+syntax = "v1"
+
+type (
+    CodeResponse {
+        Id string `json:"id"`       // 在登录时提交
+        Image string `json:"image"` // 验证码 base64 格式
+    }
+
+    LoginRequest {
+        Username string `json:"username" binding:"required"`       // 用户名
+        Password string `json:"password" binding:"required,min=6"` // 密码
+        Code string `json:"code" binding:"required,len=4"`         // 验证码
+        CodeId string `json:"codeId" binding:"required"`           // 获取验证码时的ID
+    }
+
+    LoginResponse {
+        Jwt string `json:"jwt"` // jwt 凭证
+    }
+)
+
+@server(
+    group: adminLogin
+    swtags: 登录相关
+)
+
+service admin {
+    @doc "获取验证码"
+    @handler code
+    get /code returns (CodeResponse)
+
+    @doc "登录"
+    @handler login
+    post /login (LoginRequest) returns (LoginResponse)
+
+    @doc "退出登录"
+    @handler logout
+    post /logout
+}

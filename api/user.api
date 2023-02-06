@@ -1,0 +1,90 @@
+syntax = "v1"
+
+type (
+    UserListRequest {
+        Page int `form:"page"`         // 分页
+        PageSize int `form:"pageSize"` // 每页条数
+    }
+
+    UserListResponse {
+        Page int `json:"page"`         // 分页
+        PageSize int `json:"pageSize"` // 每页条数
+        Total int `json:"total"`       // 总条数
+        Data []UserList `json:"data"`  // 具体数据
+    }
+
+    UserList {
+        Id int `json:"id"`
+        Username string `json:"username"` // 用户名
+        Realname string `json:"realname"` // 真实姓名
+        Rolename string `json:"rolename"` // 角色名
+        Status int `json:"status"`        // 状态 0:未启用 1:正常
+        Phone string `json:"phone"`       // 手机号
+    }
+
+    UserDetailRequest {
+        Id int `path:"id"`
+    }
+
+    UserDetailResponse {
+        Id int `json:"id"`
+        Username string `json:"username"` // 用户名
+        Realname string `json:"realname"` // 真实姓名
+        Phone string `json:"phone"`       // 手机号
+        RoleId int `json:"roleId"`        // 角色ID
+        Status int `json:"status"`        // 状态 0:未启用 1:正常
+    }
+
+    UserAddRequest {
+        Username string `json:"username" binding:"required"`               // 用户名
+        Realname string `json:"realname" binding:"required"`               // 真实姓名
+        Phone string `json:"phone" binding:"required"`                     // 手机号
+        RoleId int `json:"roleId" binding:"required"`                      // 角色ID
+        Password string `json:"password" binding:"required,min=6,max=255"` // 密码
+        Status int `json:"status" binding:"oneof=0 1"`                      // 状态 0:未启用 1:正常
+    }
+
+    UserEditRequest {
+        Id int `path:"id"`
+        Username string `json:"username" binding:"required"` // 用户名
+        Realname string `json:"realname" binding:"required"` // 真实姓名
+        Phone string `json:"phone" binding:"required"`       // 手机号
+        RoleId int `json:"roleId" binding:"required"`        // 角色ID
+        Password string `json:"password"`                    // 密码
+        Status int `json:"status" binding:"oneof=0 1"`        // 状态 0:未启用 1:正常
+    }
+
+    UserDeleteRequest {
+        Id int `path:"id"`
+    }
+)
+
+@server(
+    jwt: Jwt
+    middleware: Auth
+    group: adminUser
+    swtags: 后台用户相关
+)
+
+service admin {
+
+    @doc "用户列表"
+    @handler list
+    get /user (UserListRequest) returns (UserListResponse)
+
+    @doc "用户详情"
+    @handler detail
+    get /user/:id (UserDetailRequest) returns (UserDetailResponse)
+
+    @doc "添加用户"
+    @handler add
+    post /user (UserAddRequest)
+
+    @doc "编辑用户"
+    @handler edit
+    put /user/:id (UserEditRequest)
+
+    @doc "删除用户"
+    @handler del
+    delete /user/:id (UserDeleteRequest)
+}

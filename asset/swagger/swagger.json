@@ -1,0 +1,1370 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "后台管理系统",
+    "description": "标准后台管理系统，用户-角色-权限，jwt，casbin",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth": {
+      "get": {
+        "summary": "权限列表",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AuthListResponse"
+            }
+          }
+        },
+        "tags": [
+          "后台权限相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "添加权限",
+        "operationId": "add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthAddRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台权限相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/auth/{id}": {
+      "delete": {
+        "summary": "删除权限",
+        "operationId": "del",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthDeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台权限相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "编辑权限",
+        "operationId": "edit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthEditRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台权限相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/base/auth": {
+      "get": {
+        "summary": "获取所有权限",
+        "operationId": "auth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/BaseAuthResponse"
+            }
+          }
+        },
+        "tags": [
+          "基础接口相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/base/changeSelfPwd": {
+      "post": {
+        "summary": "修改自己的密码",
+        "operationId": "changeSelfPwd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeSelfPwdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "基础接口相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/base/role": {
+      "get": {
+        "summary": "获取所有角色",
+        "operationId": "role",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/BaseRoleResponse"
+            }
+          }
+        },
+        "tags": [
+          "基础接口相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/base/userInfo": {
+      "get": {
+        "summary": "获取用户信息",
+        "operationId": "userInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserInfoResponse"
+            }
+          }
+        },
+        "tags": [
+          "基础接口相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/code": {
+      "get": {
+        "summary": "获取验证码",
+        "operationId": "code",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/CodeResponse"
+            }
+          }
+        },
+        "tags": [
+          "登录相关"
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "登录",
+        "operationId": "login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "登录相关"
+        ]
+      }
+    },
+    "/logout": {
+      "post": {
+        "summary": "退出登录",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "tags": [
+          "登录相关"
+        ]
+      }
+    },
+    "/role": {
+      "get": {
+        "summary": "角色列表",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RoleListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "description": " 分页",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": " 每页条数",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "后台角色相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "添加角色",
+        "operationId": "add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAddRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台角色相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/role/{id}": {
+      "get": {
+        "summary": "角色详情",
+        "operationId": "detail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RoleDetailResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "后台角色相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "删除角色",
+        "operationId": "del",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleDeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台角色相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "编辑角色",
+        "operationId": "edit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleEditRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台角色相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/user": {
+      "get": {
+        "summary": "用户列表",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "description": " 分页",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": " 每页条数",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "后台用户相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "添加用户",
+        "operationId": "add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserAddRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台用户相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "用户详情",
+        "operationId": "detail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserDetailResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "后台用户相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "删除用户",
+        "operationId": "del",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserDeleteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台用户相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "编辑用户",
+        "operationId": "edit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {}
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserEditRequest"
+            }
+          }
+        ],
+        "tags": [
+          "后台用户相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Auth": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "key": {
+          "type": "string",
+          "description": " 权限标识"
+        },
+        "name": {
+          "type": "string",
+          "description": " 节点名"
+        },
+        "isMenu": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 是否是菜单栏 0：否 1：是"
+        },
+        "api": {
+          "type": "string",
+          "description": " 接口"
+        },
+        "action": {
+          "type": "string",
+          "description": " 操作方法"
+        },
+        "child": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Auth"
+          },
+          "description": " 子节点"
+        }
+      },
+      "title": "Auth",
+      "required": [
+        "id",
+        "pid",
+        "key",
+        "name",
+        "isMenu",
+        "api",
+        "action",
+        "child"
+      ]
+    },
+    "AuthAddRequest": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": " 节点名"
+        },
+        "key": {
+          "type": "string",
+          "description": " 权限标识"
+        },
+        "isMenu": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 是否是菜单栏 0：否 1：是"
+        },
+        "api": {
+          "type": "string",
+          "description": " 接口"
+        },
+        "action": {
+          "type": "string",
+          "description": " 操作方法"
+        }
+      },
+      "title": "AuthAddRequest",
+      "required": [
+        "pid",
+        "min=0",
+        "name",
+        "key",
+        "isMenu",
+        "oneof=0 1",
+        "api",
+        "action"
+      ]
+    },
+    "AuthDeleteRequest": {
+      "type": "object",
+      "title": "AuthDeleteRequest"
+    },
+    "AuthEditRequest": {
+      "type": "object",
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "key": {
+          "type": "string",
+          "description": " 权限标识"
+        },
+        "name": {
+          "type": "string",
+          "description": " 节点名"
+        },
+        "isMenu": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 是否是菜单栏 0：否 1：是"
+        },
+        "api": {
+          "type": "string",
+          "description": " 接口"
+        },
+        "action": {
+          "type": "string",
+          "description": " 操作方法"
+        }
+      },
+      "title": "AuthEditRequest",
+      "required": [
+        "pid",
+        "min=0",
+        "key",
+        "name",
+        "isMenu",
+        "oneof=0 1",
+        "api",
+        "action"
+      ]
+    },
+    "AuthListResponse": {
+      "type": "object",
+      "properties": {
+        "tree": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Auth"
+          },
+          "description": " 节点树"
+        }
+      },
+      "title": "AuthListResponse",
+      "required": [
+        "tree"
+      ]
+    },
+    "BaseAuth": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": " 节点名"
+        },
+        "child": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseAuth"
+          },
+          "description": " 子节点"
+        }
+      },
+      "title": "BaseAuth",
+      "required": [
+        "id",
+        "pid",
+        "name",
+        "child"
+      ]
+    },
+    "BaseAuthResponse": {
+      "type": "object",
+      "properties": {
+        "tree": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseAuth"
+          },
+          "description": " 节点树"
+        }
+      },
+      "title": "BaseAuthResponse",
+      "required": [
+        "tree"
+      ]
+    },
+    "BaseRole": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "BaseRole",
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "BaseRoleResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseRole"
+          }
+        }
+      },
+      "title": "BaseRoleResponse",
+      "required": [
+        "data"
+      ]
+    },
+    "ChangeSelfPwdRequest": {
+      "type": "object",
+      "properties": {
+        "oldPassword": {
+          "type": "string",
+          "description": " 老密码"
+        },
+        "newPassword": {
+          "type": "string",
+          "description": " 新密码"
+        },
+        "confirmPassword": {
+          "type": "string",
+          "description": " 确认密码"
+        }
+      },
+      "title": "ChangeSelfPwdRequest",
+      "required": [
+        "oldPassword",
+        "required",
+        "newPassword",
+        "confirmPassword"
+      ]
+    },
+    "CodeResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": " 在登录时提交"
+        },
+        "image": {
+          "type": "string",
+          "description": " 验证码 base64 格式"
+        }
+      },
+      "title": "CodeResponse",
+      "required": [
+        "id",
+        "image"
+      ]
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "password": {
+          "type": "string",
+          "description": " 密码"
+        },
+        "code": {
+          "type": "string",
+          "description": " 验证码"
+        },
+        "codeId": {
+          "type": "string",
+          "description": " 获取验证码时的ID"
+        }
+      },
+      "title": "LoginRequest",
+      "required": [
+        "username",
+        "password",
+        "required",
+        "code",
+        "codeId"
+      ]
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string",
+          "description": " jwt 凭证"
+        }
+      },
+      "title": "LoginResponse",
+      "required": [
+        "jwt"
+      ]
+    },
+    "RoleAddRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": " 角色名"
+        },
+        "auth": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": " 权限ID"
+        }
+      },
+      "title": "RoleAddRequest",
+      "required": [
+        "name",
+        "auth",
+        "required"
+      ]
+    },
+    "RoleDeleteRequest": {
+      "type": "object",
+      "title": "RoleDeleteRequest"
+    },
+    "RoleDetailRequest": {
+      "type": "object",
+      "title": "RoleDetailRequest"
+    },
+    "RoleDetailResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": " 角色名"
+        },
+        "auth": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": " 权限ID"
+        }
+      },
+      "title": "RoleDetailResponse",
+      "required": [
+        "id",
+        "name",
+        "auth"
+      ]
+    },
+    "RoleEditRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": " 角色名"
+        },
+        "auth": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": " 权限ID"
+        }
+      },
+      "title": "RoleEditRequest",
+      "required": [
+        "name",
+        "auth",
+        "required"
+      ]
+    },
+    "RoleList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": " 角色名"
+        }
+      },
+      "title": "RoleList",
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "RoleListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 分页"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 每页条数"
+        }
+      },
+      "title": "RoleListRequest",
+      "required": [
+        "page",
+        "pageSize"
+      ]
+    },
+    "RoleListResponse": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 分页"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 每页条数"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 总条数"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleList"
+          },
+          "description": " 具体数据"
+        }
+      },
+      "title": "RoleListResponse",
+      "required": [
+        "page",
+        "pageSize",
+        "total",
+        "data"
+      ]
+    },
+    "UserAddRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "realname": {
+          "type": "string",
+          "description": " 真实姓名"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 角色ID"
+        },
+        "password": {
+          "type": "string",
+          "description": " 密码"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 状态 0:未启用 1:正常"
+        }
+      },
+      "title": "UserAddRequest",
+      "required": [
+        "username",
+        "realname",
+        "phone",
+        "roleId",
+        "password",
+        "required",
+        "status",
+        "oneof=0 1"
+      ]
+    },
+    "UserDeleteRequest": {
+      "type": "object",
+      "title": "UserDeleteRequest"
+    },
+    "UserDetailRequest": {
+      "type": "object",
+      "title": "UserDetailRequest"
+    },
+    "UserDetailResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "realname": {
+          "type": "string",
+          "description": " 真实姓名"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 角色ID"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 状态 0:未启用 1:正常"
+        }
+      },
+      "title": "UserDetailResponse",
+      "required": [
+        "id",
+        "username",
+        "realname",
+        "phone",
+        "roleId",
+        "status"
+      ]
+    },
+    "UserEditRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "realname": {
+          "type": "string",
+          "description": " 真实姓名"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 角色ID"
+        },
+        "password": {
+          "type": "string",
+          "description": " 密码"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 状态 0:未启用 1:正常"
+        }
+      },
+      "title": "UserEditRequest",
+      "required": [
+        "username",
+        "realname",
+        "phone",
+        "roleId",
+        "password",
+        "status",
+        "oneof=0 1"
+      ]
+    },
+    "UserInfoResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 用户ID"
+        },
+        "username": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "realname": {
+          "type": "string",
+          "description": " 真实姓名"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
+        },
+        "rolename": {
+          "type": "string",
+          "description": " 角色名"
+        },
+        "authkeys": {
+          "type": "string",
+          "description": " 角色权限KEY"
+        }
+      },
+      "title": "UserInfoResponse",
+      "required": [
+        "id",
+        "username",
+        "realname",
+        "phone",
+        "rolename",
+        "authkeys"
+      ]
+    },
+    "UserList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string",
+          "description": " 用户名"
+        },
+        "realname": {
+          "type": "string",
+          "description": " 真实姓名"
+        },
+        "rolename": {
+          "type": "string",
+          "description": " 角色名"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 状态 0:未启用 1:正常"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
+        }
+      },
+      "title": "UserList",
+      "required": [
+        "id",
+        "username",
+        "realname",
+        "rolename",
+        "status",
+        "phone"
+      ]
+    },
+    "UserListRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 分页"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 每页条数"
+        }
+      },
+      "title": "UserListRequest",
+      "required": [
+        "page",
+        "pageSize"
+      ]
+    },
+    "UserListResponse": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 分页"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 每页条数"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 总条数"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserList"
+          },
+          "description": " 具体数据"
+        }
+      },
+      "title": "UserListResponse",
+      "required": [
+        "page",
+        "pageSize",
+        "total",
+        "data"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
