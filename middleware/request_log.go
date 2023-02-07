@@ -8,6 +8,7 @@ import (
 
 	"admin_template/pkg/util"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"github.com/sirupsen/logrus"
 )
 
@@ -19,12 +20,24 @@ func RequestLog(c *gin.Context) {
 		return
 	}
 
-	// 必须放在 next 之前,否则无法读取
-	// TODO 需要处理 form-data 请求
-	// TODO 需要处理 file 传参
-	body, _ := ioutil.ReadAll(c.Request.Body)
-	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
-	requestBody := string(body)
+	var requestBody string
+
+	if c.Request.Method == http.MethodGet {
+		requestBody = c.Request.URL.RawQuery
+	} else {
+		switch c.ContentType() {
+		case binding.MIMEJSON:
+			body, _ := ioutil.ReadAll(c.Request.Body)
+			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+			requestBody = string(body)
+		case binding.MIMEPOSTForm:
+			c.Request.ParseForm()
+			requestBody = c.Request.PostForm.Encode()
+		case binding.MIMEMultipartPOSTForm:
+			c.Request.ParseMultipartForm(10e6)
+			requestBody = c.Request.PostForm.Encode()
+		}
+	}
 
 	// 开始时间
 	startTime := time.Now()
@@ -41,13 +54,18 @@ func RequestLog(c *gin.Context) {
 
 	data := logrus.Fields{
 		"useTime":   time.Since(startTime),
-		"uri":       "[" + c.Request.Method + "]" + c.Request.RequestURI,
+		"uri":       "[" + c.Request.Method + "]" + c.Request.URL.Path,
 		"status":    c.Writer.Status(),
+		"ip":        c.ClientIP(),
 		"requestId": requestId,
 	}
 
 	if len(requestBody) > 0 {
 		data["request"] = requestBody
+	}
+
+	if c.Err() != nil {
+		data["err"] = c.Err().Error()
 	}
 
 	logrus.WithFields(data).Info()
