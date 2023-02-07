@@ -14,12 +14,12 @@ const TableNameRoleModel = "role"
 
 // RoleModel mapped from table <role>
 type RoleModel struct {
-	ID        int            `gorm:"column:id;primaryKey;autoIncrement:true"`
-	Name      string         `gorm:"column:name"` // 角色名
-	Auth      string         `gorm:"column:auth"` // 权限ID
-	CreatedAt time.Time      `gorm:"column:created_at"`
-	UpdatedAt time.Time      `gorm:"column:updated_at"`
-	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at"`
+	ID         int            `gorm:"column:id;primaryKey;autoIncrement:true"`
+	Name       string         `gorm:"column:name"` // 角色名
+	Auth       string         `gorm:"column:auth"` // 权限ID
+	CreateTime time.Time      `gorm:"column:create_time;default:CURRENT_TIMESTAMP"`
+	UpdateTime time.Time      `gorm:"column:update_time;default:CURRENT_TIMESTAMP"`
+	DeleteTime gorm.DeletedAt `gorm:"column:delete_time"`
 }
 
 // TableName RoleModel's table name

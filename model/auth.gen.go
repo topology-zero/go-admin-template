@@ -14,16 +14,16 @@ const TableNameAuthModel = "auth"
 
 // AuthModel mapped from table <auth>
 type AuthModel struct {
-	ID        int            `gorm:"column:id;primaryKey;autoIncrement:true"`
-	Pid       int            `gorm:"column:pid"`     // 上级ID
-	Name      string         `gorm:"column:name"`    // 节点名
-	Key       string         `gorm:"column:key"`     // 权限标识
-	IsMenu    int            `gorm:"column:is_menu"` // 是否是菜单栏 0：否 1：是
-	API       string         `gorm:"column:api"`     // 接口
-	Action    string         `gorm:"column:action"`  // 操作方法
-	CreatedAt time.Time      `gorm:"column:created_at"`
-	UpdatedAt time.Time      `gorm:"column:updated_at"`
-	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at"`
+	ID         int            `gorm:"column:id;primaryKey;autoIncrement:true"`
+	Pid        int            `gorm:"column:pid"`     // 上级ID
+	Name       string         `gorm:"column:name"`    // 节点名
+	Key        string         `gorm:"column:key"`     // 权限标识
+	IsMenu     int            `gorm:"column:is_menu"` // 是否是菜单栏 0：否 1：是
+	API        string         `gorm:"column:api"`     // 接口
+	Action     string         `gorm:"column:action"`  // 操作方法
+	CreateTime time.Time      `gorm:"column:create_time;default:CURRENT_TIMESTAMP"`
+	UpdateTime time.Time      `gorm:"column:update_time;default:CURRENT_TIMESTAMP"`
+	DeleteTime gorm.DeletedAt `gorm:"column:delete_time"`
 }
 
 // TableName AuthModel's table name

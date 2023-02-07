@@ -65,7 +65,7 @@ func TestGEN(t *testing.T) {
 	})
 
 	// 默认 deleted_at 字段是 gorm.Delete 类型, 如果其他字段需要实现软删除,则需要将这个设置
-	g.WithOpts(gen.FieldType("delete_time", "gorm.Delete"))
+	g.WithOpts(gen.FieldType("delete_time", "gorm.DeletedAt"))
 
 	// 设置目标 db
 	g.UseDB(db)

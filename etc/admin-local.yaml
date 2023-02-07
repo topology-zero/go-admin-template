@@ -13,7 +13,7 @@ Log:
 
 Mysql:
   Host: 127.0.0.1
-  Port: 3306
+  Port: 3309
   User: root
   Pwd: 123456
   Db: admin-template

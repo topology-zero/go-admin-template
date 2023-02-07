@@ -31,9 +31,9 @@ func newRoleModel(db *gorm.DB, opts ...gen.DOOption) roleModel {
 	_roleModel.ID = field.NewInt(tableName, "id")
 	_roleModel.Name = field.NewString(tableName, "name")
 	_roleModel.Auth = field.NewString(tableName, "auth")
-	_roleModel.CreatedAt = field.NewTime(tableName, "created_at")
-	_roleModel.UpdatedAt = field.NewTime(tableName, "updated_at")
-	_roleModel.DeletedAt = field.NewField(tableName, "deleted_at")
+	_roleModel.CreateTime = field.NewTime(tableName, "create_time")
+	_roleModel.UpdateTime = field.NewTime(tableName, "update_time")
+	_roleModel.DeleteTime = field.NewField(tableName, "delete_time")
 
 	_roleModel.fillFieldMap()
 
@@ -43,13 +43,13 @@ func newRoleModel(db *gorm.DB, opts ...gen.DOOption) roleModel {
 type roleModel struct {
 	roleModelDo
 
-	ALL       field.Asterisk
-	ID        field.Int
-	Name      field.String // 角色名
-	Auth      field.String // 权限ID
-	CreatedAt field.Time
-	UpdatedAt field.Time
-	DeletedAt field.Field
+	ALL        field.Asterisk
+	ID         field.Int
+	Name       field.String // 角色名
+	Auth       field.String // 权限ID
+	CreateTime field.Time
+	UpdateTime field.Time
+	DeleteTime field.Field
 
 	fieldMap map[string]field.Expr
 }
@@ -69,9 +69,9 @@ func (r *roleModel) updateTableName(table string) *roleModel {
 	r.ID = field.NewInt(table, "id")
 	r.Name = field.NewString(table, "name")
 	r.Auth = field.NewString(table, "auth")
-	r.CreatedAt = field.NewTime(table, "created_at")
-	r.UpdatedAt = field.NewTime(table, "updated_at")
-	r.DeletedAt = field.NewField(table, "deleted_at")
+	r.CreateTime = field.NewTime(table, "create_time")
+	r.UpdateTime = field.NewTime(table, "update_time")
+	r.DeleteTime = field.NewField(table, "delete_time")
 
 	r.fillFieldMap()
 
@@ -92,9 +92,9 @@ func (r *roleModel) fillFieldMap() {
 	r.fieldMap["id"] = r.ID
 	r.fieldMap["name"] = r.Name
 	r.fieldMap["auth"] = r.Auth
-	r.fieldMap["created_at"] = r.CreatedAt
-	r.fieldMap["updated_at"] = r.UpdatedAt
-	r.fieldMap["deleted_at"] = r.DeletedAt
+	r.fieldMap["create_time"] = r.CreateTime
+	r.fieldMap["update_time"] = r.UpdateTime
+	r.fieldMap["delete_time"] = r.DeleteTime
 }
 
 func (r roleModel) clone(db *gorm.DB) roleModel {

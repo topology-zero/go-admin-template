@@ -34,9 +34,9 @@ func newAuthModel(db *gorm.DB, opts ...gen.DOOption) authModel {
 	_authModel.IsMenu = field.NewInt(tableName, "is_menu")
 	_authModel.API = field.NewString(tableName, "api")
 	_authModel.Action = field.NewString(tableName, "action")
-	_authModel.CreatedAt = field.NewTime(tableName, "created_at")
-	_authModel.UpdatedAt = field.NewTime(tableName, "updated_at")
-	_authModel.DeletedAt = field.NewField(tableName, "deleted_at")
+	_authModel.CreateTime = field.NewTime(tableName, "create_time")
+	_authModel.UpdateTime = field.NewTime(tableName, "update_time")
+	_authModel.DeleteTime = field.NewField(tableName, "delete_time")
 
 	_authModel.fillFieldMap()
 
@@ -46,17 +46,17 @@ func newAuthModel(db *gorm.DB, opts ...gen.DOOption) authModel {
 type authModel struct {
 	authModelDo
 
-	ALL       field.Asterisk
-	ID        field.Int
-	Pid       field.Int    // 上级ID
-	Name      field.String // 节点名
-	Key       field.String // 权限标识
-	IsMenu    field.Int    // 是否是菜单栏 0：否 1：是
-	API       field.String // 接口
-	Action    field.String // 操作方法
-	CreatedAt field.Time
-	UpdatedAt field.Time
-	DeletedAt field.Field
+	ALL        field.Asterisk
+	ID         field.Int
+	Pid        field.Int    // 上级ID
+	Name       field.String // 节点名
+	Key        field.String // 权限标识
+	IsMenu     field.Int    // 是否是菜单栏 0：否 1：是
+	API        field.String // 接口
+	Action     field.String // 操作方法
+	CreateTime field.Time
+	UpdateTime field.Time
+	DeleteTime field.Field
 
 	fieldMap map[string]field.Expr
 }
@@ -80,9 +80,9 @@ func (a *authModel) updateTableName(table string) *authModel {
 	a.IsMenu = field.NewInt(table, "is_menu")
 	a.API = field.NewString(table, "api")
 	a.Action = field.NewString(table, "action")
-	a.CreatedAt = field.NewTime(table, "created_at")
-	a.UpdatedAt = field.NewTime(table, "updated_at")
-	a.DeletedAt = field.NewField(table, "deleted_at")
+	a.CreateTime = field.NewTime(table, "create_time")
+	a.UpdateTime = field.NewTime(table, "update_time")
+	a.DeleteTime = field.NewField(table, "delete_time")
 
 	a.fillFieldMap()
 
@@ -107,9 +107,9 @@ func (a *authModel) fillFieldMap() {
 	a.fieldMap["is_menu"] = a.IsMenu
 	a.fieldMap["api"] = a.API
 	a.fieldMap["action"] = a.Action
-	a.fieldMap["created_at"] = a.CreatedAt
-	a.fieldMap["updated_at"] = a.UpdatedAt
-	a.fieldMap["deleted_at"] = a.DeletedAt
+	a.fieldMap["create_time"] = a.CreateTime
+	a.fieldMap["update_time"] = a.UpdateTime
+	a.fieldMap["delete_time"] = a.DeleteTime
 }
 
 func (a authModel) clone(db *gorm.DB) authModel {

@@ -36,9 +36,9 @@ func newAdminUserModel(db *gorm.DB, opts ...gen.DOOption) adminUserModel {
 	_adminUserModel.Phone = field.NewString(tableName, "phone")
 	_adminUserModel.RoleID = field.NewInt(tableName, "role_id")
 	_adminUserModel.Status = field.NewInt(tableName, "status")
-	_adminUserModel.CreatedAt = field.NewTime(tableName, "created_at")
-	_adminUserModel.UpdatedAt = field.NewTime(tableName, "updated_at")
-	_adminUserModel.DeletedAt = field.NewField(tableName, "deleted_at")
+	_adminUserModel.CreateTime = field.NewTime(tableName, "create_time")
+	_adminUserModel.UpdateTime = field.NewTime(tableName, "update_time")
+	_adminUserModel.DeleteTime = field.NewField(tableName, "delete_time")
 
 	_adminUserModel.fillFieldMap()
 
@@ -48,17 +48,17 @@ func newAdminUserModel(db *gorm.DB, opts ...gen.DOOption) adminUserModel {
 type adminUserModel struct {
 	adminUserModelDo
 
-	ALL       field.Asterisk
-	ID        field.Int
-	Username  field.String // 用户名
-	Realname  field.String // 真实姓名
-	Password  field.String // 密码
-	Phone     field.String // 手机号
-	RoleID    field.Int    // 角色ID
-	Status    field.Int    // 状态 0:未启用 1:正常
-	CreatedAt field.Time
-	UpdatedAt field.Time
-	DeletedAt field.Field
+	ALL        field.Asterisk
+	ID         field.Int
+	Username   field.String // 用户名
+	Realname   field.String // 真实姓名
+	Password   field.String // 密码
+	Phone      field.String // 手机号
+	RoleID     field.Int    // 角色ID
+	Status     field.Int    // 状态 0:未启用 1:正常
+	CreateTime field.Time
+	UpdateTime field.Time
+	DeleteTime field.Field
 
 	fieldMap map[string]field.Expr
 }
@@ -82,9 +82,9 @@ func (a *adminUserModel) updateTableName(table string) *adminUserModel {
 	a.Phone = field.NewString(table, "phone")
 	a.RoleID = field.NewInt(table, "role_id")
 	a.Status = field.NewInt(table, "status")
-	a.CreatedAt = field.NewTime(table, "created_at")
-	a.UpdatedAt = field.NewTime(table, "updated_at")
-	a.DeletedAt = field.NewField(table, "deleted_at")
+	a.CreateTime = field.NewTime(table, "create_time")
+	a.UpdateTime = field.NewTime(table, "update_time")
+	a.DeleteTime = field.NewField(table, "delete_time")
 
 	a.fillFieldMap()
 
@@ -109,9 +109,9 @@ func (a *adminUserModel) fillFieldMap() {
 	a.fieldMap["phone"] = a.Phone
 	a.fieldMap["role_id"] = a.RoleID
 	a.fieldMap["status"] = a.Status
-	a.fieldMap["created_at"] = a.CreatedAt
-	a.fieldMap["updated_at"] = a.UpdatedAt
-	a.fieldMap["deleted_at"] = a.DeletedAt
+	a.fieldMap["create_time"] = a.CreateTime
+	a.fieldMap["update_time"] = a.UpdateTime
+	a.fieldMap["delete_time"] = a.DeleteTime
 }
 
 func (a adminUserModel) clone(db *gorm.DB) adminUserModel {
