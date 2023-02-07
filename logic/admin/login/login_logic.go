@@ -34,6 +34,11 @@ func Login(req *login.LoginRequest) (resp login.LoginResponse, err error) {
 		return
 	}
 
+	if userInfo.Status != 1 {
+		err = errors.New("该用户已被管理员停用")
+		return
+	}
+
 	token, err := jwt.MakeToken(userInfo.ID, userInfo.RoleID, userInfo.Phone)
 	if err != nil {
 		err = errors.New("系统错误")
