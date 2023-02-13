@@ -11,15 +11,15 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type MyHook struct{}
+type RotateHook struct{}
 
 var openFile *os.File
 
-func (h *MyHook) Levels() []logrus.Level {
+func (h *RotateHook) Levels() []logrus.Level {
 	return logrus.AllLevels
 }
 
-func (h *MyHook) Fire(entry *logrus.Entry) (err error) {
+func (h *RotateHook) Fire(entry *logrus.Entry) (err error) {
 	fileName := time.Now().Format("2006-01-02")
 	fullPath := fmt.Sprintf("%s/%s.log", config.LogConf.Dir, fileName)
 

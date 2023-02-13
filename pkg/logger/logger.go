@@ -32,5 +32,5 @@ func Setup() {
 	// 打印堆栈信息
 	logrus.SetReportCaller(true)
 
-	logrus.AddHook(&MyHook{})
+	logrus.AddHook(&RotateHook{})
 }

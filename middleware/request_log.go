@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"time"
 
-	"admin_template/pkg/util"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/sirupsen/logrus"
@@ -50,14 +49,11 @@ func RequestLog(c *gin.Context) {
 		}
 	}
 
-	requestId, _ := c.Get(util.TrafficKey)
-
 	data := logrus.Fields{
-		"useTime":   time.Since(startTime),
-		"uri":       "[" + c.Request.Method + "]" + c.Request.URL.Path,
-		"status":    c.Writer.Status(),
-		"ip":        c.ClientIP(),
-		"requestId": requestId,
+		"useTime": time.Since(startTime),
+		"uri":     "[" + c.Request.Method + "]" + c.Request.URL.Path,
+		"status":  c.Writer.Status(),
+		"ip":      c.ClientIP(),
 	}
 
 	if len(requestBody) > 0 {

@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 
+	"admin_template/pkg/logger"
 	"admin_template/pkg/util"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -21,6 +22,8 @@ func RequestId(c *gin.Context) {
 	if requestId == "" {
 		requestId = uuid.New().String()
 	}
+
+	logger.SetRequestId(requestId)
 
 	c.Header(util.TrafficKey, requestId)
 	c.Set(util.TrafficKey, requestId)
