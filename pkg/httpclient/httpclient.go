@@ -36,6 +36,7 @@ func NewHttpRequest(m method, url string, opt ...HTTPOption) *Request {
 		method: string(m),
 		url:    url,
 		client: &http.Client{},
+		header: make(map[string]string),
 	}
 	for _, option := range opt {
 		option(r)
