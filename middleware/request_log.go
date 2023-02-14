@@ -54,11 +54,11 @@ func RequestLog(c *gin.Context) {
 	requestId, _ := c.Get(util.TrafficKey)
 
 	data := logrus.Fields{
-		"useTime":   time.Since(startTime),
-		"uri":       "[" + c.Request.Method + "]" + c.Request.URL.Path,
-		"status":    c.Writer.Status(),
-		"ip":        c.ClientIP(),
-		"requestId": requestId,
+		"useTime":    time.Since(startTime),
+		"uri":        "[" + c.Request.Method + "]" + c.Request.URL.Path,
+		"status":     c.Writer.Status(),
+		"ip":         c.ClientIP(),
+		util.TraceId: requestId,
 	}
 
 	if len(requestBody) > 0 {

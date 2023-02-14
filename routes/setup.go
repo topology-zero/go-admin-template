@@ -2,19 +2,19 @@
 package routes
 
 import (
-	"admin_template/routes/admin/auth"
-	"admin_template/routes/admin/base"
-	"admin_template/routes/admin/login"
-	"admin_template/routes/admin/role"
-	"admin_template/routes/admin/user"
+	adminAuth "admin_template/routes/admin/auth"
+	adminBase "admin_template/routes/admin/base"
+	adminLogin "admin_template/routes/admin/login"
+	adminRole "admin_template/routes/admin/role"
+	adminUser "admin_template/routes/admin/user"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Setup(e *gin.Engine) {
-	login.RegisterAdminLoginRoute(e)
-	user.RegisterAdminUserRoute(e)
-	role.RegisterAdminRoleRoute(e)
-	auth.RegisterAdminAuthRoute(e)
-	base.RegisterAdminBaseRoute(e)
+	adminLogin.RegisterAdminLoginRoute(e)
+	adminUser.RegisterAdminUserRoute(e)
+	adminRole.RegisterAdminRoleRoute(e)
+	adminAuth.RegisterAdminAuthRoute(e)
+	adminBase.RegisterAdminBaseRoute(e)
 }

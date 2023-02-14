@@ -7,13 +7,13 @@ import (
 	"admin_template/model"
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/role"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 )
 
 // Add 添加角色
-func Add(req *role.RoleAddRequest) error {
+func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
 	roleModel := query.RoleModel
 	roleInfo, _ := roleModel.Where(roleModel.Name.Eq(req.Name)).First()
 	if roleInfo != nil {
@@ -22,7 +22,7 @@ func Add(req *role.RoleAddRequest) error {
 
 	marshal, err := json.Marshal(req.Auth)
 	if err != nil {
-		logrus.Errorf("%+v", errors.WithStack(err))
+		ctx.Log.Errorf("%+v", errors.WithStack(err))
 		return errors.New("JSON转换错误")
 	}
 	authStr := string(marshal)

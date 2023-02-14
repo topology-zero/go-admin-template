@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/role"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 )
 
 // Detail 角色详情
-func Detail(req *role.RoleDetailRequest) (resp role.RoleDetailResponse, err error) {
+func Detail(req *role.RoleDetailRequest, ctx *svc.ServiceContext) (resp role.RoleDetailResponse, err error) {
 	roleModel := query.RoleModel
 	authModel := query.AuthModel
 	roleInfo, _ := roleModel.Where(roleModel.ID.Eq(req.Id)).First()
@@ -18,7 +18,7 @@ func Detail(req *role.RoleDetailRequest) (resp role.RoleDetailResponse, err erro
 	var auths []int
 	err = json.Unmarshal([]byte(roleInfo.Auth), &auths)
 	if err != nil {
-		logrus.Errorf("%+v", errors.WithStack(err))
+		ctx.Log.Errorf("%+v", errors.WithStack(err))
 		err = errors.New("JSON转换错误")
 		return
 	}

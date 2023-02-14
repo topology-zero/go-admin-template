@@ -2,13 +2,14 @@ package user
 
 import (
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/user"
 
 	"github.com/jinzhu/copier"
 )
 
 // List 用户列表
-func List(req *user.UserListRequest) (resp user.UserListResponse, err error) {
+func List(req *user.UserListRequest, ctx *svc.ServiceContext) (resp user.UserListResponse, err error) {
 	userModel := query.AdminUserModel
 	roleModel := query.RoleModel
 	var data []user.UserList

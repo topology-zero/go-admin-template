@@ -3,14 +3,14 @@ package base
 import (
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/base"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // ChangeSelfPwd 修改自己的密码
-func ChangeSelfPwd(uid int, req *base.ChangeSelfPwdRequest) error {
+func ChangeSelfPwd(uid int, req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) error {
 	userModel := query.AdminUserModel
 	userInfo, _ := userModel.Where(userModel.ID.Eq(uid)).First()
 	err := bcrypt.CompareHashAndPassword([]byte(userInfo.Password), []byte(req.OldPassword))
@@ -20,7 +20,7 @@ func ChangeSelfPwd(uid int, req *base.ChangeSelfPwdRequest) error {
 
 	password, err := bcrypt.GenerateFromPassword([]byte(req.NewPassword), bcrypt.DefaultCost)
 	if err != nil {
-		logrus.Errorf("%+v", err)
+		ctx.Log.Errorf("%+v", err)
 		return errors.New("系统错误")
 	}
 

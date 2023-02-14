@@ -3,14 +3,14 @@ package user
 import (
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/user"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // Edit 编辑用户
-func Edit(req *user.UserEditRequest) error {
+func Edit(req *user.UserEditRequest, ctx *svc.ServiceContext) error {
 	if req.Id == SuperAdminID && req.RoleId != SuperAdminRoleID {
 		return errors.New("无法设置超级管理员的角色")
 	}
@@ -37,7 +37,7 @@ func Edit(req *user.UserEditRequest) error {
 	if len(req.Password) > 0 {
 		password, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 		if err != nil {
-			logrus.Errorf("%+v", err)
+			ctx.Log.Errorf("%+v", err)
 			return errors.New("系统错误")
 		}
 		updates["password"] = string(password)

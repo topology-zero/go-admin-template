@@ -3,6 +3,7 @@ package auth
 import (
 	"admin_template/internal/response"
 	"admin_template/logic/admin/auth"
+	"admin_template/svc"
 	authType "admin_template/types/admin/auth"
 
 	"github.com/gin-gonic/gin"
@@ -16,6 +17,6 @@ func DelHandle(c *gin.Context) {
 		return
 	}
 
-	err := auth.Del(&req)
+	err := auth.Del(&req, svc.NewServiceContext(c))
 	response.HandleResponse(c, nil, err)
 }

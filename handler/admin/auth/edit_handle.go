@@ -3,6 +3,7 @@ package auth
 import (
 	"admin_template/internal/response"
 	"admin_template/logic/admin/auth"
+	"admin_template/svc"
 	authType "admin_template/types/admin/auth"
 
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,6 @@ func EditHandle(c *gin.Context) {
 		return
 	}
 
-	err := auth.Edit(&req)
+	err := auth.Edit(&req, svc.NewServiceContext(c))
 	response.HandleResponse(c, nil, err)
 }

@@ -3,10 +3,11 @@ package base
 import (
 	"admin_template/model"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/base"
 )
 
-func Auth() (resp base.BaseAuthResponse, err error) {
+func Auth(ctx *svc.ServiceContext) (resp base.BaseAuthResponse, err error) {
 	authModel := query.AuthModel
 	auths, _ := authModel.Find()
 	resp.Tree = authTree(0, auths)

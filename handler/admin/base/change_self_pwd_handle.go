@@ -4,6 +4,7 @@ import (
 	"admin_template/internal/response"
 	"admin_template/logic/admin/base"
 	"admin_template/pkg/jwt"
+	"admin_template/svc"
 	baseType "admin_template/types/admin/base"
 
 	"github.com/gin-gonic/gin"
@@ -19,6 +20,6 @@ func ChangeSelfPwdHandle(c *gin.Context) {
 
 	userInfo, _ := c.Get("userInfo")
 	claims := userInfo.(*jwt.Claims)
-	err := base.ChangeSelfPwd(claims.Id, &req)
+	err := base.ChangeSelfPwd(claims.Id, &req, svc.NewServiceContext(c))
 	response.HandleResponse(c, nil, err)
 }

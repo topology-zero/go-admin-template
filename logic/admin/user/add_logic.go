@@ -4,15 +4,15 @@ import (
 	"admin_template/model"
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/user"
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // Add 添加用户
-func Add(req *user.UserAddRequest) error {
+func Add(req *user.UserAddRequest, ctx *svc.ServiceContext) error {
 	userModel := query.AdminUserModel
 	userInfo, _ := userModel.Where(userModel.Username.Eq(req.Username)).First()
 	if userInfo != nil {
@@ -27,7 +27,7 @@ func Add(req *user.UserAddRequest) error {
 	password, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	req.Password = string(password)
 	if err != nil {
-		logrus.Errorf("%+v", err)
+		ctx.Log.Errorf("%+v", err)
 		return errors.New("系统错误")
 	}
 

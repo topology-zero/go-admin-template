@@ -7,13 +7,13 @@ import (
 	"admin_template/model"
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/role"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 )
 
 // Edit 编辑角色
-func Edit(req *role.RoleEditRequest) error {
+func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 	if req.Id == AdminRoleId {
 		return errors.New("无法修改超级管理员角色")
 	}
@@ -26,7 +26,7 @@ func Edit(req *role.RoleEditRequest) error {
 
 	marshal, err := json.Marshal(req.Auth)
 	if err != nil {
-		logrus.Errorf("%+v", errors.WithStack(err))
+		ctx.Log.Errorf("%+v", errors.WithStack(err))
 		return errors.New("JSON转换错误")
 	}
 	authStr := string(marshal)

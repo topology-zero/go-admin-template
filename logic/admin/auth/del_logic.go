@@ -3,12 +3,13 @@ package auth
 import (
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/auth"
 	"github.com/pkg/errors"
 )
 
 // Del 删除权限
-func Del(req *auth.AuthDeleteRequest) error {
+func Del(req *auth.AuthDeleteRequest, ctx *svc.ServiceContext) error {
 	authModel := query.AuthModel
 	auths, _ := authModel.Where(authModel.Pid.Eq(req.Id)).First()
 	if auths != nil {

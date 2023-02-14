@@ -6,12 +6,13 @@ import (
 	"admin_template/model"
 	"admin_template/pkg/util"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/role"
 	"github.com/pkg/errors"
 )
 
 // Del 删除角色
-func Del(req *role.RoleDeleteRequest) error {
+func Del(req *role.RoleDeleteRequest, ctx *svc.ServiceContext) error {
 	if req.Id == AdminRoleId {
 		return errors.New("无法修改超级管理员角色")
 	}

@@ -6,6 +6,7 @@ import (
 	"admin_template/config"
 	"admin_template/pkg/jwt"
 	"admin_template/query"
+	"admin_template/svc"
 	"admin_template/types/admin/login"
 
 	"github.com/pkg/errors"
@@ -13,7 +14,7 @@ import (
 )
 
 // Login 登录
-func Login(req *login.LoginRequest) (resp login.LoginResponse, err error) {
+func Login(req *login.LoginRequest, ctx *svc.ServiceContext) (resp login.LoginResponse, err error) {
 	req.Code = strings.ToLower(req.Code)
 	match := config.Captcha.Verify(req.CodeId, req.Code, true)
 	if !match {

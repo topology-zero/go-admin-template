@@ -3,6 +3,7 @@ package role
 import (
 	"admin_template/internal/response"
 	"admin_template/logic/admin/role"
+	"admin_template/svc"
 	roleType "admin_template/types/admin/role"
 
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,6 @@ func ListHandle(c *gin.Context) {
 		req.PageSize = 10
 	}
 
-	resp, err := role.List(&req)
+	resp, err := role.List(&req, svc.NewServiceContext(c))
 	response.HandleResponse(c, resp, err)
 }

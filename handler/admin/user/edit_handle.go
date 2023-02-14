@@ -3,6 +3,7 @@ package user
 import (
 	"admin_template/internal/response"
 	"admin_template/logic/admin/user"
+	"admin_template/svc"
 	userType "admin_template/types/admin/user"
 	"github.com/pkg/errors"
 
@@ -26,6 +27,6 @@ func EditHandle(c *gin.Context) {
 		return
 	}
 
-	err := user.Edit(&req)
+	err := user.Edit(&req, svc.NewServiceContext(c))
 	response.HandleResponse(c, nil, err)
 }

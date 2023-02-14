@@ -3,6 +3,7 @@ package auth
 import (
 	"admin_template/internal/response"
 	"admin_template/logic/admin/auth"
+	"admin_template/svc"
 	authType "admin_template/types/admin/auth"
 	"github.com/pkg/errors"
 
@@ -22,6 +23,6 @@ func AddHandle(c *gin.Context) {
 		return
 	}
 
-	err := auth.Add(&req)
+	err := auth.Add(&req, svc.NewServiceContext(c))
 	response.HandleResponse(c, nil, err)
 }
