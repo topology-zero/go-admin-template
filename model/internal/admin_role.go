@@ -2,7 +2,7 @@ package internal
 
 import "gorm.io/gen"
 
-type Role interface {
+type AdminRole interface {
 
 	// GetRoleByAuthId 根据 auth_id 获取角色
 	//

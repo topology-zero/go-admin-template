@@ -14,7 +14,7 @@ import (
 
 // Add 添加角色
 func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
-	roleModel := query.RoleModel
+	roleModel := query.AdminRoleModel
 	roleInfo, _ := roleModel.Where(roleModel.Name.Eq(req.Name)).First()
 	if roleInfo != nil {
 		return errors.New("该角色已存在")
@@ -30,24 +30,24 @@ func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
 	defer model.Enforcer.LoadPolicy()
 
 	return util.WarpDbError(query.Q.Transaction(func(tx *query.Query) error {
-		saveRole := model.RoleModel{
+		saveRole := model.AdminRoleModel{
 			Name: req.Name,
 			Auth: authStr,
 		}
-		err = tx.RoleModel.Create(&saveRole)
+		err = tx.AdminRoleModel.Create(&saveRole)
 		if err != nil {
 			return err
 		}
 
-		var rules []*model.CasbinRuleModel
+		var rules []*model.AdminCasbinRuleModel
 
-		authModels, _ := tx.AuthModel.Where(tx.AuthModel.ID.In(req.Auth...)).Find()
+		authModels, _ := tx.AdminAuthModel.Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
 		for _, a := range authModels {
 			if a.IsMenu == 1 {
 				continue
 			}
 
-			rules = append(rules, &model.CasbinRuleModel{
+			rules = append(rules, &model.AdminCasbinRuleModel{
 				Ptype: "p",
 				V0:    "role:" + strconv.Itoa(saveRole.ID),
 				V1:    a.API,
@@ -55,6 +55,6 @@ func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
 			})
 		}
 
-		return tx.CasbinRuleModel.CreateInBatches(rules, 100)
+		return tx.AdminCasbinRuleModel.CreateInBatches(rules, 100)
 	}))
 }

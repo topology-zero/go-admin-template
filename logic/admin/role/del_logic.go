@@ -26,12 +26,12 @@ func Del(req *role.RoleDeleteRequest, ctx *svc.ServiceContext) error {
 	defer model.Enforcer.LoadPolicy()
 
 	return util.WarpDbError(query.Q.Transaction(func(tx *query.Query) error {
-		_, err := tx.RoleModel.Where(tx.RoleModel.ID.Eq(req.Id)).Delete()
+		_, err := tx.AdminRoleModel.Where(tx.AdminRoleModel.ID.Eq(req.Id)).Delete()
 		if err != nil {
 			return err
 		}
 
-		_, err = tx.CasbinRuleModel.Where(tx.CasbinRuleModel.Ptype.Eq("p"), tx.CasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
+		_, err = tx.AdminCasbinRuleModel.Where(tx.AdminCasbinRuleModel.Ptype.Eq("p"), tx.AdminCasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
 		return err
 	}))
 

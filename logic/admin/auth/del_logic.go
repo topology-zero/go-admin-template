@@ -10,13 +10,13 @@ import (
 
 // Del 删除权限
 func Del(req *auth.AuthDeleteRequest, ctx *svc.ServiceContext) error {
-	authModel := query.AuthModel
+	authModel := query.AdminAuthModel
 	auths, _ := authModel.Where(authModel.Pid.Eq(req.Id)).First()
 	if auths != nil {
 		return errors.New("无法删除该权限,请先删除子权限")
 	}
 
-	roleModel := query.RoleModel
+	roleModel := query.AdminRoleModel
 	role := roleModel.GetRoleByAuthId(req.Id)
 	if role != nil {
 		return errors.New("无法删除该权限,该权限已被使用")

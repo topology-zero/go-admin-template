@@ -54,7 +54,7 @@ func Setup() {
 }
 
 func casbinSetup() {
-	adapter, err := gormadapter.NewAdapterByDB(db)
+	adapter, err := gormadapter.NewAdapterByDBUseTableName(db, "", "admin_casbin_rule")
 	if err != nil {
 		logrus.Panicf("%+v", errors.WithStack(err))
 	}

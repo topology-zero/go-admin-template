@@ -11,7 +11,7 @@ import (
 // List 用户列表
 func List(req *user.UserListRequest, ctx *svc.ServiceContext) (resp user.UserListResponse, err error) {
 	userModel := query.AdminUserModel
-	roleModel := query.RoleModel
+	roleModel := query.AdminRoleModel
 	var data []user.UserList
 
 	count, err := userModel.LeftJoin(roleModel, userModel.RoleID.EqCol(roleModel.ID)).

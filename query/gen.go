@@ -16,49 +16,49 @@ import (
 )
 
 var (
-	Q               = new(Query)
-	AdminUserModel  *adminUserModel
-	AuthModel       *authModel
-	CasbinRuleModel *casbinRuleModel
-	RoleModel       *roleModel
+	Q                    = new(Query)
+	AdminAuthModel       *adminAuthModel
+	AdminCasbinRuleModel *adminCasbinRuleModel
+	AdminRoleModel       *adminRoleModel
+	AdminUserModel       *adminUserModel
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	AdminAuthModel = &Q.AdminAuthModel
+	AdminCasbinRuleModel = &Q.AdminCasbinRuleModel
+	AdminRoleModel = &Q.AdminRoleModel
 	AdminUserModel = &Q.AdminUserModel
-	AuthModel = &Q.AuthModel
-	CasbinRuleModel = &Q.CasbinRuleModel
-	RoleModel = &Q.RoleModel
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:              db,
-		AdminUserModel:  newAdminUserModel(db, opts...),
-		AuthModel:       newAuthModel(db, opts...),
-		CasbinRuleModel: newCasbinRuleModel(db, opts...),
-		RoleModel:       newRoleModel(db, opts...),
+		db:                   db,
+		AdminAuthModel:       newAdminAuthModel(db, opts...),
+		AdminCasbinRuleModel: newAdminCasbinRuleModel(db, opts...),
+		AdminRoleModel:       newAdminRoleModel(db, opts...),
+		AdminUserModel:       newAdminUserModel(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	AdminUserModel  adminUserModel
-	AuthModel       authModel
-	CasbinRuleModel casbinRuleModel
-	RoleModel       roleModel
+	AdminAuthModel       adminAuthModel
+	AdminCasbinRuleModel adminCasbinRuleModel
+	AdminRoleModel       adminRoleModel
+	AdminUserModel       adminUserModel
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:              db,
-		AdminUserModel:  q.AdminUserModel.clone(db),
-		AuthModel:       q.AuthModel.clone(db),
-		CasbinRuleModel: q.CasbinRuleModel.clone(db),
-		RoleModel:       q.RoleModel.clone(db),
+		db:                   db,
+		AdminAuthModel:       q.AdminAuthModel.clone(db),
+		AdminCasbinRuleModel: q.AdminCasbinRuleModel.clone(db),
+		AdminRoleModel:       q.AdminRoleModel.clone(db),
+		AdminUserModel:       q.AdminUserModel.clone(db),
 	}
 }
 
@@ -72,27 +72,27 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:              db,
-		AdminUserModel:  q.AdminUserModel.replaceDB(db),
-		AuthModel:       q.AuthModel.replaceDB(db),
-		CasbinRuleModel: q.CasbinRuleModel.replaceDB(db),
-		RoleModel:       q.RoleModel.replaceDB(db),
+		db:                   db,
+		AdminAuthModel:       q.AdminAuthModel.replaceDB(db),
+		AdminCasbinRuleModel: q.AdminCasbinRuleModel.replaceDB(db),
+		AdminRoleModel:       q.AdminRoleModel.replaceDB(db),
+		AdminUserModel:       q.AdminUserModel.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	AdminUserModel  IAdminUserModelDo
-	AuthModel       IAuthModelDo
-	CasbinRuleModel ICasbinRuleModelDo
-	RoleModel       IRoleModelDo
+	AdminAuthModel       IAdminAuthModelDo
+	AdminCasbinRuleModel IAdminCasbinRuleModelDo
+	AdminRoleModel       IAdminRoleModelDo
+	AdminUserModel       IAdminUserModelDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		AdminUserModel:  q.AdminUserModel.WithContext(ctx),
-		AuthModel:       q.AuthModel.WithContext(ctx),
-		CasbinRuleModel: q.CasbinRuleModel.WithContext(ctx),
-		RoleModel:       q.RoleModel.WithContext(ctx),
+		AdminAuthModel:       q.AdminAuthModel.WithContext(ctx),
+		AdminCasbinRuleModel: q.AdminCasbinRuleModel.WithContext(ctx),
+		AdminRoleModel:       q.AdminRoleModel.WithContext(ctx),
+		AdminUserModel:       q.AdminUserModel.WithContext(ctx),
 	}
 }
 

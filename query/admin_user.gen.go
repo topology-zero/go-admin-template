@@ -200,7 +200,7 @@ type IAdminUserModelDo interface {
 // 		( SELECT GROUP_CONCAT(`key`) FROM auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys
 // 	FROM
 // 		admin_user u
-// 		LEFT JOIN role r ON u.role_id = r.id
+// 		LEFT JOIN admin_role r ON u.role_id = r.id
 // 	WHERE
 // 		u.id = @id
 func (a adminUserModelDo) GetUserInfo(id int) (result base.UserInfoResponse) {
@@ -208,7 +208,7 @@ func (a adminUserModelDo) GetUserInfo(id int) (result base.UserInfoResponse) {
 
 	var generateSQL strings.Builder
 	params = append(params, id)
-	generateSQL.WriteString("SELECT u.id, u.username, u.realname, u.phone, r.NAME AS rolename, ( SELECT GROUP_CONCAT(`key`) FROM auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys FROM admin_user u LEFT JOIN role r ON u.role_id = r.id WHERE u.id = ? ")
+	generateSQL.WriteString("SELECT u.id, u.username, u.realname, u.phone, r.NAME AS rolename, ( SELECT GROUP_CONCAT(`key`) FROM auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys FROM admin_user u LEFT JOIN admin_role r ON u.role_id = r.id WHERE u.id = ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = a.UnderlyingDB().Raw(generateSQL.String(), params...).Take(&result) // ignore_security_alert

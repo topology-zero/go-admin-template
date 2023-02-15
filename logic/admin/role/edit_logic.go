@@ -18,7 +18,7 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 		return errors.New("无法修改超级管理员角色")
 	}
 
-	roleModel := query.RoleModel
+	roleModel := query.AdminRoleModel
 	roleInfo, _ := roleModel.Where(roleModel.Name.Eq(req.Name), roleModel.ID.Neq(req.Id)).First()
 	if roleInfo != nil {
 		return errors.New("该角色已存在")
@@ -34,29 +34,29 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 	defer model.Enforcer.LoadPolicy()
 
 	return util.WarpDbError(query.Q.Transaction(func(tx *query.Query) error {
-		_, err := tx.RoleModel.Where(tx.RoleModel.ID.Eq(req.Id)).UpdateSimple(
-			tx.RoleModel.Name.Value(req.Name),
-			tx.RoleModel.Auth.Value(authStr),
+		_, err := tx.AdminRoleModel.Where(tx.AdminRoleModel.ID.Eq(req.Id)).UpdateSimple(
+			tx.AdminRoleModel.Name.Value(req.Name),
+			tx.AdminRoleModel.Auth.Value(authStr),
 		)
 		if err != nil {
 			return err
 		}
 
 		// 删除casbin表
-		_, err = tx.CasbinRuleModel.Where(tx.CasbinRuleModel.Ptype.Eq("p"), tx.CasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
+		_, err = tx.AdminCasbinRuleModel.Where(tx.AdminCasbinRuleModel.Ptype.Eq("p"), tx.AdminCasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
 		if err != nil {
 			return err
 		}
 
 		// 重新加入casbin表
-		var rules []*model.CasbinRuleModel
-		authModels, _ := tx.AuthModel.Where(tx.AuthModel.ID.In(req.Auth...)).Find()
+		var rules []*model.AdminCasbinRuleModel
+		authModels, _ := tx.AdminAuthModel.Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
 		for _, a := range authModels {
 			if a.IsMenu == 1 {
 				continue
 			}
 
-			rules = append(rules, &model.CasbinRuleModel{
+			rules = append(rules, &model.AdminCasbinRuleModel{
 				Ptype: "p",
 				V0:    "role:" + strconv.Itoa(req.Id),
 				V1:    a.API,
@@ -64,6 +64,6 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 			})
 		}
 
-		return tx.CasbinRuleModel.CreateInBatches(rules, 100)
+		return tx.AdminCasbinRuleModel.CreateInBatches(rules, 100)
 	}))
 }

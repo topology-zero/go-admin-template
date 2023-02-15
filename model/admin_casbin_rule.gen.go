@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameCasbinRuleModel = "casbin_rule"
+const TableNameAdminCasbinRuleModel = "admin_casbin_rule"
 
-// CasbinRuleModel mapped from table <casbin_rule>
-type CasbinRuleModel struct {
+// AdminCasbinRuleModel mapped from table <admin_casbin_rule>
+type AdminCasbinRuleModel struct {
 	ID    int64  `gorm:"column:id;primaryKey;autoIncrement:true"`
 	Ptype string `gorm:"column:ptype"`
 	V0    string `gorm:"column:v0"`
@@ -20,7 +20,7 @@ type CasbinRuleModel struct {
 	V7    string `gorm:"column:v7"`
 }
 
-// TableName CasbinRuleModel's table name
-func (*CasbinRuleModel) TableName() string {
-	return TableNameCasbinRuleModel
+// TableName AdminCasbinRuleModel's table name
+func (*AdminCasbinRuleModel) TableName() string {
+	return TableNameAdminCasbinRuleModel
 }

@@ -77,12 +77,12 @@ func TestGEN(t *testing.T) {
 	//g.GenerateModel("admin_user")
 
 	// 创建模型 + query ,不加入自定义方法
-	g.ApplyBasic(g.GenerateModel("auth"))
-	g.ApplyBasic(g.GenerateModel("casbin_rule"))
+	g.ApplyBasic(g.GenerateModel("admin_auth"))
+	g.ApplyBasic(g.GenerateModel("admin_casbin_rule"))
 
 	// 创建模型的方法 + 创建 query 文件 + 自定义方法
 	g.ApplyInterface(func(internal.AdminUser) {}, g.GenerateModel("admin_user"))
-	g.ApplyInterface(func(internal.Role) {}, g.GenerateModel("role"))
+	g.ApplyInterface(func(internal.AdminRole) {}, g.GenerateModel("admin_role"))
 
 	// 最后执行文件生成
 	g.Execute()

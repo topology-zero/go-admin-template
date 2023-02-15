@@ -10,10 +10,10 @@ import (
 	"gorm.io/gorm"
 )
 
-const TableNameRoleModel = "role"
+const TableNameAdminRoleModel = "admin_role"
 
-// RoleModel mapped from table <role>
-type RoleModel struct {
+// AdminRoleModel mapped from table <admin_role>
+type AdminRoleModel struct {
 	ID         int            `gorm:"column:id;primaryKey;autoIncrement:true"`
 	Name       string         `gorm:"column:name"` // 角色名
 	Auth       string         `gorm:"column:auth"` // 权限ID
@@ -22,7 +22,7 @@ type RoleModel struct {
 	DeleteTime gorm.DeletedAt `gorm:"column:delete_time"`
 }
 
-// TableName RoleModel's table name
-func (*RoleModel) TableName() string {
-	return TableNameRoleModel
+// TableName AdminRoleModel's table name
+func (*AdminRoleModel) TableName() string {
+	return TableNameAdminRoleModel
 }

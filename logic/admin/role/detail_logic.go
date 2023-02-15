@@ -11,8 +11,8 @@ import (
 
 // Detail 角色详情
 func Detail(req *role.RoleDetailRequest, ctx *svc.ServiceContext) (resp role.RoleDetailResponse, err error) {
-	roleModel := query.RoleModel
-	authModel := query.AuthModel
+	roleModel := query.AdminRoleModel
+	authModel := query.AdminAuthModel
 	roleInfo, _ := roleModel.Where(roleModel.ID.Eq(req.Id)).First()
 
 	var auths []int

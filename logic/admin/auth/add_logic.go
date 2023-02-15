@@ -11,9 +11,9 @@ import (
 
 // Add 添加权限
 func Add(req *auth.AuthAddRequest, ctx *svc.ServiceContext) error {
-	authModel := query.AuthModel
+	authModel := query.AdminAuthModel
 
-	var saveAuth model.AuthModel
+	var saveAuth model.AdminAuthModel
 	copier.Copy(&saveAuth, &req)
 	saveAuth.API = req.Api
 

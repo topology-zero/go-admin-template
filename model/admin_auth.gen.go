@@ -10,10 +10,10 @@ import (
 	"gorm.io/gorm"
 )
 
-const TableNameAuthModel = "auth"
+const TableNameAdminAuthModel = "admin_auth"
 
-// AuthModel mapped from table <auth>
-type AuthModel struct {
+// AdminAuthModel mapped from table <admin_auth>
+type AdminAuthModel struct {
 	ID         int            `gorm:"column:id;primaryKey;autoIncrement:true"`
 	Pid        int            `gorm:"column:pid"`     // 上级ID
 	Name       string         `gorm:"column:name"`    // 节点名
@@ -26,7 +26,7 @@ type AuthModel struct {
 	DeleteTime gorm.DeletedAt `gorm:"column:delete_time"`
 }
 
-// TableName AuthModel's table name
-func (*AuthModel) TableName() string {
-	return TableNameAuthModel
+// TableName AdminAuthModel's table name
+func (*AdminAuthModel) TableName() string {
+	return TableNameAdminAuthModel
 }
