@@ -12,7 +12,7 @@ type AdminUser interface {
 	//		u.realname,
 	//		u.phone,
 	//		r.NAME AS rolename,
-	//		( SELECT GROUP_CONCAT(`key`) FROM auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys
+	//		( SELECT GROUP_CONCAT(`key`) FROM admin_auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys
 	//	FROM
 	//		admin_user u
 	//		LEFT JOIN admin_role r ON u.role_id = r.id
