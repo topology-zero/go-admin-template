@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  go-admin-template:
+    image: registry.cn-hangzhou.aliyuncs.com/tanwuyang/go-admin-template:latest
+    container_name: go-admin-template
+    restart: always
+    command:
+      - "-env"
+      - "local"
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./log:/var/logs/go-admin-template
+      - ./etc:/home/project/etc
+      - ./asset:/home/project/asset
