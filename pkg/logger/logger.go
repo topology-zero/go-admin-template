@@ -19,8 +19,9 @@ func Setup() {
 
 	//设置日志格式
 	logrus.SetFormatter(&logrus.TextFormatter{
-		ForceQuote:   false,
-		DisableQuote: true,
+		ForceQuote:      false,
+		DisableQuote:    true,
+		TimestampFormat: "2006-01-02 15:04:05.000",
 		CallerPrettyfier: func(frame *runtime.Frame) (function string, file string) {
 			return "", fmt.Sprintf("%s:%d", frame.File, frame.Line)
 		},
