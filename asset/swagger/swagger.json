@@ -249,6 +249,58 @@
         ]
       }
     },
+    "/generate": {
+      "get": {
+        "summary": "表结构列表",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GenerateListResponse"
+            }
+          }
+        },
+        "tags": [
+          "代码生成相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "生成前端文件",
+        "operationId": "generate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GenerateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "代码生成相关"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/login": {
       "post": {
         "summary": "登录",
@@ -898,6 +950,52 @@
       "required": [
         "id",
         "image"
+      ]
+    },
+    "GenerateListResponse": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "GenerateListResponse",
+      "required": [
+        "tables"
+      ]
+    },
+    "GenerateRequest": {
+      "type": "object",
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": " 表名"
+        }
+      },
+      "title": "GenerateRequest",
+      "required": [
+        "table"
+      ]
+    },
+    "GenerateResponse": {
+      "type": "object",
+      "properties": {
+        "js": {
+          "type": "string",
+          "description": " js 文件内容"
+        },
+        "vue": {
+          "type": "string",
+          "description": " vue 文件内容"
+        }
+      },
+      "title": "GenerateResponse",
+      "required": [
+        "js",
+        "vue"
       ]
     },
     "LoginRequest": {

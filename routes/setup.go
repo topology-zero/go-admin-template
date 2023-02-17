@@ -4,6 +4,7 @@ package routes
 import (
 	adminAuth "admin_template/routes/admin/auth"
 	adminBase "admin_template/routes/admin/base"
+	adminGenerate "admin_template/routes/admin/generate"
 	adminLogin "admin_template/routes/admin/login"
 	adminRole "admin_template/routes/admin/role"
 	adminUser "admin_template/routes/admin/user"
@@ -17,4 +18,5 @@ func Setup(e *gin.Engine) {
 	adminRole.RegisterAdminRoleRoute(e)
 	adminAuth.RegisterAdminAuthRoute(e)
 	adminBase.RegisterAdminBaseRoute(e)
+	adminGenerate.RegisterAdminGenerateRoute(e)
 }

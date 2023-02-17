@@ -1,0 +1,32 @@
+syntax = "v1"
+
+type (
+    GenerateListResponse {
+        Tables []string `json:"tables"`
+    }
+
+    GenerateRequest {
+        Table string `json:"table" binding:"required"` // 表名
+    }
+
+    GenerateResponse {
+        Js string `json:"js"`   // js 文件内容
+        Vue string `json:"vue"` // vue 文件内容
+    }
+)
+
+@server(
+    jwt: Jwt
+    group: adminGenerate
+    swtags: 代码生成相关
+)
+
+service admin {
+    @doc "表结构列表"
+    @handler list
+    get /generate returns (GenerateListResponse)
+
+    @doc "生成前端文件"
+    @handler generate
+    post /generate (GenerateRequest) returns (GenerateResponse)
+}
