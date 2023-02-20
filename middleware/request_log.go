@@ -46,7 +46,7 @@ func RequestLog(c *gin.Context) {
 	c.Next()
 
 	for _, url := range writeList {
-		if c.Request.RequestURI == url {
+		if c.Request.URL.Path == url {
 			return
 		}
 	}
