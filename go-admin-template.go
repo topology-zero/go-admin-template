@@ -24,7 +24,7 @@ import (
 func main() {
 	flag.Parse()
 
-	configFile := fmt.Sprintf("etc/admin-%s.yaml", config.Env)
+	configFile := fmt.Sprintf("etc/go-admin-template-%s.yaml", config.Env)
 
 	e := gin.New()
 	e.Use(
