@@ -18,7 +18,7 @@ func Del(req *auth.AuthDeleteRequest, ctx *svc.ServiceContext) error {
 
 	roleModel := query.AdminRoleModel
 	role := roleModel.GetRoleByAuthId(req.Id)
-	if role != nil {
+	if role.ID != 0 {
 		return errors.New("无法删除该权限,该权限已被使用")
 	}
 
