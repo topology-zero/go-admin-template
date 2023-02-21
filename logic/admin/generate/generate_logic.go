@@ -14,6 +14,7 @@ import (
 	"github.com/pkg/errors"
 	"go-admin-template/dto"
 	"go-admin-template/model"
+	"go-admin-template/pkg/util"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/generate"
 )
@@ -23,6 +24,9 @@ var jsTpl string
 
 //go:embed _vue.tpl
 var vueTpl string
+
+//go:embed _api.tpl
+var apiTpl string
 
 type genFile struct {
 	ctx       *svc.ServiceContext
@@ -46,6 +50,11 @@ func Generate(req *generate.GenerateRequest, ctx *svc.ServiceContext) (resp gene
 	}
 
 	resp.Vue, err = g.vueParse()
+	if err != nil {
+		return
+	}
+
+	resp.Api, err = g.apiParse()
 	return
 }
 
@@ -86,6 +95,9 @@ func (g *genFile) tableParse() {
 		if len(l.Comment) == 0 {
 			l.Comment = strings.ToUpper(l.Name)
 		}
+
+		_, l.GoType = getColumnType(col.Tp.Tp)
+
 		g.cols = append(g.cols, l)
 	}
 }
@@ -140,41 +152,68 @@ func (g *genFile) vueParse() (string, error) {
 	return buffer.String(), nil
 }
 
-func getColumnType(t byte) string {
+// api 模板解析
+func (g *genFile) apiParse() (string, error) {
+	parse, err := template.New("api").Funcs(template.FuncMap{
+		"title": util.Title,
+		"camel": util.Camel,
+	}).Parse(apiTpl)
+	if err != nil {
+		g.ctx.Log.Errorf("%+v", errors.WithStack(err))
+		return "", errors.New("模板解析错误")
+	}
+
+	data := map[string]any{
+		"name":  g.comment,
+		"table": g.tableName,
+		"cols":  g.cols,
+	}
+
+	buffer := new(bytes.Buffer)
+	err = parse.Execute(buffer, data)
+	if err != nil {
+		g.ctx.Log.Errorf("%+v", errors.WithStack(err))
+		return "", errors.New("模板解析错误")
+	}
+
+	return buffer.String(), nil
+}
+
+func getColumnType(t byte) (mysqlType, goType string) {
 	switch t {
 	case mysql.TypeUnspecified, mysql.TypeNull, mysql.TypeNewDate:
 		// 母鸡这些字段是干嘛的
-		return ""
+		return "", "string"
 	case mysql.TypeFloat, mysql.TypeDouble:
-		return "float"
+		return "float", "float64"
 	case mysql.TypeTimestamp:
-		return "timestamp"
+		return "timestamp", "string"
 	case mysql.TypeDate:
-		return "date"
+		return "date", "string"
 	case mysql.TypeDuration:
-		return "time"
+		return "time", "string"
 	case mysql.TypeDatetime:
-		return "datetime"
+		return "datetime", "string"
 	case mysql.TypeYear, mysql.TypeTiny, mysql.TypeLong, mysql.TypeShort, mysql.TypeLonglong, mysql.TypeInt24:
-		return "int"
+		return "int", "int"
 	case mysql.TypeBit:
-		return "bit"
+		return "bit", "string"
 	case mysql.TypeJSON:
-		return "json"
+		return "json", "string"
 	case mysql.TypeNewDecimal:
-		return "decimal"
+		return "decimal", "float64"
 	case mysql.TypeEnum:
-		return "enum"
+		return "enum", "string"
 	case mysql.TypeSet:
-		return "set"
+		return "set", "string"
 	case mysql.TypeTinyBlob, mysql.TypeMediumBlob, mysql.TypeLongBlob, mysql.TypeBlob:
-		return "blob"
+		return "blob", "string"
 	case mysql.TypeVarString, mysql.TypeVarchar, mysql.TypeString:
-		return "string"
+		return "string", "string"
 	case mysql.TypeGeometry:
-		return "point"
+		return "point", "string"
 	default:
-		return ""
+		return "", "string"
 	}
 }
 

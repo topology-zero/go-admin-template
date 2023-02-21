@@ -990,12 +990,17 @@
         "vue": {
           "type": "string",
           "description": " vue 文件内容"
+        },
+        "api": {
+          "type": "string",
+          "description": " api 文件内容"
         }
       },
       "title": "GenerateResponse",
       "required": [
         "js",
-        "vue"
+        "vue",
+        "api"
       ]
     },
     "LoginRequest": {

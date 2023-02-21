@@ -6,8 +6,9 @@ type CreateTable struct {
 }
 
 type Cols struct {
-	Name    string
-	Type    string
-	Comment string
-	Default string
+	Name      string
+	MysqlType string
+	GoType    string
+	Comment   string
+	Default   string
 }

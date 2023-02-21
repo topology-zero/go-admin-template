@@ -12,4 +12,5 @@ type GenerateRequest struct {
 type GenerateResponse struct {
 	Js  string `json:"js"`  // js 文件内容
 	Vue string `json:"vue"` // vue 文件内容
+	Api string `json:"api"` // api 文件内容
 }
