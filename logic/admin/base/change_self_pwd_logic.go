@@ -2,6 +2,7 @@ package base
 
 import (
 	"github.com/pkg/errors"
+	"go-admin-template/pkg/jwt"
 	"go-admin-template/pkg/util"
 	"go-admin-template/query"
 	"go-admin-template/svc"
@@ -10,9 +11,12 @@ import (
 )
 
 // ChangeSelfPwd 修改自己的密码
-func ChangeSelfPwd(uid int, req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) error {
+func ChangeSelfPwd(req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) error {
+	user, _ := ctx.GinContext.Get("userInfo")
+	claims := user.(*jwt.Claims)
+
 	userModel := query.AdminUserModel
-	userInfo, _ := userModel.Where(userModel.ID.Eq(uid)).First()
+	userInfo, _ := userModel.Where(userModel.ID.Eq(claims.Id)).First()
 	err := bcrypt.CompareHashAndPassword([]byte(userInfo.Password), []byte(req.OldPassword))
 	if err != nil {
 		return errors.New("输入的原密码错误")
@@ -24,6 +28,6 @@ func ChangeSelfPwd(uid int, req *base.ChangeSelfPwdRequest, ctx *svc.ServiceCont
 		return errors.New("系统错误")
 	}
 
-	_, err = userModel.Where(userModel.ID.Eq(uid)).Update(userModel.Password, string(password))
+	_, err = userModel.Where(userModel.ID.Eq(claims.Id)).Update(userModel.Password, string(password))
 	return util.WarpDbError(err)
 }

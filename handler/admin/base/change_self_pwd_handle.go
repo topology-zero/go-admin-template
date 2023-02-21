@@ -3,7 +3,6 @@ package base
 import (
 	"go-admin-template/internal/response"
 	"go-admin-template/logic/admin/base"
-	"go-admin-template/pkg/jwt"
 	"go-admin-template/svc"
 	baseType "go-admin-template/types/admin/base"
 
@@ -18,8 +17,6 @@ func ChangeSelfPwdHandle(c *gin.Context) {
 		return
 	}
 
-	userInfo, _ := c.Get("userInfo")
-	claims := userInfo.(*jwt.Claims)
-	err := base.ChangeSelfPwd(claims.Id, &req, svc.NewServiceContext(c))
+	err := base.ChangeSelfPwd(&req, svc.NewServiceContext(c))
 	response.HandleResponse(c, nil, err)
 }
