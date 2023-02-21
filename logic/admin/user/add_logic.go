@@ -1,13 +1,13 @@
 package user
 
 import (
-	"admin_template/model"
-	"admin_template/pkg/util"
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/user"
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
+	"go-admin-template/model"
+	"go-admin-template/pkg/util"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/user"
 	"golang.org/x/crypto/bcrypt"
 )
 

@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"admin_template/config"
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
+	"go-admin-template/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	glog "gorm.io/gorm/logger"

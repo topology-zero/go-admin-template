@@ -2,12 +2,12 @@
 package routes
 
 import (
-	adminAuth "admin_template/routes/admin/auth"
-	adminBase "admin_template/routes/admin/base"
-	adminGenerate "admin_template/routes/admin/generate"
-	adminLogin "admin_template/routes/admin/login"
-	adminRole "admin_template/routes/admin/role"
-	adminUser "admin_template/routes/admin/user"
+	adminAuth "go-admin-template/routes/admin/auth"
+	adminBase "go-admin-template/routes/admin/base"
+	adminGenerate "go-admin-template/routes/admin/generate"
+	adminLogin "go-admin-template/routes/admin/login"
+	adminRole "go-admin-template/routes/admin/role"
+	adminUser "go-admin-template/routes/admin/user"
 
 	"github.com/gin-gonic/gin"
 )

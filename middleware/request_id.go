@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"strings"
 
-	"admin_template/pkg/util"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"go-admin-template/pkg/util"
 )
 
 func RequestId(c *gin.Context) {

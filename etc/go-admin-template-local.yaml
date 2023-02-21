@@ -8,7 +8,7 @@ Jwt:
   Expire: 24
 
 Log:
-  Dir: /var/logs/admin-template
+  Dir: /var/logs/go-admin-template
   Level: debug
 
 Mysql:
@@ -16,7 +16,7 @@ Mysql:
   Port: 3309
   User: root
   Pwd: 123456
-  Db: admin-template
+  Db: go-admin-template
 
 Redis:
   Host: 127.0.0.1

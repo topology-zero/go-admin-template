@@ -2,8 +2,8 @@
 package generate
 
 import (
-	"admin_template/handler/admin/generate"
-	"admin_template/middleware"
+	"go-admin-template/handler/admin/generate"
+	"go-admin-template/middleware"
 
 	"github.com/gin-gonic/gin"
 )

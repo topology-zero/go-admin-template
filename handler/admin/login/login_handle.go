@@ -1,12 +1,12 @@
 package login
 
 import (
-	"admin_template/config"
-	"admin_template/internal/response"
-	"admin_template/logic/admin/login"
-	"admin_template/pkg/jwt"
-	"admin_template/svc"
-	loginType "admin_template/types/admin/login"
+	"go-admin-template/config"
+	"go-admin-template/internal/response"
+	"go-admin-template/logic/admin/login"
+	"go-admin-template/pkg/jwt"
+	"go-admin-template/svc"
+	loginType "go-admin-template/types/admin/login"
 
 	"github.com/gin-gonic/gin"
 )

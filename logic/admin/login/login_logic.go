@@ -3,11 +3,11 @@ package login
 import (
 	"strings"
 
-	"admin_template/config"
-	"admin_template/pkg/jwt"
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/login"
+	"go-admin-template/config"
+	"go-admin-template/pkg/jwt"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/login"
 
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"

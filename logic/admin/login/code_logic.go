@@ -1,9 +1,9 @@
 package login
 
 import (
-	"admin_template/config"
-	"admin_template/svc"
-	"admin_template/types/admin/login"
+	"go-admin-template/config"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/login"
 )
 
 // Code 获取验证码

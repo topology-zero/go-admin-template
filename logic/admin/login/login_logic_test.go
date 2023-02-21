@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"admin_template/config"
-	"admin_template/pkg/jwt"
+	"go-admin-template/config"
+	"go-admin-template/pkg/jwt"
 )
 
 func TestLogin(t *testing.T) {

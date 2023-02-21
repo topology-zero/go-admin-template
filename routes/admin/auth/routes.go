@@ -2,8 +2,8 @@
 package auth
 
 import (
-	"admin_template/handler/admin/auth"
-	"admin_template/middleware"
+	"go-admin-template/handler/admin/auth"
+	"go-admin-template/middleware"
 
 	"github.com/gin-gonic/gin"
 )

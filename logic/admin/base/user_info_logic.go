@@ -1,9 +1,9 @@
 package base
 
 import (
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/base"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/base"
 )
 
 // UserInfo 获取用户信息

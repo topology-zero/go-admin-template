@@ -1,8 +1,8 @@
 package response
 
 import (
-	"admin_template/internal/translator"
-	"admin_template/pkg/util"
+	"go-admin-template/internal/translator"
+	"go-admin-template/pkg/util"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,6 +14,7 @@ type UnifiedResponse struct {
 	Message   string `json:"message"`
 	RequestId string `json:"requestId"`
 }
+
 // HandleResponse 统一返回处理
 func HandleResponse(c *gin.Context, data any, err error) {
 	requestId, _ := c.Get(util.TrafficKey)

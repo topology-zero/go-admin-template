@@ -5,7 +5,7 @@ import (
 	_ "embed"
 	"text/template"
 
-	"admin_template/config"
+	"go-admin-template/config"
 
 	"github.com/gin-gonic/gin"
 )

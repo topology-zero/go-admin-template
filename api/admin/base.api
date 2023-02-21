@@ -45,7 +45,7 @@ type (
     swtags: 基础接口相关
 )
 
-service admin {
+service go-admin-template {
     @doc "获取所有角色"
     @handler role
     get /role returns (BaseRoleResponse)

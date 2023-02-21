@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"admin_template/config"
-	"admin_template/pkg/logger"
+	"go-admin-template/config"
+	"go-admin-template/pkg/logger"
 
 	"gorm.io/gen"
 )

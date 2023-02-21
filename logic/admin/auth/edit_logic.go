@@ -1,10 +1,10 @@
 package auth
 
 import (
-	"admin_template/pkg/util"
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/auth"
+	"go-admin-template/pkg/util"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/auth"
 )
 
 // Edit 编辑权限

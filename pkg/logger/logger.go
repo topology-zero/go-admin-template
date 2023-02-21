@@ -5,7 +5,7 @@ import (
 	"log"
 	"runtime"
 
-	"admin_template/config"
+	"go-admin-template/config"
 
 	"github.com/sirupsen/logrus"
 )

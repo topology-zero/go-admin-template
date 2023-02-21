@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50731
  Source Host           : localhost:3309
- Source Schema         : admin-template
+ Source Schema         : go-admin-template
 
  Target Server Type    : MySQL
  Target Server Version : 50731

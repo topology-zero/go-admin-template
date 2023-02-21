@@ -7,20 +7,20 @@ import (
 	"net/http"
 	"time"
 
-	"admin_template/config"
-	"admin_template/middleware"
-	"admin_template/model"
-	"admin_template/pkg/logger"
-	"admin_template/pkg/swagger"
-	"admin_template/query"
-	"admin_template/routes"
+	"go-admin-template/config"
+	"go-admin-template/middleware"
+	"go-admin-template/model"
+	"go-admin-template/pkg/logger"
+	"go-admin-template/pkg/swagger"
+	"go-admin-template/query"
+	"go-admin-template/routes"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 )
 
-//go:generate goctl api plugin -p gengin -api admin.api -dir .
-//go:generate goctl api plugin -p "goctl-swagger swagger -filename asset/swagger/swagger.json" -api admin.api -dir .
+//go:generate goctl api plugin -p gengin -api go-admin-template.api -dir .
+//go:generate goctl api plugin -p "goctl-swagger swagger -filename asset/swagger/swagger.json" -api go-admin-template.api -dir .
 func main() {
 	flag.Parse()
 

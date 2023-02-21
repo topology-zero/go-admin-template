@@ -1,10 +1,10 @@
 package auth
 
 import (
-	"admin_template/model"
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/auth"
+	"go-admin-template/model"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/auth"
 )
 
 func List(ctx *svc.ServiceContext) (resp auth.AuthListResponse, err error) {

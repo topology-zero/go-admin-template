@@ -1,10 +1,10 @@
 package role
 
 import (
-	"admin_template/internal/response"
-	"admin_template/logic/admin/role"
-	"admin_template/svc"
-	roleType "admin_template/types/admin/role"
+	"go-admin-template/internal/response"
+	"go-admin-template/logic/admin/role"
+	"go-admin-template/svc"
+	roleType "go-admin-template/types/admin/role"
 
 	"github.com/gin-gonic/gin"
 )

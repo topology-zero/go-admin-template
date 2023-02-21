@@ -1,11 +1,11 @@
 package user
 
 import (
-	"admin_template/pkg/util"
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/user"
 	"github.com/pkg/errors"
+	"go-admin-template/pkg/util"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/user"
 )
 
 // Del 删除用户

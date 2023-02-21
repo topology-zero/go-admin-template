@@ -1,10 +1,10 @@
 package role
 
 import (
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/role"
 	"github.com/jinzhu/copier"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/role"
 )
 
 // List 角色列表

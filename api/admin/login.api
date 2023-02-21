@@ -23,7 +23,7 @@ type (
     swtags: 登录相关
 )
 
-service admin {
+service go-admin-template {
     @doc "获取验证码"
     @handler code
     get /code returns (CodeResponse)

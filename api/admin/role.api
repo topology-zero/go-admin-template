@@ -51,7 +51,7 @@ type (
     swtags: 后台角色相关
 )
 
-service admin {
+service go-admin-template {
     @doc "角色列表"
     @handler list
     get /role (RoleListRequest) returns (RoleListResponse)

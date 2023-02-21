@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"admin_template/pkg/util"
+	"go-admin-template/pkg/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"

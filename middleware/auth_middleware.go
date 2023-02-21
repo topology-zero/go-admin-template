@@ -4,11 +4,11 @@ import (
 	"strconv"
 	"strings"
 
-	"admin_template/internal/response"
-	"admin_template/model"
-	"admin_template/pkg/jwt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	"go-admin-template/internal/response"
+	"go-admin-template/model"
+	"go-admin-template/pkg/jwt"
 )
 
 func AuthMiddleware(c *gin.Context) {

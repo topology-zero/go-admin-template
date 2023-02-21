@@ -17,7 +17,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"admin_template/model"
+	"go-admin-template/model"
 )
 
 func newAdminRoleModel(db *gorm.DB, opts ...gen.DOOption) adminRoleModel {

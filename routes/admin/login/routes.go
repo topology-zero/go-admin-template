@@ -2,7 +2,7 @@
 package login
 
 import (
-	"admin_template/handler/admin/login"
+	"go-admin-template/handler/admin/login"
 
 	"github.com/gin-gonic/gin"
 )

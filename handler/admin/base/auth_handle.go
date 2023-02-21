@@ -1,9 +1,9 @@
 package base
 
 import (
-	"admin_template/internal/response"
-	"admin_template/logic/admin/base"
-	"admin_template/svc"
+	"go-admin-template/internal/response"
+	"go-admin-template/logic/admin/base"
+	"go-admin-template/svc"
 
 	"github.com/gin-gonic/gin"
 )

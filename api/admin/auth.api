@@ -47,7 +47,7 @@ type (
     swtags: 后台权限相关
 )
 
-service admin {
+service go-admin-template {
     @doc "权限列表"
     @handler list
     get /auth returns (AuthListResponse)

@@ -2,8 +2,8 @@
 package role
 
 import (
-	"admin_template/handler/admin/role"
-	"admin_template/middleware"
+	"go-admin-template/handler/admin/role"
+	"go-admin-template/middleware"
 
 	"github.com/gin-gonic/gin"
 )

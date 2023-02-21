@@ -1,11 +1,11 @@
 package auth
 
 import (
-	"admin_template/internal/response"
-	"admin_template/logic/admin/auth"
-	"admin_template/svc"
-	authType "admin_template/types/admin/auth"
 	"github.com/pkg/errors"
+	"go-admin-template/internal/response"
+	"go-admin-template/logic/admin/auth"
+	"go-admin-template/svc"
+	authType "go-admin-template/types/admin/auth"
 
 	"github.com/gin-gonic/gin"
 )

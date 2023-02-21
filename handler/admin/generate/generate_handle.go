@@ -1,10 +1,10 @@
 package generate
 
 import (
-	"admin_template/internal/response"
-	"admin_template/logic/admin/generate"
-	"admin_template/svc"
-	generateType "admin_template/types/admin/generate"
+	"go-admin-template/internal/response"
+	"go-admin-template/logic/admin/generate"
+	"go-admin-template/svc"
+	generateType "go-admin-template/types/admin/generate"
 
 	"github.com/gin-gonic/gin"
 )

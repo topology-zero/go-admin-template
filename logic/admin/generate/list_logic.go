@@ -1,9 +1,9 @@
 package generate
 
 import (
-	"admin_template/model"
-	"admin_template/svc"
-	"admin_template/types/admin/generate"
+	"go-admin-template/model"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/generate"
 )
 
 // List 表结构列表

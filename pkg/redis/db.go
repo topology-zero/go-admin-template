@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"admin_template/config"
-	"admin_template/pkg/logger"
 	redigo "github.com/go-redis/redis/v8"
 	"github.com/pkg/errors"
+	"go-admin-template/config"
+	"go-admin-template/pkg/logger"
 )
 
 var Client *redigo.Client

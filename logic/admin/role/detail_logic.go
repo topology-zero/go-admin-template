@@ -3,10 +3,10 @@ package role
 import (
 	"encoding/json"
 
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/role"
 	"github.com/pkg/errors"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/role"
 )
 
 // Detail 角色详情

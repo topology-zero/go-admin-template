@@ -2,8 +2,8 @@
 package base
 
 import (
-	"admin_template/handler/admin/base"
-	"admin_template/middleware"
+	"go-admin-template/handler/admin/base"
+	"go-admin-template/middleware"
 
 	"github.com/gin-gonic/gin"
 )

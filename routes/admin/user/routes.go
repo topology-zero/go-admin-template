@@ -2,8 +2,8 @@
 package user
 
 import (
-	"admin_template/handler/admin/user"
-	"admin_template/middleware"
+	"go-admin-template/handler/admin/user"
+	"go-admin-template/middleware"
 
 	"github.com/gin-gonic/gin"
 )

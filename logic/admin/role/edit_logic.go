@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"admin_template/model"
-	"admin_template/pkg/util"
-	"admin_template/query"
-	"admin_template/svc"
-	"admin_template/types/admin/role"
 	"github.com/pkg/errors"
+	"go-admin-template/model"
+	"go-admin-template/pkg/util"
+	"go-admin-template/query"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/role"
 )
 
 // Edit 编辑角色

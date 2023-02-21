@@ -21,7 +21,7 @@ type (
     swtags: 代码生成相关
 )
 
-service admin {
+service go-admin-template {
     @doc "表结构列表"
     @handler list
     get /generate returns (GenerateListResponse)

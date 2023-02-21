@@ -1,7 +1,7 @@
 package login
 
 import (
-	"admin_template/svc"
+	"go-admin-template/svc"
 )
 
 // Logout 退出登录

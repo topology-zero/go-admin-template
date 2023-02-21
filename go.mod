@@ -1,4 +1,4 @@
-module admin_template
+module go-admin-template
 
 go 1.18
 

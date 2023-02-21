@@ -1,11 +1,11 @@
 package base
 
 import (
-	"admin_template/internal/response"
-	"admin_template/logic/admin/base"
-	"admin_template/pkg/jwt"
-	"admin_template/svc"
-	baseType "admin_template/types/admin/base"
+	"go-admin-template/internal/response"
+	"go-admin-template/logic/admin/base"
+	"go-admin-template/pkg/jwt"
+	"go-admin-template/svc"
+	baseType "go-admin-template/types/admin/base"
 
 	"github.com/gin-gonic/gin"
 )
