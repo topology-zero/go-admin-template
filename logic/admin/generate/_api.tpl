@@ -2,8 +2,8 @@ syntax = "v1"
 
 type (
     {{title .table}}ListRequest {
-        Page int `form:"page"`         // 分页
-        PageSize int `form:"pageSize"` // 每页条数
+        Page int `form:"page,optional"`         // 分页
+        PageSize int `form:"pageSize,optional"` // 每页条数
     }
 
     {{title .table}}ListResponse {
