@@ -6,7 +6,6 @@ import (
 
 	"github.com/pkg/errors"
 	"go-admin-template/model"
-	"go-admin-template/pkg/util"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/role"
@@ -33,7 +32,7 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 
 	defer model.Enforcer.LoadPolicy()
 
-	return util.WarpDbError(query.Q.Transaction(func(tx *query.Query) error {
+	err = query.Q.Transaction(func(tx *query.Query) error {
 		_, err := tx.AdminRoleModel.Where(tx.AdminRoleModel.ID.Eq(req.Id)).UpdateSimple(
 			tx.AdminRoleModel.Name.Value(req.Name),
 			tx.AdminRoleModel.Auth.Value(authStr),
@@ -65,5 +64,10 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 		}
 
 		return tx.AdminCasbinRuleModel.CreateInBatches(rules, 100)
-	}))
+	})
+	if err != nil {
+		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
+		err = errors.New("系统错误")
+	}
+	return err
 }

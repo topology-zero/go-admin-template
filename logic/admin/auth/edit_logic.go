@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"go-admin-template/pkg/util"
+	"github.com/pkg/errors"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/auth"
@@ -18,5 +18,9 @@ func Edit(req *auth.AuthEditRequest, ctx *svc.ServiceContext) error {
 		authModel.API.Value(req.Api),
 		authModel.Action.Value(req.Action),
 	)
-	return util.WarpDbError(err)
+	if err != nil {
+		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
+		err = errors.New("系统错误")
+	}
+	return err
 }

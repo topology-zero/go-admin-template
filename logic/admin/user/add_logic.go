@@ -4,7 +4,6 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 	"go-admin-template/model"
-	"go-admin-template/pkg/util"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/user"
@@ -35,5 +34,10 @@ func Add(req *user.UserAddRequest, ctx *svc.ServiceContext) error {
 	copier.Copy(&u, &req)
 	u.RoleID = req.RoleId
 
-	return util.WarpDbError(userModel.Create(&u))
+	err = userModel.Create(&u)
+	if err != nil {
+		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
+		err = errors.New("系统错误")
+	}
+	return err
 }

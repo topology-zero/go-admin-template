@@ -2,7 +2,6 @@ package auth
 
 import (
 	"github.com/pkg/errors"
-	"go-admin-template/pkg/util"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/auth"
@@ -23,5 +22,9 @@ func Del(req *auth.AuthDeleteRequest, ctx *svc.ServiceContext) error {
 	}
 
 	_, err := authModel.Unscoped().Where(authModel.ID.Eq(req.Id)).Delete()
-	return util.WarpDbError(err)
+	if err != nil {
+		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
+		err = errors.New("系统错误")
+	}
+	return err
 }

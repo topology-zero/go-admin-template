@@ -5,7 +5,6 @@ import (
 
 	"github.com/pkg/errors"
 	"go-admin-template/model"
-	"go-admin-template/pkg/util"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/role"
@@ -25,7 +24,7 @@ func Del(req *role.RoleDeleteRequest, ctx *svc.ServiceContext) error {
 
 	defer model.Enforcer.LoadPolicy()
 
-	return util.WarpDbError(query.Q.Transaction(func(tx *query.Query) error {
+	err := query.Q.Transaction(func(tx *query.Query) error {
 		_, err := tx.AdminRoleModel.Where(tx.AdminRoleModel.ID.Eq(req.Id)).Delete()
 		if err != nil {
 			return err
@@ -33,6 +32,10 @@ func Del(req *role.RoleDeleteRequest, ctx *svc.ServiceContext) error {
 
 		_, err = tx.AdminCasbinRuleModel.Where(tx.AdminCasbinRuleModel.Ptype.Eq("p"), tx.AdminCasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
 		return err
-	}))
-
+	})
+	if err != nil {
+		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
+		err = errors.New("系统错误")
+	}
+	return err
 }

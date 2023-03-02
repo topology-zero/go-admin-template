@@ -6,7 +6,6 @@ import (
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 )
 
 // CopyValue 数据复制
@@ -63,13 +62,4 @@ func Camel(s string) string {
 	}
 	s = Title(s)
 	return strings.ToLower(s[:1]) + s[1:]
-}
-
-// WarpDbError 将错误打印，且不包含敏感信息返回
-func WarpDbError(err error) error {
-	if err == nil {
-		return nil
-	}
-	logrus.Errorf("数据库异常：%+v", errors.WithStack(err))
-	return errors.New("系统错误")
 }

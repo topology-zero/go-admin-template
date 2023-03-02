@@ -3,7 +3,6 @@ package base
 import (
 	"github.com/pkg/errors"
 	"go-admin-template/pkg/jwt"
-	"go-admin-template/pkg/util"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/base"
@@ -29,5 +28,9 @@ func ChangeSelfPwd(req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) erro
 	}
 
 	_, err = userModel.Where(userModel.ID.Eq(claims.Id)).Update(userModel.Password, string(password))
-	return util.WarpDbError(err)
+	if err != nil {
+		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
+		err = errors.New("系统错误")
+	}
+	return err
 }
