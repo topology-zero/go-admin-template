@@ -95,7 +95,7 @@
     </div>
 </template>
 
-<script>
+{{.startScript}}
     const defaultFormData = () => {
         return {
             {{- range $i, $v := .cols}}
@@ -119,20 +119,20 @@
             }
         },
         methods: {
-            {{.dd}} 添加{{.name}}
+            // 添加{{.name}}
             handleAdd() {
                 this.dialogVisible = true
                 this.formDataId = 0
                 this.formData = defaultFormData()
             },
-            {{.dd}} 编辑{{.name}}
+            // 编辑{{.name}}
             async handleEdit(info) {
                 this.dialogVisible = true
                 this.formDataId = info.id
                 const { data } = await getDetail(info.id)
                 this.formData = data
             },
-            {{.dd}} 添加 or 编辑{{.name}}提交
+            // 添加 or 编辑{{.name}}提交
             async submitForm() {
                 await this.$refs.elForm.validate()
                 try {
@@ -147,14 +147,14 @@
                     this.dialogVisible = false
                 }
             },
-            {{.dd}} 删除{{.name}}
+            // 删除{{.name}}
             async handleDel(info) {
-                await this.$confirm('删除用户不可恢复', '警告')
+                await this.$confirm('删除{{.name}}不可恢复', '警告')
                 const { message } = await del(info.id)
                 this.$message.success(message)
                 this._getData(this.params)
             },
-            {{.dd}} 获取数据
+            // 获取数据
             async _getData() {
                 const res = await getList(this.params)
                 this.list = res.data.data
@@ -165,4 +165,4 @@
             }
         }
     }
-</script>
+{{.endScript}}

@@ -134,12 +134,13 @@ func (g *genFile) vueParse() (string, error) {
 	}
 
 	data := map[string]any{
-		"name":    template.JS(g.comment),
-		"table":   g.tableName,
-		"cols":    g.cols,
-		"colsLen": len(g.cols) - 1,
-		"hasId":   g.hasId,
-		"dd":      template.JS("//"),
+		"name":        g.comment,
+		"table":       g.tableName,
+		"cols":        g.cols,
+		"colsLen":     len(g.cols) - 1,
+		"hasId":       g.hasId,
+		"startScript": template.HTML("<script>"),
+		"endScript":   template.HTML("</script>"),
 	}
 
 	buffer := new(bytes.Buffer)
