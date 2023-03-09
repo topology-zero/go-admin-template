@@ -1,12 +1,13 @@
 package auth
 
 import (
-	"github.com/jinzhu/copier"
-	"github.com/pkg/errors"
 	"go-admin-template/model"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/auth"
+
+	"github.com/jinzhu/copier"
+	"github.com/pkg/errors"
 )
 
 // Add 添加权限

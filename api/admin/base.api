@@ -35,7 +35,6 @@ type (
         NewPassword string `json:"newPassword" binding:"required,nefield=OldPassword,min=6,max=255"` // 新密码
         ConfirmPassword string `json:"confirmPassword" binding:"required,eqfield=NewPassword"`       // 确认密码
     }
-
 )
 
 @server(

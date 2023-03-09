@@ -1,9 +1,10 @@
 package svc
 
 import (
+	"go-admin-template/pkg/util"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"go-admin-template/pkg/util"
 )
 
 type ServiceContext struct {

@@ -7,8 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"go-admin-template/config"
+
+	"github.com/sirupsen/logrus"
 )
 
 type RotateHook struct{}

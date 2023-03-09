@@ -29,6 +29,7 @@ type Request struct {
 }
 
 type HTTPOption func(r *Request)
+
 // NewHttpRequest 构建一个 Request 对象
 func NewHttpRequest(m method, url string, opt ...HTTPOption) *Request {
 	r := &Request{

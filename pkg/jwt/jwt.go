@@ -3,11 +3,12 @@ package jwt
 import (
 	"time"
 
+	"go-admin-template/config"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
-	"go-admin-template/config"
 )
 
 const JwtName = "Authorization"

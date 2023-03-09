@@ -5,14 +5,15 @@ import (
 	"fmt"
 	"time"
 
+	"go-admin-template/config"
+
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
-	"go-admin-template/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	glog "gorm.io/gorm/logger"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
@@ -31,15 +32,15 @@ func Setup() {
 	)
 	var err error
 
-	logMode := glog.Silent
+	logMode := logger.Silent
 	if config.Env == "local" || config.Env == "dev" {
-		logMode = glog.Info
+		logMode = logger.Info
 	}
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
 		},
-		Logger: glog.New(logrus.StandardLogger(), glog.Config{
+		Logger: logger.New(logrus.StandardLogger(), logger.Config{
 			SlowThreshold:             200 * time.Millisecond,
 			Colorful:                  false,
 			IgnoreRecordNotFoundError: true,

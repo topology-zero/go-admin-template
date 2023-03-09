@@ -36,21 +36,21 @@ type (
     }
 
     UserAddRequest {
-        Username string `json:"username" binding:"required"`               // 用户名
-        Realname string `json:"realname" binding:"required"`               // 真实姓名
-        Phone string `json:"phone" binding:"required"`                     // 手机号
-        RoleId int `json:"roleId" binding:"required"`                      // 角色ID
-        Password string `json:"password" binding:"required,min=6,max=255"` // 密码
+        Username string `json:"username" binding:"required"`                // 用户名
+        Realname string `json:"realname" binding:"required"`                // 真实姓名
+        Phone string `json:"phone" binding:"required"`                      // 手机号
+        RoleId int `json:"roleId" binding:"required"`                       // 角色ID
+        Password string `json:"password" binding:"required,min=6,max=255"`  // 密码
         Status int `json:"status" binding:"oneof=0 1"`                      // 状态 0:未启用 1:正常
     }
 
     UserEditRequest {
         Id int `path:"id"`
-        Username string `json:"username" binding:"required"` // 用户名
-        Realname string `json:"realname" binding:"required"` // 真实姓名
-        Phone string `json:"phone" binding:"required"`       // 手机号
-        RoleId int `json:"roleId" binding:"required"`        // 角色ID
-        Password string `json:"password"`                    // 密码
+        Username string `json:"username" binding:"required"`  // 用户名
+        Realname string `json:"realname" binding:"required"`  // 真实姓名
+        Phone string `json:"phone" binding:"required"`        // 手机号
+        RoleId int `json:"roleId" binding:"required"`         // 角色ID
+        Password string `json:"password"`                     // 密码
         Status int `json:"status" binding:"oneof=0 1"`        // 状态 0:未启用 1:正常
     }
 
@@ -67,7 +67,6 @@ type (
 )
 
 service go-admin-template {
-
     @doc "用户列表"
     @handler list
     get /user (UserListRequest) returns (UserListResponse)

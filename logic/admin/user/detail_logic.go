@@ -1,10 +1,11 @@
 package user
 
 import (
-	"github.com/jinzhu/copier"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/user"
+
+	"github.com/jinzhu/copier"
 )
 
 // Detail 用户详情

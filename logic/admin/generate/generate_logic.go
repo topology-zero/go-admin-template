@@ -6,17 +6,18 @@ import (
 	"html/template"
 	"strings"
 
+	"go-admin-template/dto"
+	"go-admin-template/model"
+	"go-admin-template/pkg/util"
+	"go-admin-template/svc"
+	"go-admin-template/types/admin/generate"
+
 	"github.com/pingcap/tidb/parser"
 	"github.com/pingcap/tidb/parser/ast"
 	"github.com/pingcap/tidb/parser/mysql"
 	_ "github.com/pingcap/tidb/types/parser_driver"
 	driver "github.com/pingcap/tidb/types/parser_driver"
 	"github.com/pkg/errors"
-	"go-admin-template/dto"
-	"go-admin-template/model"
-	"go-admin-template/pkg/util"
-	"go-admin-template/svc"
-	"go-admin-template/types/admin/generate"
 )
 
 //go:embed _js.tpl

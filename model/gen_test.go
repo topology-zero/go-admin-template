@@ -8,6 +8,7 @@ import (
 	"go-admin-template/config"
 	"go-admin-template/model/internal"
 	"go-admin-template/pkg/logger"
+
 	"gorm.io/gen"
 )
 

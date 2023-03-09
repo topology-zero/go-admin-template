@@ -1,11 +1,12 @@
 package base
 
 import (
-	"github.com/pkg/errors"
 	"go-admin-template/pkg/jwt"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/base"
+
+	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 

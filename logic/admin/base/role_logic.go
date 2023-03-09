@@ -1,10 +1,11 @@
 package base
 
 import (
-	"github.com/jinzhu/copier"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/base"
+
+	"github.com/jinzhu/copier"
 )
 
 // Role 获取所有角色

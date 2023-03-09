@@ -1,10 +1,11 @@
 package auth
 
 import (
-	"github.com/pkg/errors"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/auth"
+
+	"github.com/pkg/errors"
 )
 
 // Del 删除权限

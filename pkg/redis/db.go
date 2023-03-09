@@ -4,10 +4,11 @@ import (
 	"context"
 	"fmt"
 
+	"go-admin-template/config"
+
 	redigo "github.com/go-redis/redis/v8"
 	"github.com/pkg/errors"
-	"go-admin-template/config"
-	"go-admin-template/pkg/logger"
+	"github.com/sirupsen/logrus"
 )
 
 var Client *redigo.Client
@@ -22,6 +23,6 @@ func Setup() {
 	})
 	_, err := Client.Ping(context.Background()).Result()
 	if err != nil {
-		logger.Fatalf("%+v", errors.WithStack(err))
+		logrus.Fatalf("%+v", errors.WithStack(err))
 	}
 }

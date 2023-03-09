@@ -1,13 +1,13 @@
 package auth
 
 import (
-	"github.com/pkg/errors"
 	"go-admin-template/internal/response"
 	"go-admin-template/logic/admin/auth"
 	"go-admin-template/svc"
 	authType "go-admin-template/types/admin/auth"
 
 	"github.com/gin-gonic/gin"
+	"github.com/pkg/errors"
 )
 
 // AddHandle 添加权限
