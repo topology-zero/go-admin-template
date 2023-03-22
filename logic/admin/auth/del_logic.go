@@ -9,7 +9,7 @@ import (
 )
 
 // Del 删除权限
-func Del(req *auth.AuthDeleteRequest, ctx *svc.ServiceContext) error {
+func Del(req *auth.PathId, ctx *svc.ServiceContext) error {
 	authModel := query.AdminAuthModel
 	auths, _ := authModel.Where(authModel.Pid.Eq(req.Id)).First()
 	if auths != nil {

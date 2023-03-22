@@ -9,7 +9,7 @@ import (
 )
 
 // Detail 用户详情
-func Detail(req *user.UserDetailRequest, ctx *svc.ServiceContext) (resp user.UserDetailResponse, err error) {
+func Detail(req *user.PathId, ctx *svc.ServiceContext) (resp user.UserDetailResponse, err error) {
 	userModel := query.AdminUserModel
 	userInfo, _ := userModel.Where(userModel.ID.Eq(req.Id)).First()
 	copier.Copy(&resp, &userInfo)

@@ -10,9 +10,10 @@ type (
     }
 
     GenerateResponse {
-        Js string `json:"js"`   // js 文件内容
-        Vue string `json:"vue"` // vue 文件内容
-        Api string `json:"api"` // api 文件内容
+        Js string `json:"js"`     // js 文件内容
+        Vue string `json:"vue"`   // vue 文件内容
+        Api string `json:"api"`   // api 文件内容
+        Auth string `json:"auth"` // auth sql 文件内容
     }
 )
 

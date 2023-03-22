@@ -26,17 +26,8 @@ type (
     }
 
     AuthEditRequest {
-        Id int `path:"id"`
-        Pid int `json:"pid"  binding:"min=0"`
-        Key string `json:"key" binding:"required"`        // 权限标识
-        Name string `json:"name" binding:"required"`      // 节点名
-        IsMenu int `json:"isMenu" binding:"oneof=0 1"`    // 是否是菜单栏 0：否 1：是
-        Api string `json:"api"`                           // 接口
-        Action string `json:"action"`                     // 操作方法
-    }
-
-    AuthDeleteRequest {
-        Id int `path:"id"`
+        PathId
+        AuthAddRequest
     }
 )
 
@@ -62,5 +53,5 @@ service go-admin-template {
 
     @doc "删除权限"
     @handler del
-    delete /auth/:id (AuthDeleteRequest)
+    delete /auth/:id (PathId)
 }

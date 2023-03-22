@@ -7,8 +7,6 @@ type (
     }
 
     {{title .table}}ListResponse {
-        Page int `json:"page"`         // 分页
-        PageSize int `json:"pageSize"` // 每页条数
         Total int `json:"total"`       // 总条数
         Data []{{title .table}}List `json:"data"`  // 具体数据
     }
@@ -20,10 +18,6 @@ type (
         {{- range .cols}}
         {{title .Name}} {{.GoType}} `json:"{{camel .Name}}"` // {{.Comment}}
         {{- end}}
-    }
-
-    {{title .table}}DetailRequest {
-        Id int `path:"id"`
     }
 
     {{title .table}}DetailResponse {
@@ -42,14 +36,8 @@ type (
     }
 
     {{title .table}}EditRequest {
-        Id int `path:"id"`
-        {{- range .cols}}
-        {{title .Name}} {{.GoType}} `json:"{{camel .Name}}" binding:"required"` // {{.Comment}}
-        {{- end}}
-    }
-
-    {{title .table}}DeleteRequest {
-        Id int `path:"id"`
+        PathId
+        {{title .table}}AddRequest
     }
 )
 
@@ -68,7 +56,7 @@ service go-admin-template {
 
     @doc "{{.name}}详情"
     @handler detail
-    get /{{.table}}/:id ({{title .table}}DetailRequest) returns ({{title .table}}DetailResponse)
+    get /{{.table}}/:id (PathId) returns ({{title .table}}DetailResponse)
 
     @doc "添加{{.name}}"
     @handler add
@@ -80,5 +68,5 @@ service go-admin-template {
 
     @doc "删除{{.name}}"
     @handler del
-    delete /{{.table}}/:id ({{title .table}}DeleteRequest)
+    delete /{{.table}}/:id (PathId)
 }

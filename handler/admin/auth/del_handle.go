@@ -11,7 +11,7 @@ import (
 
 // DelHandle 删除权限
 func DelHandle(c *gin.Context) {
-	var req authType.AuthDeleteRequest
+	var req authType.PathId
 	if err := c.ShouldBindUri(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

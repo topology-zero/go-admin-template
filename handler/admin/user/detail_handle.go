@@ -11,7 +11,7 @@ import (
 
 // DetailHandle 用户详情
 func DetailHandle(c *gin.Context) {
-	var req userType.UserDetailRequest
+	var req userType.PathId
 	if err := c.ShouldBindUri(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

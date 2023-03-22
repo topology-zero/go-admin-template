@@ -88,7 +88,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthDeleteRequest"
+              "$ref": "#/definitions/PathId"
             }
           }
         ],
@@ -461,7 +461,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleDeleteRequest"
+              "$ref": "#/definitions/PathId"
             }
           }
         ],
@@ -627,7 +627,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDeleteRequest"
+              "$ref": "#/definitions/PathId"
             }
           }
         ],
@@ -770,24 +770,24 @@
         "action"
       ]
     },
-    "AuthDeleteRequest": {
-      "type": "object",
-      "title": "AuthDeleteRequest"
-    },
     "AuthEditRequest": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
         "pid": {
           "type": "integer",
           "format": "int32"
         },
-        "key": {
-          "type": "string",
-          "description": " 权限标识"
-        },
         "name": {
           "type": "string",
           "description": " 节点名"
+        },
+        "key": {
+          "type": "string",
+          "description": " 权限标识"
         },
         "isMenu": {
           "type": "integer",
@@ -803,17 +803,7 @@
           "description": " 操作方法"
         }
       },
-      "title": "AuthEditRequest",
-      "required": [
-        "pid",
-        "min=0",
-        "key",
-        "name",
-        "isMenu",
-        "oneof=0 1",
-        "api",
-        "action"
-      ]
+      "title": "AuthEditRequest"
     },
     "AuthListResponse": {
       "type": "object",
@@ -994,13 +984,18 @@
         "api": {
           "type": "string",
           "description": " api 文件内容"
+        },
+        "auth": {
+          "type": "string",
+          "description": " auth sql 文件内容"
         }
       },
       "title": "GenerateResponse",
       "required": [
         "js",
         "vue",
-        "api"
+        "api",
+        "auth"
       ]
     },
     "LoginRequest": {
@@ -1045,6 +1040,10 @@
         "jwt"
       ]
     },
+    "PathId": {
+      "type": "object",
+      "title": "PathId"
+    },
     "RoleAddRequest": {
       "type": "object",
       "properties": {
@@ -1067,14 +1066,6 @@
         "auth",
         "required"
       ]
-    },
-    "RoleDeleteRequest": {
-      "type": "object",
-      "title": "RoleDeleteRequest"
-    },
-    "RoleDetailRequest": {
-      "type": "object",
-      "title": "RoleDetailRequest"
     },
     "RoleDetailResponse": {
       "type": "object",
@@ -1106,6 +1097,10 @@
     "RoleEditRequest": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
         "name": {
           "type": "string",
           "description": " 角色名"
@@ -1119,12 +1114,7 @@
           "description": " 权限ID"
         }
       },
-      "title": "RoleEditRequest",
-      "required": [
-        "name",
-        "auth",
-        "required"
-      ]
+      "title": "RoleEditRequest"
     },
     "RoleList": {
       "type": "object",
@@ -1167,16 +1157,6 @@
     "RoleListResponse": {
       "type": "object",
       "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32",
-          "description": " 分页"
-        },
-        "pageSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": " 每页条数"
-        },
         "total": {
           "type": "integer",
           "format": "int32",
@@ -1192,8 +1172,6 @@
       },
       "title": "RoleListResponse",
       "required": [
-        "page",
-        "pageSize",
         "total",
         "data"
       ]
@@ -1240,14 +1218,6 @@
         "oneof=0 1"
       ]
     },
-    "UserDeleteRequest": {
-      "type": "object",
-      "title": "UserDeleteRequest"
-    },
-    "UserDetailRequest": {
-      "type": "object",
-      "title": "UserDetailRequest"
-    },
     "UserDetailResponse": {
       "type": "object",
       "properties": {
@@ -1291,6 +1261,10 @@
     "UserEditRequest": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
         "username": {
           "type": "string",
           "description": " 用户名"
@@ -1430,16 +1404,6 @@
     "UserListResponse": {
       "type": "object",
       "properties": {
-        "page": {
-          "type": "integer",
-          "format": "int32",
-          "description": " 分页"
-        },
-        "pageSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": " 每页条数"
-        },
         "total": {
           "type": "integer",
           "format": "int32",
@@ -1455,8 +1419,6 @@
       },
       "title": "UserListResponse",
       "required": [
-        "page",
-        "pageSize",
         "total",
         "data"
       ]

@@ -11,7 +11,7 @@ import (
 
 // DelHandle 删除用户
 func DelHandle(c *gin.Context) {
-	var req userType.UserDeleteRequest
+	var req userType.PathId
 	if err := c.ShouldBindUri(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

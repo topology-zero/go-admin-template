@@ -1,0 +1,8 @@
+syntax = "v1"
+
+type (
+    PathId {
+        Id int `path:"id"`
+    }
+
+)

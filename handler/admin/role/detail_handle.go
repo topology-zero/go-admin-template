@@ -11,7 +11,7 @@ import (
 
 // DetailHandle 角色详情
 func DetailHandle(c *gin.Context) {
-	var req roleType.RoleDetailRequest
+	var req roleType.PathId
 	if err := c.ShouldBindUri(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

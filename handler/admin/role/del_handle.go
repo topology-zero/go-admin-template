@@ -11,7 +11,7 @@ import (
 
 // DelHandle 删除角色
 func DelHandle(c *gin.Context) {
-	var req roleType.RoleDeleteRequest
+	var req roleType.PathId
 	if err := c.ShouldBindUri(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

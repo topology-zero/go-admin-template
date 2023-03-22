@@ -156,11 +156,9 @@
             },
             // 获取数据
             async _getData() {
-                const res = await getList(this.params)
-                this.list = res.data.data
-                this.total = res.data.total
-                this.pageSize = res.data.per_page
-                this.page = res.data.current_page
+                const { data } = await getList(this.params)
+                this.list = data.data
+                this.total = data.total
                 this.table_loading = false
             }
         }

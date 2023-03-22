@@ -12,7 +12,7 @@ import (
 )
 
 // Del 删除角色
-func Del(req *role.RoleDeleteRequest, ctx *svc.ServiceContext) error {
+func Del(req *role.PathId, ctx *svc.ServiceContext) error {
 	if req.Id == AdminRoleId {
 		return errors.New("无法修改超级管理员角色")
 	}

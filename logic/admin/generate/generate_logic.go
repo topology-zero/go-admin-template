@@ -9,6 +9,7 @@ import (
 	"go-admin-template/dto"
 	"go-admin-template/model"
 	"go-admin-template/pkg/util"
+	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/generate"
 
@@ -28,6 +29,9 @@ var vueTpl string
 
 //go:embed _api.tpl
 var apiTpl string
+
+//go:embed _auth.tpl
+var authTpl string
 
 type genFile struct {
 	ctx       *svc.ServiceContext
@@ -56,6 +60,11 @@ func Generate(req *generate.GenerateRequest, ctx *svc.ServiceContext) (resp gene
 	}
 
 	resp.Api, err = g.apiParse()
+	if err != nil {
+		return
+	}
+
+	resp.Auth, err = g.authSqlParse()
 	return
 }
 
@@ -171,6 +180,33 @@ func (g *genFile) apiParse() (string, error) {
 		"cols":  g.cols,
 	}
 
+	buffer := new(bytes.Buffer)
+	err = parse.Execute(buffer, data)
+	if err != nil {
+		g.ctx.Log.Errorf("%+v", errors.WithStack(err))
+		return "", errors.New("模板解析错误")
+	}
+
+	return buffer.String(), nil
+}
+
+// SQL权限 模板解析
+func (g *genFile) authSqlParse() (string, error) {
+	parse, err := template.New("auth_sql").Parse(authTpl)
+	if err != nil {
+		g.ctx.Log.Errorf("%+v", errors.WithStack(err))
+		return "", errors.New("模板解析错误")
+	}
+
+	authModel := query.AdminAuthModel
+	first, _ := authModel.Order(authModel.ID.Desc()).First()
+	maxId := first.ID + 1
+
+	data := map[string]any{
+		"name":  g.comment,
+		"url":   g.tableName,
+		"maxId": maxId,
+	}
 	buffer := new(bytes.Buffer)
 	err = parse.Execute(buffer, data)
 	if err != nil {

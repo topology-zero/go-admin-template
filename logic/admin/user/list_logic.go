@@ -18,8 +18,6 @@ func List(req *user.UserListRequest, ctx *svc.ServiceContext) (resp user.UserLis
 		Select(userModel.ALL, roleModel.Name.As("rolename")).
 		ScanByPage(&data, (req.Page-1)*req.PageSize, req.PageSize)
 
-	resp.Page = req.Page
-	resp.PageSize = req.PageSize
 	resp.Total = int(count)
 	copier.Copy(&resp.Data, &data)
 	return

@@ -6,6 +6,7 @@ info(
     author: "master joy"
 )
 
+import "api/common.api"
 import "api/admin/login.api"
 import "api/admin/user.api"
 import "api/admin/role.api"
