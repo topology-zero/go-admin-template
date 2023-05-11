@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	_ "embed"
 	"flag"
 	"fmt"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 	"go-admin-template/middleware"
 	"go-admin-template/model"
 	"go-admin-template/pkg/logger"
+	"go-admin-template/pkg/prometheus"
 	"go-admin-template/pkg/swagger"
 	"go-admin-template/query"
 	"go-admin-template/routes"
@@ -32,10 +34,12 @@ func main() {
 		middleware.RequestLog,
 		gin.Recovery(),
 		middleware.CorsMiddleware,
+		middleware.ApiHitRecord,
 	)
 
 	config.Setup(configFile)
 	logger.Setup()
+	prometheus.Setup(e)
 	//redis.Setup()
 	model.Setup()
 	query.SetDefault(model.DB())

@@ -152,7 +152,7 @@
                 await this.$confirm('删除{{.name}}不可恢复', '警告')
                 const { message } = await del(info.id)
                 this.$message.success(message)
-                this._getData(this.params)
+                this._getData()
             },
             // 获取数据
             async _getData() {
