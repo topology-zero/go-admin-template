@@ -44,7 +44,7 @@ func newAdminCasbinRuleModel(db *gorm.DB, opts ...gen.DOOption) adminCasbinRuleM
 }
 
 type adminCasbinRuleModel struct {
-	adminCasbinRuleModelDo
+	adminCasbinRuleModelDo adminCasbinRuleModelDo
 
 	ALL   field.Asterisk
 	ID    field.Int64
@@ -88,6 +88,14 @@ func (a *adminCasbinRuleModel) updateTableName(table string) *adminCasbinRuleMod
 
 	return a
 }
+
+func (a *adminCasbinRuleModel) WithContext(ctx context.Context) IAdminCasbinRuleModelDo {
+	return a.adminCasbinRuleModelDo.WithContext(ctx)
+}
+
+func (a adminCasbinRuleModel) TableName() string { return a.adminCasbinRuleModelDo.TableName() }
+
+func (a adminCasbinRuleModel) Alias() string { return a.adminCasbinRuleModelDo.Alias() }
 
 func (a *adminCasbinRuleModel) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := a.fieldMap[fieldName]

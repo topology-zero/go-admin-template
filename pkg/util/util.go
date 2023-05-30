@@ -1,7 +1,9 @@
 package util
 
 import (
+	"reflect"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/jinzhu/copier"
@@ -62,4 +64,20 @@ func Camel(s string) string {
 	}
 	s = Title(s)
 	return strings.ToLower(s[:1]) + s[1:]
+}
+
+type empty struct{}
+
+var (
+	pkgNameOnce sync.Once
+	pkgName     string
+)
+
+func GetPkgName() string {
+	pkgNameOnce.Do(func() {
+		pkgNames := reflect.TypeOf(empty{}).PkgPath()
+		split := strings.Split(pkgNames, "/")
+		pkgName = split[0]
+	})
+	return pkgName
 }

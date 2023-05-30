@@ -23,7 +23,7 @@ func Login(req *login.LoginRequest, ctx *svc.ServiceContext) (resp login.LoginRe
 	}
 
 	userModel := query.AdminUserModel
-	userInfo, _ := userModel.Where(userModel.Username.Eq(req.Username)).First()
+	userInfo, _ := userModel.WithContext(ctx).Where(userModel.Username.Eq(req.Username)).First()
 	if userInfo == nil {
 		err = errors.New("用户名或密码错误")
 		return

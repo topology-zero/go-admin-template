@@ -19,7 +19,7 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 	}
 
 	roleModel := query.AdminRoleModel
-	roleInfo, _ := roleModel.Where(roleModel.Name.Eq(req.Name), roleModel.ID.Neq(req.Id)).First()
+	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.Name.Eq(req.Name), roleModel.ID.Neq(req.Id)).First()
 	if roleInfo != nil {
 		return errors.New("该角色已存在")
 	}
@@ -34,7 +34,7 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 	defer model.Enforcer.LoadPolicy()
 
 	err = query.Q.Transaction(func(tx *query.Query) error {
-		_, err := tx.AdminRoleModel.Where(tx.AdminRoleModel.ID.Eq(req.Id)).UpdateSimple(
+		_, err := tx.AdminRoleModel.WithContext(ctx).Where(tx.AdminRoleModel.ID.Eq(req.Id)).UpdateSimple(
 			tx.AdminRoleModel.Name.Value(req.Name),
 			tx.AdminRoleModel.Auth.Value(authStr),
 		)
@@ -43,14 +43,14 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 		}
 
 		// 删除casbin表
-		_, err = tx.AdminCasbinRuleModel.Where(tx.AdminCasbinRuleModel.Ptype.Eq("p"), tx.AdminCasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
+		_, err = tx.AdminCasbinRuleModel.WithContext(ctx).Where(tx.AdminCasbinRuleModel.Ptype.Eq("p"), tx.AdminCasbinRuleModel.V0.Eq("role:"+strconv.Itoa(req.Id))).Delete()
 		if err != nil {
 			return err
 		}
 
 		// 重新加入casbin表
 		var rules []*model.AdminCasbinRuleModel
-		authModels, _ := tx.AdminAuthModel.Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
+		authModels, _ := tx.AdminAuthModel.WithContext(ctx).Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
 		for _, a := range authModels {
 			if a.IsMenu == 1 {
 				continue
@@ -64,7 +64,7 @@ func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
 			})
 		}
 
-		return tx.AdminCasbinRuleModel.CreateInBatches(rules, 100)
+		return tx.AdminCasbinRuleModel.WithContext(ctx).CreateInBatches(rules, 100)
 	})
 	if err != nil {
 		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))

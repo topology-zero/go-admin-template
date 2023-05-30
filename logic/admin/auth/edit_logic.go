@@ -11,7 +11,7 @@ import (
 // Edit 编辑权限
 func Edit(req *auth.AuthEditRequest, ctx *svc.ServiceContext) error {
 	authModel := query.AdminAuthModel
-	_, err := authModel.Where(authModel.ID.Eq(req.Id)).UpdateSimple(
+	_, err := authModel.WithContext(ctx).Where(authModel.ID.Eq(req.Id)).UpdateSimple(
 		authModel.Pid.Value(req.Pid),
 		authModel.Key.Value(req.Key),
 		authModel.Name.Value(req.Name),

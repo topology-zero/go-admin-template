@@ -44,7 +44,7 @@ func newAdminAuthModel(db *gorm.DB, opts ...gen.DOOption) adminAuthModel {
 }
 
 type adminAuthModel struct {
-	adminAuthModelDo
+	adminAuthModelDo adminAuthModelDo
 
 	ALL        field.Asterisk
 	ID         field.Int
@@ -88,6 +88,14 @@ func (a *adminAuthModel) updateTableName(table string) *adminAuthModel {
 
 	return a
 }
+
+func (a *adminAuthModel) WithContext(ctx context.Context) IAdminAuthModelDo {
+	return a.adminAuthModelDo.WithContext(ctx)
+}
+
+func (a adminAuthModel) TableName() string { return a.adminAuthModelDo.TableName() }
+
+func (a adminAuthModel) Alias() string { return a.adminAuthModelDo.Alias() }
 
 func (a *adminAuthModel) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := a.fieldMap[fieldName]

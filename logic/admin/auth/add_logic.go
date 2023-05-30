@@ -18,7 +18,7 @@ func Add(req *auth.AuthAddRequest, ctx *svc.ServiceContext) error {
 	copier.Copy(&saveAuth, &req)
 	saveAuth.API = req.Api
 
-	err := authModel.Create(&saveAuth)
+	err := authModel.WithContext(ctx).Create(&saveAuth)
 	if err != nil {
 		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
 		err = errors.New("系统错误")

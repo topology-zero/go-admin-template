@@ -14,7 +14,7 @@ import (
 func Detail(req *role.PathId, ctx *svc.ServiceContext) (resp role.RoleDetailResponse, err error) {
 	roleModel := query.AdminRoleModel
 	authModel := query.AdminAuthModel
-	roleInfo, _ := roleModel.Where(roleModel.ID.Eq(req.Id)).First()
+	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.ID.Eq(req.Id)).First()
 
 	var auths []int
 	err = json.Unmarshal([]byte(roleInfo.Auth), &auths)
@@ -25,7 +25,7 @@ func Detail(req *role.PathId, ctx *svc.ServiceContext) (resp role.RoleDetailResp
 	}
 
 	var auth []int
-	_ = authModel.Select(authModel.ID).Where(authModel.IsMenu.Eq(0), authModel.ID.In(auths...)).Scan(&auth)
+	_ = authModel.WithContext(ctx).Select(authModel.ID).Where(authModel.IsMenu.Eq(0), authModel.ID.In(auths...)).Scan(&auth)
 	resp.Id = roleInfo.ID
 	resp.Name = roleInfo.Name
 	resp.Auth = auth

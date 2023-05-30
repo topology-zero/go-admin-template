@@ -16,7 +16,7 @@ func ChangeSelfPwd(req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) erro
 	claims := user.(*jwt.Claims)
 
 	userModel := query.AdminUserModel
-	userInfo, _ := userModel.Where(userModel.ID.Eq(claims.Id)).First()
+	userInfo, _ := userModel.WithContext(ctx).Where(userModel.ID.Eq(claims.Id)).First()
 	err := bcrypt.CompareHashAndPassword([]byte(userInfo.Password), []byte(req.OldPassword))
 	if err != nil {
 		return errors.New("输入的原密码错误")
@@ -28,7 +28,7 @@ func ChangeSelfPwd(req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) erro
 		return errors.New("系统错误")
 	}
 
-	_, err = userModel.Where(userModel.ID.Eq(claims.Id)).Update(userModel.Password, string(password))
+	_, err = userModel.WithContext(ctx).Where(userModel.ID.Eq(claims.Id)).Update(userModel.Password, string(password))
 	if err != nil {
 		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
 		err = errors.New("系统错误")

@@ -15,7 +15,7 @@ import (
 // Add 添加角色
 func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
 	roleModel := query.AdminRoleModel
-	roleInfo, _ := roleModel.Where(roleModel.Name.Eq(req.Name)).First()
+	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.Name.Eq(req.Name)).First()
 	if roleInfo != nil {
 		return errors.New("该角色已存在")
 	}
@@ -34,14 +34,14 @@ func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
 			Name: req.Name,
 			Auth: authStr,
 		}
-		err = tx.AdminRoleModel.Create(&saveRole)
+		err = tx.AdminRoleModel.WithContext(ctx).Create(&saveRole)
 		if err != nil {
 			return err
 		}
 
 		var rules []*model.AdminCasbinRuleModel
 
-		authModels, _ := tx.AdminAuthModel.Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
+		authModels, _ := tx.AdminAuthModel.WithContext(ctx).Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
 		for _, a := range authModels {
 			if a.IsMenu == 1 {
 				continue
@@ -55,7 +55,7 @@ func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
 			})
 		}
 
-		return tx.AdminCasbinRuleModel.CreateInBatches(rules, 100)
+		return tx.AdminCasbinRuleModel.WithContext(ctx).CreateInBatches(rules, 100)
 	})
 	if err != nil {
 		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))

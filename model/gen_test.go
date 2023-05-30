@@ -29,7 +29,7 @@ func TestGEN(t *testing.T) {
 		// WithDefaultQuery 生成默认查询结构体(作为全局变量使用), 即`Q`结构体和其字段(各表模型)
 		// WithoutContext 生成没有context调用限制的代码供查询
 		// WithQueryInterface 生成interface形式的查询代码(可导出), 如`Where()`方法返回的就是一个可导出的接口类型
-		Mode: gen.WithDefaultQuery | gen.WithQueryInterface | gen.WithoutContext,
+		Mode: gen.WithDefaultQuery | gen.WithQueryInterface,
 
 		// 表字段可为 null 值时, 对应结体字段使用指针类型
 		FieldNullable: false, // generate pointer when field is nullable

@@ -14,12 +14,12 @@ import (
 // Add 添加用户
 func Add(req *user.UserAddRequest, ctx *svc.ServiceContext) error {
 	userModel := query.AdminUserModel
-	userInfo, _ := userModel.Where(userModel.Username.Eq(req.Username)).First()
+	userInfo, _ := userModel.WithContext(ctx).Where(userModel.Username.Eq(req.Username)).First()
 	if userInfo != nil {
 		return errors.New("该账号已被注册")
 	}
 
-	userInfo, _ = userModel.Where(userModel.Phone.Eq(req.Phone)).First()
+	userInfo, _ = userModel.WithContext(ctx).Where(userModel.Phone.Eq(req.Phone)).First()
 	if userInfo != nil {
 		return errors.New("该手机已被注册")
 	}
@@ -35,7 +35,7 @@ func Add(req *user.UserAddRequest, ctx *svc.ServiceContext) error {
 	copier.Copy(&u, &req)
 	u.RoleID = req.RoleId
 
-	err = userModel.Create(&u)
+	err = userModel.WithContext(ctx).Create(&u)
 	if err != nil {
 		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
 		err = errors.New("系统错误")

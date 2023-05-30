@@ -40,9 +40,8 @@ func Setup() {
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
 		},
-		Logger: logger.New(logrus.StandardLogger(), logger.Config{
+		Logger: NewLogger(logger.Config{
 			SlowThreshold:             200 * time.Millisecond,
-			Colorful:                  false,
 			IgnoreRecordNotFoundError: true,
 			LogLevel:                  logMode,
 		}),
@@ -72,13 +71,4 @@ func casbinSetup() {
 // DB 获取数据库实例
 func DB() *gorm.DB {
 	return db
-}
-
-// WarpError 将错误打印，且不包含敏感信息返回
-func WarpError(err error) error {
-	if err == nil {
-		return nil
-	}
-	logrus.Errorf("数据库异常：%+v", errors.WithStack(err))
-	return errors.New("系统错误")
 }

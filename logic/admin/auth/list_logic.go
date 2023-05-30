@@ -9,7 +9,7 @@ import (
 
 func List(ctx *svc.ServiceContext) (resp auth.AuthListResponse, err error) {
 	authModel := query.AdminAuthModel
-	auths, _ := authModel.Find()
+	auths, _ := authModel.WithContext(ctx).Find()
 	resp.Tree = authTree(0, auths)
 	return
 }

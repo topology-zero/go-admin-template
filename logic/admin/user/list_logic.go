@@ -14,7 +14,7 @@ func List(req *user.UserListRequest, ctx *svc.ServiceContext) (resp user.UserLis
 	roleModel := query.AdminRoleModel
 	var data []user.UserList
 
-	count, err := userModel.LeftJoin(roleModel, userModel.RoleID.EqCol(roleModel.ID)).
+	count, err := userModel.WithContext(ctx).LeftJoin(roleModel, userModel.RoleID.EqCol(roleModel.ID)).
 		Select(userModel.ALL, roleModel.Name.As("rolename")).
 		ScanByPage(&data, (req.Page-1)*req.PageSize, req.PageSize)
 

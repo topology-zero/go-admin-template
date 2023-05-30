@@ -2,6 +2,7 @@ package generate
 
 import (
 	"bytes"
+	"context"
 	_ "embed"
 	"html/template"
 	"strings"
@@ -199,7 +200,7 @@ func (g *genFile) authSqlParse() (string, error) {
 	}
 
 	authModel := query.AdminAuthModel
-	first, _ := authModel.Order(authModel.ID.Desc()).First()
+	first, _ := authModel.WithContext(context.Background()).Order(authModel.ID.Desc()).First()
 	maxId := first.ID + 1
 
 	data := map[string]any{
