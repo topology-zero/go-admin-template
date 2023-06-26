@@ -13,7 +13,7 @@ import (
 )
 
 // Add 添加角色
-func Add(req *role.RoleAddRequest, ctx *svc.ServiceContext) error {
+func Add(ctx *svc.ServiceContext, req *role.RoleAddRequest) error {
 	roleModel := query.AdminRoleModel
 	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.Name.Eq(req.Name)).First()
 	if roleInfo != nil {

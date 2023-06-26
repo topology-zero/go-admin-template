@@ -17,6 +17,6 @@ func AddHandle(c *gin.Context) {
 		return
 	}
 
-	err := role.Add(&req, svc.NewServiceContext(c))
+	err := role.Add(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

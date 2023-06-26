@@ -13,7 +13,7 @@ import (
 )
 
 // Edit 编辑角色
-func Edit(req *role.RoleEditRequest, ctx *svc.ServiceContext) error {
+func Edit(ctx *svc.ServiceContext, req *role.RoleEditRequest) error {
 	if req.Id == AdminRoleId {
 		return errors.New("无法修改超级管理员角色")
 	}

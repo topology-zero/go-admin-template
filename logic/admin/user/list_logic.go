@@ -9,7 +9,7 @@ import (
 )
 
 // List 用户列表
-func List(req *user.UserListRequest, ctx *svc.ServiceContext) (resp user.UserListResponse, err error) {
+func List(ctx *svc.ServiceContext, req *user.UserListRequest) (resp user.UserListResponse, err error) {
 	userModel := query.AdminUserModel
 	roleModel := query.AdminRoleModel
 	var data []user.UserList

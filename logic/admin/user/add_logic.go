@@ -12,7 +12,7 @@ import (
 )
 
 // Add 添加用户
-func Add(req *user.UserAddRequest, ctx *svc.ServiceContext) error {
+func Add(ctx *svc.ServiceContext, req *user.UserAddRequest) error {
 	userModel := query.AdminUserModel
 	userInfo, _ := userModel.WithContext(ctx).Where(userModel.Username.Eq(req.Username)).First()
 	if userInfo != nil {

@@ -10,7 +10,7 @@ import (
 )
 
 // Edit 编辑用户
-func Edit(req *user.UserEditRequest, ctx *svc.ServiceContext) error {
+func Edit(ctx *svc.ServiceContext, req *user.UserEditRequest) error {
 	if req.Id == SuperAdminID && req.RoleId != SuperAdminRoleID {
 		return errors.New("无法设置超级管理员的角色")
 	}

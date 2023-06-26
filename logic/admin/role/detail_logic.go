@@ -11,7 +11,7 @@ import (
 )
 
 // Detail 角色详情
-func Detail(req *role.PathId, ctx *svc.ServiceContext) (resp role.RoleDetailResponse, err error) {
+func Detail(ctx *svc.ServiceContext, req *role.PathId) (resp role.RoleDetailResponse, err error) {
 	roleModel := query.AdminRoleModel
 	authModel := query.AdminAuthModel
 	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.ID.Eq(req.Id)).First()

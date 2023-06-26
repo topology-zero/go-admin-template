@@ -43,7 +43,7 @@ type genFile struct {
 }
 
 // Generate 生成前端文件
-func Generate(req *generate.GenerateRequest, ctx *svc.ServiceContext) (resp generate.GenerateResponse, err error) {
+func Generate(ctx *svc.ServiceContext, req *generate.GenerateRequest) (resp generate.GenerateResponse, err error) {
 	g := genFile{
 		ctx:       ctx,
 		tableName: req.Table,

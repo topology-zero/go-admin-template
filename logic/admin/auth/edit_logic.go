@@ -9,7 +9,7 @@ import (
 )
 
 // Edit 编辑权限
-func Edit(req *auth.AuthEditRequest, ctx *svc.ServiceContext) error {
+func Edit(ctx *svc.ServiceContext, req *auth.AuthEditRequest) error {
 	authModel := query.AdminAuthModel
 	_, err := authModel.WithContext(ctx).Where(authModel.ID.Eq(req.Id)).UpdateSimple(
 		authModel.Pid.Value(req.Pid),

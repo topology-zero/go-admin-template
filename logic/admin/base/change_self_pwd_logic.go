@@ -11,7 +11,7 @@ import (
 )
 
 // ChangeSelfPwd 修改自己的密码
-func ChangeSelfPwd(req *base.ChangeSelfPwdRequest, ctx *svc.ServiceContext) error {
+func ChangeSelfPwd(ctx *svc.ServiceContext, req *base.ChangeSelfPwdRequest) error {
 	user, _ := ctx.GinContext.Get("userInfo")
 	claims := user.(*jwt.Claims)
 

@@ -21,6 +21,6 @@ func EditHandle(c *gin.Context) {
 		return
 	}
 
-	err := role.Edit(&req, svc.NewServiceContext(c))
+	err := role.Edit(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

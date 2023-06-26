@@ -19,7 +19,7 @@ func LoginHandle(c *gin.Context) {
 		return
 	}
 
-	resp, err := login.Login(&req, svc.NewServiceContext(c))
+	resp, err := login.Login(svc.NewServiceContext(c), &req)
 	if err == nil {
 		c.SetCookie(jwt.JwtName, resp.Jwt, config.JwtConf.Expire*3600, "/", "127.0.0.1", true, true)
 		c.SetCookie(jwt.JwtName, resp.Jwt, config.JwtConf.Expire*3600, "/", "localhost", true, true)

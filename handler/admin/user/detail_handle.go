@@ -17,6 +17,6 @@ func DetailHandle(c *gin.Context) {
 		return
 	}
 
-	resp, err := user.Detail(&req, svc.NewServiceContext(c))
+	resp, err := user.Detail(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, resp, err)
 }

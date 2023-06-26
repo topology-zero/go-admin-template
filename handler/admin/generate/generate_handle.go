@@ -17,6 +17,6 @@ func GenerateHandle(c *gin.Context) {
 		return
 	}
 
-	resp, err := generate.Generate(&req, svc.NewServiceContext(c))
+	resp, err := generate.Generate(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, resp, err)
 }

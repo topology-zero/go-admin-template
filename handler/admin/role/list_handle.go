@@ -25,6 +25,6 @@ func ListHandle(c *gin.Context) {
 		req.PageSize = 10
 	}
 
-	resp, err := role.List(&req, svc.NewServiceContext(c))
+	resp, err := role.List(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, resp, err)
 }

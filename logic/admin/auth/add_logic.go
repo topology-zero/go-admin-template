@@ -11,7 +11,7 @@ import (
 )
 
 // Add 添加权限
-func Add(req *auth.AuthAddRequest, ctx *svc.ServiceContext) error {
+func Add(ctx *svc.ServiceContext, req *auth.AuthAddRequest) error {
 	authModel := query.AdminAuthModel
 
 	var saveAuth model.AdminAuthModel

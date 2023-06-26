@@ -17,6 +17,6 @@ func AddHandle(c *gin.Context) {
 		return
 	}
 
-	err := user.Add(&req, svc.NewServiceContext(c))
+	err := user.Add(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

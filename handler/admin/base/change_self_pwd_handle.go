@@ -17,6 +17,6 @@ func ChangeSelfPwdHandle(c *gin.Context) {
 		return
 	}
 
-	err := base.ChangeSelfPwd(&req, svc.NewServiceContext(c))
+	err := base.ChangeSelfPwd(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

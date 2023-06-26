@@ -17,6 +17,6 @@ func DelHandle(c *gin.Context) {
 		return
 	}
 
-	err := role.Del(&req, svc.NewServiceContext(c))
+	err := role.Del(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

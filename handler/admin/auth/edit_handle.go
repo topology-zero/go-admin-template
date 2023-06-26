@@ -21,6 +21,6 @@ func EditHandle(c *gin.Context) {
 		return
 	}
 
-	err := auth.Edit(&req, svc.NewServiceContext(c))
+	err := auth.Edit(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

@@ -27,6 +27,6 @@ func EditHandle(c *gin.Context) {
 		return
 	}
 
-	err := user.Edit(&req, svc.NewServiceContext(c))
+	err := user.Edit(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }
