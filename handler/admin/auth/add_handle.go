@@ -23,6 +23,6 @@ func AddHandle(c *gin.Context) {
 		return
 	}
 
-	err := auth.Add(svc.NewServiceContext(c),&req )
+	err := auth.Add(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }
