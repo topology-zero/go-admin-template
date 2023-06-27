@@ -25,7 +25,7 @@ func CopyValue(toValue, fromValue interface{}) error {
 					if !ok {
 						return nil, errors.New("CopyValue 时间转换错误")
 					}
-					return s.Format("2006-01-02 15:04:05"), nil
+					return s.Format(time.DateTime), nil
 				},
 			},
 		},

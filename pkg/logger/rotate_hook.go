@@ -21,7 +21,7 @@ func (h *RotateHook) Levels() []logrus.Level {
 }
 
 func (h *RotateHook) Fire(entry *logrus.Entry) (err error) {
-	fileName := time.Now().Format("2006-01-02")
+	fileName := time.Now().Format(time.DateOnly)
 	fullPath := fmt.Sprintf("%s/%s.log", config.LogConf.Dir, fileName)
 
 	// 无需多次获取文件句柄

@@ -1,6 +1,6 @@
 module go-admin-template
 
-go 1.18
+go 1.20
 
 require (
 	github.com/casbin/casbin/v2 v2.55.1
