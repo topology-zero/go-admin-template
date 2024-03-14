@@ -12,16 +12,16 @@ import (
 func JwtMiddleware(c *gin.Context) {
 	token, err := jwt.GetToken(c)
 	if err != nil {
-		response.HandleAbortResponse(c, "鉴权失败，没有获取到有效的 token")
+		response.HandleAbortResponse(c, "鉴权失败，请重新登录")
 		return
 	}
 	claims, err := jwt.ParseToken(token)
 	if err != nil {
-		response.HandleAbortResponse(c, "鉴权失败，没有获取到有效的 token")
+		response.HandleAbortResponse(c, "鉴权失败，请重新登录")
 		return
 	}
 	if time.Now().Unix() > claims.ExpiresAt {
-		response.HandleAbortResponse(c, "鉴权失败，没有获取到有效的 token")
+		response.HandleAbortResponse(c, "鉴权失败，请重新登录")
 		return
 	}
 
