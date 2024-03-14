@@ -6,7 +6,7 @@ package model
 
 const TableNameAdminCasbinRuleModel = "admin_casbin_rule"
 
-// AdminCasbinRuleModel mapped from table <admin_casbin_rule>
+// AdminCasbinRuleModel casbin 权限管理
 type AdminCasbinRuleModel struct {
 	ID    int64  `gorm:"column:id;primaryKey;autoIncrement:true"`
 	Ptype string `gorm:"column:ptype"`

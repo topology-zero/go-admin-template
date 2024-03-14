@@ -1,17 +1,19 @@
 package user
 
 import (
+	"go-admin-template/config"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/user"
 
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gen/field"
 )
 
 // Edit 编辑用户
 func Edit(ctx *svc.ServiceContext, req *user.UserEditRequest) error {
-	if req.Id == SuperAdminID && req.RoleId != SuperAdminRoleID {
+	if req.Id == config.SuperAdminID && req.RoleId != config.SuperAdminRoleID {
 		return errors.New("无法设置超级管理员的角色")
 	}
 
@@ -26,12 +28,12 @@ func Edit(ctx *svc.ServiceContext, req *user.UserEditRequest) error {
 		return errors.New("该手机已被注册")
 	}
 
-	updates := map[string]any{
-		"username": req.Username,
-		"realname": req.Realname,
-		"phone":    req.Phone,
-		"role_id":  req.RoleId,
-		"status":   req.Status,
+	updates := []field.AssignExpr{
+		userModel.Username.Value(req.Username),
+		userModel.Realname.Value(req.Realname),
+		userModel.Phone.Value(req.Phone),
+		userModel.RoleID.Value(req.RoleId),
+		userModel.Status.Value(req.Status),
 	}
 
 	if len(req.Password) > 0 {
@@ -40,10 +42,10 @@ func Edit(ctx *svc.ServiceContext, req *user.UserEditRequest) error {
 			ctx.Log.Errorf("%+v", err)
 			return errors.New("系统错误")
 		}
-		updates["password"] = string(password)
+		updates = append(updates, userModel.Password.Value(string(password)))
 	}
 
-	_, err := userModel.WithContext(ctx).Where(userModel.ID.Eq(req.Id)).Updates(updates)
+	_, err := userModel.WithContext(ctx).Where(userModel.ID.Eq(req.Id)).UpdateColumnSimple(updates...)
 	if err != nil {
 		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
 		err = errors.New("系统错误")

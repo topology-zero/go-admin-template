@@ -43,6 +43,7 @@ func newAdminCasbinRuleModel(db *gorm.DB, opts ...gen.DOOption) adminCasbinRuleM
 	return _adminCasbinRuleModel
 }
 
+// adminCasbinRuleModel casbin 权限管理
 type adminCasbinRuleModel struct {
 	adminCasbinRuleModelDo adminCasbinRuleModelDo
 
@@ -96,6 +97,10 @@ func (a *adminCasbinRuleModel) WithContext(ctx context.Context) IAdminCasbinRule
 func (a adminCasbinRuleModel) TableName() string { return a.adminCasbinRuleModelDo.TableName() }
 
 func (a adminCasbinRuleModel) Alias() string { return a.adminCasbinRuleModelDo.Alias() }
+
+func (a adminCasbinRuleModel) Columns(cols ...field.Expr) gen.Columns {
+	return a.adminCasbinRuleModelDo.Columns(cols...)
+}
 
 func (a *adminCasbinRuleModel) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := a.fieldMap[fieldName]
@@ -235,10 +240,6 @@ func (a adminCasbinRuleModelDo) Select(conds ...field.Expr) IAdminCasbinRuleMode
 
 func (a adminCasbinRuleModelDo) Where(conds ...gen.Condition) IAdminCasbinRuleModelDo {
 	return a.withDO(a.DO.Where(conds...))
-}
-
-func (a adminCasbinRuleModelDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) IAdminCasbinRuleModelDo {
-	return a.Where(field.CompareSubQuery(field.ExistsOp, nil, subquery.UnderlyingDB()))
 }
 
 func (a adminCasbinRuleModelDo) Order(conds ...field.Expr) IAdminCasbinRuleModelDo {

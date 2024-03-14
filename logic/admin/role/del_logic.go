@@ -3,6 +3,7 @@ package role
 import (
 	"strconv"
 
+	"go-admin-template/config"
 	"go-admin-template/model"
 	"go-admin-template/query"
 	"go-admin-template/svc"
@@ -13,7 +14,7 @@ import (
 
 // Del 删除角色
 func Del(ctx *svc.ServiceContext, req *role.PathId) error {
-	if req.Id == AdminRoleId {
+	if req.Id == config.SuperAdminRoleID {
 		return errors.New("无法修改超级管理员角色")
 	}
 

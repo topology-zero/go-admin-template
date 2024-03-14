@@ -12,15 +12,15 @@ import (
 
 const TableNameAdminUserModel = "admin_user"
 
-// AdminUserModel mapped from table <admin_user>
+// AdminUserModel 后台用户
 type AdminUserModel struct {
 	ID         int            `gorm:"column:id;primaryKey;autoIncrement:true"`
-	Username   string         `gorm:"column:username"` // 用户名
-	Realname   string         `gorm:"column:realname"` // 真实姓名
-	Password   string         `gorm:"column:password"` // 密码
-	Phone      string         `gorm:"column:phone"`    // 手机号
-	RoleID     int            `gorm:"column:role_id"`  // 角色ID
-	Status     int            `gorm:"column:status"`   // 状态 0:未启用 1:正常
+	Username   string         `gorm:"column:username;comment:用户名"`         // 用户名
+	Realname   string         `gorm:"column:realname;comment:真实姓名"`        // 真实姓名
+	Password   string         `gorm:"column:password;comment:密码"`          // 密码
+	Phone      string         `gorm:"column:phone;comment:手机号"`            // 手机号
+	RoleID     int            `gorm:"column:role_id;comment:角色ID"`         // 角色ID
+	Status     int            `gorm:"column:status;comment:状态 0:未启用 1:正常"` // 状态 0:未启用 1:正常
 	CreateTime time.Time      `gorm:"column:create_time;default:CURRENT_TIMESTAMP"`
 	UpdateTime time.Time      `gorm:"column:update_time;default:CURRENT_TIMESTAMP"`
 	DeleteTime gorm.DeletedAt `gorm:"column:delete_time"`

@@ -1,4 +1,4 @@
-package user
+package config
 
 const (
 	SuperAdminID     = 1

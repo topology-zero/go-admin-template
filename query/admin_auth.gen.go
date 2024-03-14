@@ -43,6 +43,7 @@ func newAdminAuthModel(db *gorm.DB, opts ...gen.DOOption) adminAuthModel {
 	return _adminAuthModel
 }
 
+// adminAuthModel 权限
 type adminAuthModel struct {
 	adminAuthModelDo adminAuthModelDo
 
@@ -96,6 +97,10 @@ func (a *adminAuthModel) WithContext(ctx context.Context) IAdminAuthModelDo {
 func (a adminAuthModel) TableName() string { return a.adminAuthModelDo.TableName() }
 
 func (a adminAuthModel) Alias() string { return a.adminAuthModelDo.Alias() }
+
+func (a adminAuthModel) Columns(cols ...field.Expr) gen.Columns {
+	return a.adminAuthModelDo.Columns(cols...)
+}
 
 func (a *adminAuthModel) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := a.fieldMap[fieldName]
@@ -235,10 +240,6 @@ func (a adminAuthModelDo) Select(conds ...field.Expr) IAdminAuthModelDo {
 
 func (a adminAuthModelDo) Where(conds ...gen.Condition) IAdminAuthModelDo {
 	return a.withDO(a.DO.Where(conds...))
-}
-
-func (a adminAuthModelDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) IAdminAuthModelDo {
-	return a.Where(field.CompareSubQuery(field.ExistsOp, nil, subquery.UnderlyingDB()))
 }
 
 func (a adminAuthModelDo) Order(conds ...field.Expr) IAdminAuthModelDo {

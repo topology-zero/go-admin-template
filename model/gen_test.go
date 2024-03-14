@@ -10,6 +10,7 @@ import (
 	"go-admin-template/pkg/logger"
 
 	"gorm.io/gen"
+	"gorm.io/gorm"
 )
 
 // 运行该测试用例时, 需要设置工作目录为项目目录
@@ -60,8 +61,11 @@ func TestGEN(t *testing.T) {
 	})
 
 	//不需要将数据库中的 int 转换成 struct 的 int32
-	g.WithDataTypeMap(map[string]func(detailType string) (dataType string){
-		"int": func(detailType string) (dataType string) {
+	g.WithDataTypeMap(map[string]func(columnType gorm.ColumnType) (dataType string){
+		"int": func(columnType gorm.ColumnType) (dataType string) {
+			return "int"
+		},
+		"tinyint": func(columnType gorm.ColumnType) (dataType string) {
 			return "int"
 		},
 	})

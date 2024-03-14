@@ -45,6 +45,7 @@ func newAdminUserModel(db *gorm.DB, opts ...gen.DOOption) adminUserModel {
 	return _adminUserModel
 }
 
+// adminUserModel 后台用户
 type adminUserModel struct {
 	adminUserModelDo adminUserModelDo
 
@@ -98,6 +99,10 @@ func (a *adminUserModel) WithContext(ctx context.Context) IAdminUserModelDo {
 func (a adminUserModel) TableName() string { return a.adminUserModelDo.TableName() }
 
 func (a adminUserModel) Alias() string { return a.adminUserModelDo.Alias() }
+
+func (a adminUserModel) Columns(cols ...field.Expr) gen.Columns {
+	return a.adminUserModelDo.Columns(cols...)
+}
 
 func (a *adminUserModel) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := a.fieldMap[fieldName]
@@ -200,17 +205,18 @@ type IAdminUserModelDo interface {
 // GetUserInfo 获取用户基本信息
 //
 // SELECT
-//       u.id,
-//       u.username,
-//       u.realname,
-//       u.phone,
-//       r.NAME AS rolename,
-//       ( SELECT GROUP_CONCAT(`key`) FROM admin_auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys
-//   FROM
-//       admin_user u
-//       LEFT JOIN admin_role r ON u.role_id = r.id
-//   WHERE
-// 		u.id = @id
+//
+//	      u.id,
+//	      u.username,
+//	      u.realname,
+//	      u.phone,
+//	      r.NAME AS rolename,
+//	      ( SELECT GROUP_CONCAT(`key`) FROM admin_auth WHERE JSON_CONTAINS( r.auth, JSON_ARRAY(id))) as authkeys
+//	  FROM
+//	      admin_user u
+//	      LEFT JOIN admin_role r ON u.role_id = r.id
+//	  WHERE
+//			u.id = @id
 func (a adminUserModelDo) GetUserInfo(id int) (result base.UserInfoResponse) {
 	var params []interface{}
 
@@ -267,10 +273,6 @@ func (a adminUserModelDo) Select(conds ...field.Expr) IAdminUserModelDo {
 
 func (a adminUserModelDo) Where(conds ...gen.Condition) IAdminUserModelDo {
 	return a.withDO(a.DO.Where(conds...))
-}
-
-func (a adminUserModelDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) IAdminUserModelDo {
-	return a.Where(field.CompareSubQuery(field.ExistsOp, nil, subquery.UnderlyingDB()))
 }
 
 func (a adminUserModelDo) Order(conds ...field.Expr) IAdminUserModelDo {

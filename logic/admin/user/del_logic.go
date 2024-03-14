@@ -1,6 +1,7 @@
 package user
 
 import (
+	"go-admin-template/config"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types/admin/user"
@@ -10,7 +11,7 @@ import (
 
 // Del 删除用户
 func Del(ctx *svc.ServiceContext, req *user.PathId) error {
-	if req.Id == SuperAdminID {
+	if req.Id == config.SuperAdminID {
 		return errors.New("无法删除超级管理员")
 	}
 	userModel := query.AdminUserModel

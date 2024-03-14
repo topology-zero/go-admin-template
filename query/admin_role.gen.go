@@ -40,6 +40,7 @@ func newAdminRoleModel(db *gorm.DB, opts ...gen.DOOption) adminRoleModel {
 	return _adminRoleModel
 }
 
+// adminRoleModel 角色
 type adminRoleModel struct {
 	adminRoleModelDo adminRoleModelDo
 
@@ -85,6 +86,10 @@ func (a *adminRoleModel) WithContext(ctx context.Context) IAdminRoleModelDo {
 func (a adminRoleModel) TableName() string { return a.adminRoleModelDo.TableName() }
 
 func (a adminRoleModel) Alias() string { return a.adminRoleModelDo.Alias() }
+
+func (a adminRoleModel) Columns(cols ...field.Expr) gen.Columns {
+	return a.adminRoleModelDo.Columns(cols...)
+}
 
 func (a *adminRoleModel) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := a.fieldMap[fieldName]
@@ -239,10 +244,6 @@ func (a adminRoleModelDo) Select(conds ...field.Expr) IAdminRoleModelDo {
 
 func (a adminRoleModelDo) Where(conds ...gen.Condition) IAdminRoleModelDo {
 	return a.withDO(a.DO.Where(conds...))
-}
-
-func (a adminRoleModelDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) IAdminRoleModelDo {
-	return a.Where(field.CompareSubQuery(field.ExistsOp, nil, subquery.UnderlyingDB()))
 }
 
 func (a adminRoleModelDo) Order(conds ...field.Expr) IAdminRoleModelDo {

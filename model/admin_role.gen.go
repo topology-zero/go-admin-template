@@ -12,11 +12,11 @@ import (
 
 const TableNameAdminRoleModel = "admin_role"
 
-// AdminRoleModel mapped from table <admin_role>
+// AdminRoleModel 角色
 type AdminRoleModel struct {
 	ID         int            `gorm:"column:id;primaryKey;autoIncrement:true"`
-	Name       string         `gorm:"column:name"` // 角色名
-	Auth       string         `gorm:"column:auth"` // 权限ID
+	Name       string         `gorm:"column:name;comment:角色名"`  // 角色名
+	Auth       string         `gorm:"column:auth;comment:权限ID"` // 权限ID
 	CreateTime time.Time      `gorm:"column:create_time;default:CURRENT_TIMESTAMP"`
 	UpdateTime time.Time      `gorm:"column:update_time;default:CURRENT_TIMESTAMP"`
 	DeleteTime gorm.DeletedAt `gorm:"column:delete_time"`

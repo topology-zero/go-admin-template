@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 
+	"go-admin-template/config"
 	"go-admin-template/model"
 	"go-admin-template/query"
 	"go-admin-template/svc"
@@ -14,7 +15,7 @@ import (
 
 // Edit 编辑角色
 func Edit(ctx *svc.ServiceContext, req *role.RoleEditRequest) error {
-	if req.Id == AdminRoleId {
+	if req.Id == config.SuperAdminRoleID {
 		return errors.New("无法修改超级管理员角色")
 	}
 

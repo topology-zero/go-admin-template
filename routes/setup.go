@@ -4,7 +4,6 @@ package routes
 import (
 	adminAuth "go-admin-template/routes/admin/auth"
 	adminBase "go-admin-template/routes/admin/base"
-	adminGenerate "go-admin-template/routes/admin/generate"
 	adminLogin "go-admin-template/routes/admin/login"
 	adminRole "go-admin-template/routes/admin/role"
 	adminUser "go-admin-template/routes/admin/user"
@@ -18,5 +17,4 @@ func Setup(e *gin.Engine) {
 	adminRole.RegisterAdminRoleRoute(e)
 	adminAuth.RegisterAdminAuthRoute(e)
 	adminBase.RegisterAdminBaseRoute(e)
-	adminGenerate.RegisterAdminGenerateRoute(e)
 }
