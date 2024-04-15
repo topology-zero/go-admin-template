@@ -4,7 +4,7 @@ import (
 	"go-admin-template/internal/response"
 	"go-admin-template/logic/admin/user"
 	"go-admin-template/svc"
-	userType "go-admin-template/types/admin/user"
+	"go-admin-template/types"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
@@ -12,7 +12,7 @@ import (
 
 // EditHandle 编辑用户
 func EditHandle(c *gin.Context) {
-	var req userType.UserEditRequest
+	var req types.UserEditRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

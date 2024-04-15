@@ -12,7 +12,7 @@ type (
     }
 
     UserList {
-        Id int `json:"id"`
+        ID int `json:"id"`
         Username string `json:"username"` // 用户名
         Realname string `json:"realname"` // 真实姓名
         Rolename string `json:"rolename"` // 角色名
@@ -21,11 +21,11 @@ type (
     }
 
     UserDetailResponse {
-        Id int `json:"id"`
+        ID int `json:"id"`
         Username string `json:"username"` // 用户名
         Realname string `json:"realname"` // 真实姓名
         Phone string `json:"phone"`       // 手机号
-        RoleId int `json:"roleId"`        // 角色ID
+        RoleID int `json:"roleId"`        // 角色ID
         Status int `json:"status"`        // 状态 0:未启用 1:正常
     }
 
@@ -33,17 +33,17 @@ type (
         Username string `json:"username" binding:"required"`                // 用户名
         Realname string `json:"realname" binding:"required"`                // 真实姓名
         Phone string `json:"phone" binding:"required"`                      // 手机号
-        RoleId int `json:"roleId" binding:"required"`                       // 角色ID
+        RoleID int `json:"roleId" binding:"required"`                       // 角色ID
         Password string `json:"password" binding:"required,min=6,max=255"`  // 密码
         Status int `json:"status" binding:"oneof=0 1"`                      // 状态 0:未启用 1:正常
     }
 
     UserEditRequest {
-        PathId
+        PathID
         Username string `json:"username" binding:"required"`  // 用户名
         Realname string `json:"realname" binding:"required"`  // 真实姓名
         Phone string `json:"phone" binding:"required"`        // 手机号
-        RoleId int `json:"roleId" binding:"required"`         // 角色ID
+        RoleID int `json:"roleId" binding:"required"`         // 角色ID
         Password string `json:"password"`                     // 密码
         Status int `json:"status" binding:"oneof=0 1"`        // 状态 0:未启用 1:正常
     }
@@ -63,7 +63,7 @@ service go-admin-template {
 
     @doc "用户详情"
     @handler detail
-    get /user/:id (PathId) returns (UserDetailResponse)
+    get /user/:id (PathID) returns (UserDetailResponse)
 
     @doc "添加用户"
     @handler add
@@ -75,5 +75,5 @@ service go-admin-template {
 
     @doc "删除用户"
     @handler del
-    delete /user/:id (PathId)
+    delete /user/:id (PathID)
 }

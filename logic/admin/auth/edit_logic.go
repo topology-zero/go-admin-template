@@ -3,20 +3,20 @@ package auth
 import (
 	"go-admin-template/query"
 	"go-admin-template/svc"
-	"go-admin-template/types/admin/auth"
+	"go-admin-template/types"
 
 	"github.com/pkg/errors"
 )
 
 // Edit 编辑权限
-func Edit(ctx *svc.ServiceContext, req *auth.AuthEditRequest) error {
+func Edit(ctx *svc.ServiceContext, req *types.AuthEditRequest) error {
 	authModel := query.AdminAuthModel
-	_, err := authModel.WithContext(ctx).Where(authModel.ID.Eq(req.Id)).UpdateSimple(
+	_, err := authModel.WithContext(ctx).Where(authModel.ID.Eq(req.ID)).UpdateSimple(
 		authModel.Pid.Value(req.Pid),
 		authModel.Key.Value(req.Key),
 		authModel.Name.Value(req.Name),
 		authModel.IsMenu.Value(req.IsMenu),
-		authModel.API.Value(req.Api),
+		authModel.API.Value(req.API),
 		authModel.Action.Value(req.Action),
 	)
 	if err != nil {

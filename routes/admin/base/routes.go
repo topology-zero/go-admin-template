@@ -15,5 +15,4 @@ func RegisterAdminBaseRoute(e *gin.Engine) {
 	g.GET("/auth", base.AuthHandle)
 	g.GET("/userInfo", base.UserInfoHandle)
 	g.POST("/changeSelfPwd", base.ChangeSelfPwdHandle)
-
 }

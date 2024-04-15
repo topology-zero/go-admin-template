@@ -4,7 +4,7 @@ import (
 	"go-admin-template/model"
 	"go-admin-template/query"
 	"go-admin-template/svc"
-	"go-admin-template/types/admin/user"
+	"go-admin-template/types"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
@@ -12,7 +12,7 @@ import (
 )
 
 // Add 添加用户
-func Add(ctx *svc.ServiceContext, req *user.UserAddRequest) error {
+func Add(ctx *svc.ServiceContext, req *types.UserAddRequest) error {
 	userModel := query.AdminUserModel
 	userInfo, _ := userModel.WithContext(ctx).Where(userModel.Username.Eq(req.Username)).First()
 	if userInfo != nil {
@@ -33,7 +33,6 @@ func Add(ctx *svc.ServiceContext, req *user.UserAddRequest) error {
 
 	var u model.AdminUserModel
 	copier.Copy(&u, &req)
-	u.RoleID = req.RoleId
 
 	err = userModel.WithContext(ctx).Create(&u)
 	if err != nil {

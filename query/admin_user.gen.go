@@ -18,7 +18,7 @@ import (
 	"gorm.io/plugin/dbresolver"
 
 	"go-admin-template/model"
-	"go-admin-template/types/admin/base"
+	"go-admin-template/types"
 )
 
 func newAdminUserModel(db *gorm.DB, opts ...gen.DOOption) adminUserModel {
@@ -199,7 +199,7 @@ type IAdminUserModelDo interface {
 	UnderlyingDB() *gorm.DB
 	schema.Tabler
 
-	GetUserInfo(id int) (result base.UserInfoResponse)
+	GetUserInfo(id int) (result types.UserInfoResponse)
 }
 
 // GetUserInfo 获取用户基本信息
@@ -217,7 +217,7 @@ type IAdminUserModelDo interface {
 //	      LEFT JOIN admin_role r ON u.role_id = r.id
 //	  WHERE
 //			u.id = @id
-func (a adminUserModelDo) GetUserInfo(id int) (result base.UserInfoResponse) {
+func (a adminUserModelDo) GetUserInfo(id int) (result types.UserInfoResponse) {
 	var params []interface{}
 
 	var generateSQL strings.Builder

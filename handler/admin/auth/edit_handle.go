@@ -4,14 +4,14 @@ import (
 	"go-admin-template/internal/response"
 	"go-admin-template/logic/admin/auth"
 	"go-admin-template/svc"
-	authType "go-admin-template/types/admin/auth"
+	"go-admin-template/types"
 
 	"github.com/gin-gonic/gin"
 )
 
 // EditHandle 编辑权限
 func EditHandle(c *gin.Context) {
-	var req authType.AuthEditRequest
+	var req types.AuthEditRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return
@@ -20,7 +20,6 @@ func EditHandle(c *gin.Context) {
 		response.HandleResponse(c, nil, err)
 		return
 	}
-
 	err := auth.Edit(svc.NewServiceContext(c), &req)
 	response.HandleResponse(c, nil, err)
 }

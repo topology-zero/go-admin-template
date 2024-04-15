@@ -15,5 +15,4 @@ func RegisterAdminAuthRoute(e *gin.Engine) {
 	g.POST("/auth", auth.AddHandle)
 	g.PUT("/auth/:id", auth.EditHandle)
 	g.DELETE("/auth/:id", auth.DelHandle)
-
 }

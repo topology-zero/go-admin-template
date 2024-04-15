@@ -1,28 +1,15 @@
 syntax = "v1"
 
 type (
-    BaseRoleResponse {
-        Data []BaseRole `json:"data"`
-    }
-
-    BaseRole {
-        Id int `json:"id"`
-        Name string `json:"name"`
-    }
-
     BaseAuthResponse {
-        Tree []BaseAuth `json:"tree"` // 节点树
-    }
-
-    BaseAuth {
-        Id int `json:"id"`
+        ID int `json:"id"`
         Pid int `json:"pid"`
         Name string `json:"name"`        // 节点名
-        Child []BaseAuth `json:"child"`  // 子节点
+        Children []BaseAuthResponse `json:"children"`  // 子节点
     }
 
     UserInfoResponse {
-        Id int `json:"id"`                  // 用户ID
+        ID int `json:"id"`                  // 用户ID
         Username string `json:"username"`   // 用户名
         Realname string `json:"realname"`   // 真实姓名
         Phone string `json:"phone"`         // 手机号
@@ -47,11 +34,11 @@ type (
 service go-admin-template {
     @doc "获取所有角色"
     @handler role
-    get /role returns (BaseRoleResponse)
+    get /role returns ([]IDAndName)
 
     @doc "获取所有权限"
     @handler auth
-    get /auth returns (BaseAuthResponse)
+    get /auth returns ([]BaseAuthResponse)
 
     @doc "获取用户信息"
     @handler userInfo

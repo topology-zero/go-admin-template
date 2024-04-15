@@ -15,6 +15,8 @@ type UnifiedResponse struct {
 	RequestId string `json:"requestId"`
 }
 
+type Option func(*UnifiedResponse)
+
 // HandleResponse 统一返回处理
 func HandleResponse(c *gin.Context, data any, err error) {
 	requestId, _ := c.Get(util.TrafficKey)
@@ -37,18 +39,28 @@ func HandleResponse(c *gin.Context, data any, err error) {
 }
 
 // HandleAbortResponse 统一 Abort 返回处理
-func HandleAbortResponse(c *gin.Context, err string, code ...int) {
+func HandleAbortResponse(c *gin.Context, err string, opt ...Option) {
 	requestId, _ := c.Get(util.TrafficKey)
-	var returnCode int
-	if len(code) == 0 {
-		returnCode = 401
-	} else {
-		returnCode = code[0]
-	}
-	c.AbortWithStatusJSON(200, UnifiedResponse{
-		Code:      returnCode,
+	resp := UnifiedResponse{
+		Code:      500,
 		Data:      nil,
 		Message:   err,
 		RequestId: requestId.(string),
-	})
+	}
+	for _, fn := range opt {
+		fn(&resp)
+	}
+	c.AbortWithStatusJSON(200, resp)
+}
+
+func WithCode(code int) Option {
+	return func(r *UnifiedResponse) {
+		r.Code = code
+	}
+}
+
+func WithData(data any) Option {
+	return func(r *UnifiedResponse) {
+		r.Data = data
+	}
 }

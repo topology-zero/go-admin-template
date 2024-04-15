@@ -19,7 +19,7 @@ func AuthMiddleware(c *gin.Context) {
 	ok, _ := model.Enforcer.Enforce(roleStr, c.FullPath(), strings.ToLower(c.Request.Method))
 	if !ok {
 		logrus.Warning("没有权限")
-		response.HandleAbortResponse(c, "没有权限", 403)
+		response.HandleAbortResponse(c, "没有权限", response.WithCode(403))
 		return
 	}
 	c.Next()

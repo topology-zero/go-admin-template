@@ -2,18 +2,14 @@ syntax = "v1"
 
 type (
     AuthListResponse {
-        Tree []Auth `json:"tree"` // 节点树
-    }
-
-    Auth {
-        Id int `json:"id"`
+        ID int `json:"id"`
         Pid int `json:"pid"`
-        Key string `json:"key"`       // 权限标识
-        Name string `json:"name"`     // 节点名
-        IsMenu int `json:"isMenu"`    // 是否是菜单栏 0：否 1：是
-        Api string `json:"api"`       // 接口
-        Action string `json:"action"` // 操作方法
-        Child []Auth `json:"child"`   // 子节点
+        Key string `json:"key"`                         // 权限标识
+        Name string `json:"name"`                       // 节点名
+        IsMenu int `json:"isMenu"`                      // 是否是菜单栏 0：否 1：是
+        API string `json:"api"`                         // 接口
+        Action string `json:"action"`                   // 操作方法
+        Children []AuthListResponse `json:"children"`   // 子节点
     }
 
     AuthAddRequest {
@@ -21,12 +17,12 @@ type (
         Name string `json:"name" binding:"required"`      // 节点名
         Key string `json:"key" binding:"required"`        // 权限标识
         IsMenu int `json:"isMenu" binding:"oneof=0 1"`    // 是否是菜单栏 0：否 1：是
-        Api string `json:"api"`                           // 接口
+        API string `json:"api"`                           // 接口
         Action string `json:"action"`                     // 操作方法
     }
 
     AuthEditRequest {
-        PathId
+        PathID
         AuthAddRequest
     }
 )
@@ -41,7 +37,7 @@ type (
 service go-admin-template {
     @doc "权限列表"
     @handler list
-    get /auth returns (AuthListResponse)
+    get /auth returns ([]AuthListResponse)
 
     @doc "添加权限"
     @handler add
@@ -53,5 +49,5 @@ service go-admin-template {
 
     @doc "删除权限"
     @handler del
-    delete /auth/:id (PathId)
+    delete /auth/:id (PathID)
 }

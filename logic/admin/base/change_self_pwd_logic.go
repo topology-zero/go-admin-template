@@ -4,14 +4,14 @@ import (
 	"go-admin-template/pkg/jwt"
 	"go-admin-template/query"
 	"go-admin-template/svc"
-	"go-admin-template/types/admin/base"
+	"go-admin-template/types"
 
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // ChangeSelfPwd 修改自己的密码
-func ChangeSelfPwd(ctx *svc.ServiceContext, req *base.ChangeSelfPwdRequest) error {
+func ChangeSelfPwd(ctx *svc.ServiceContext, req *types.ChangeSelfPwdRequest) error {
 	user, _ := ctx.GinContext.Get("userInfo")
 	claims := user.(*jwt.Claims)
 

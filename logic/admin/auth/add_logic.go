@@ -4,19 +4,18 @@ import (
 	"go-admin-template/model"
 	"go-admin-template/query"
 	"go-admin-template/svc"
-	"go-admin-template/types/admin/auth"
+	"go-admin-template/types"
 
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 )
 
 // Add 添加权限
-func Add(ctx *svc.ServiceContext, req *auth.AuthAddRequest) error {
+func Add(ctx *svc.ServiceContext, req *types.AuthAddRequest) error {
 	authModel := query.AdminAuthModel
 
 	var saveAuth model.AdminAuthModel
 	copier.Copy(&saveAuth, &req)
-	saveAuth.API = req.Api
 
 	err := authModel.WithContext(ctx).Create(&saveAuth)
 	if err != nil {

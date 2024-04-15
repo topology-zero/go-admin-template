@@ -1,8 +1,16 @@
 syntax = "v1"
 
 type (
-    PathId {
-        Id int `path:"id"`
+    PathID {
+        ID int `uri:"id"`
     }
 
+    ParamID {
+        ID int `form:"id"`
+    }
+
+    IDAndName {
+        ID int `json:"id"`
+        Name string `json:"name"`
+    }
 )

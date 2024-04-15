@@ -7,34 +7,30 @@ import (
 	"go-admin-template/model"
 	"go-admin-template/query"
 	"go-admin-template/svc"
-	"go-admin-template/types/admin/role"
+	"go-admin-template/types"
 
 	"github.com/pkg/errors"
 )
 
 // Add 添加角色
-func Add(ctx *svc.ServiceContext, req *role.RoleAddRequest) error {
+func Add(ctx *svc.ServiceContext, req *types.RoleAddRequest) error {
 	roleModel := query.AdminRoleModel
 	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.Name.Eq(req.Name)).First()
 	if roleInfo != nil {
 		return errors.New("该角色已存在")
 	}
 
-	marshal, err := json.Marshal(req.Auth)
-	if err != nil {
-		ctx.Log.Errorf("%+v", errors.WithStack(err))
-		return errors.New("JSON转换错误")
-	}
+	marshal, _ := json.Marshal(req.Auth)
 	authStr := string(marshal)
 
 	defer model.Enforcer.LoadPolicy()
 
-	err = query.Q.Transaction(func(tx *query.Query) error {
+	err := query.Q.Transaction(func(tx *query.Query) error {
 		saveRole := model.AdminRoleModel{
 			Name: req.Name,
 			Auth: authStr,
 		}
-		err = tx.AdminRoleModel.WithContext(ctx).Create(&saveRole)
+		err := tx.AdminRoleModel.WithContext(ctx).Create(&saveRole)
 		if err != nil {
 			return err
 		}

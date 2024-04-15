@@ -16,5 +16,4 @@ func RegisterAdminRoleRoute(e *gin.Engine) {
 	g.POST("/role", role.AddHandle)
 	g.PUT("/role/:id", role.EditHandle)
 	g.DELETE("/role/:id", role.DelHandle)
-
 }

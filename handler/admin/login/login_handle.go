@@ -6,19 +6,18 @@ import (
 	"go-admin-template/logic/admin/login"
 	"go-admin-template/pkg/jwt"
 	"go-admin-template/svc"
-	loginType "go-admin-template/types/admin/login"
+	"go-admin-template/types"
 
 	"github.com/gin-gonic/gin"
 )
 
 // LoginHandle 登录
 func LoginHandle(c *gin.Context) {
-	var req loginType.LoginRequest
+	var req types.LoginRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return
 	}
-
 	resp, err := login.Login(svc.NewServiceContext(c), &req)
 	if err == nil {
 		c.SetCookie(jwt.JwtName, resp.Jwt, config.JwtConf.Expire*3600, "/", "127.0.0.1", true, true)

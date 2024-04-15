@@ -7,16 +7,16 @@ import (
 	"go-admin-template/pkg/jwt"
 	"go-admin-template/query"
 	"go-admin-template/svc"
-	"go-admin-template/types/admin/login"
+	"go-admin-template/types"
 
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // Login 登录
-func Login(ctx *svc.ServiceContext, req *login.LoginRequest) (resp login.LoginResponse, err error) {
+func Login(ctx *svc.ServiceContext, req *types.LoginRequest) (resp types.LoginResponse, err error) {
 	req.Code = strings.ToLower(req.Code)
-	match := config.Captcha.Verify(req.CodeId, req.Code, true)
+	match := config.Captcha.Verify(req.CodeID, req.Code, true)
 	if !match {
 		err = errors.New("验证码错误")
 		return

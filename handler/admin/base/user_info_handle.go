@@ -10,6 +10,6 @@ import (
 
 // UserInfoHandle 获取用户信息
 func UserInfoHandle(c *gin.Context) {
-	res, err := base.UserInfo(svc.NewServiceContext(c))
-	response.HandleResponse(c, res, err)
+	resp, err := base.UserInfo(svc.NewServiceContext(c))
+	response.HandleResponse(c, resp, err)
 }

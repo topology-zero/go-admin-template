@@ -1,6 +1,8 @@
 package internal
 
-import "go-admin-template/types/admin/base"
+import (
+	"go-admin-template/types"
+)
 
 type AdminUser interface {
 
@@ -18,5 +20,5 @@ type AdminUser interface {
 	//        LEFT JOIN admin_role r ON u.role_id = r.id
 	//    WHERE
 	//		u.id = @id
-	GetUserInfo(id int) base.UserInfoResponse
+	GetUserInfo(id int) types.UserInfoResponse
 }

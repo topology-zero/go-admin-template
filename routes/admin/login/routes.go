@@ -12,5 +12,4 @@ func RegisterAdminLoginRoute(e *gin.Engine) {
 	g.GET("/code", login.CodeHandle)
 	g.POST("/login", login.LoginHandle)
 	g.POST("/logout", login.LogoutHandle)
-
 }
