@@ -23,7 +23,8 @@ import (
 )
 
 //go:generate gengin go-admin-template.api
-//go:generate goctl api plugin -p "goctl-swagger swagger -filename asset/swagger/swagger.json" -api go-admin-template.api -dir .
+//go:generate gen-swagger --local_api= go-admin-template.api
+
 func main() {
 	flag.Parse()
 

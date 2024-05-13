@@ -8,7 +8,7 @@
 
 * [go-zero 的 gengin 插件](https://github.com/MasterJoyHunan/gengin) 基于.api 接口定义文件，生成 Gin 框架的基础文件（handler 控制器，logic 服务，routes 路由）
 
-* [go-zero 的 swagger 插件](https://github.com/zeromicro/goctl-swagger) 基于.api 接口定义文件，生成 Swagger 文档,用于接口测试,与前端对接
+* [go-zero 的 swagger 插件](https://github.com/MasterJoyHunan/gen-swagger) 基于.api 接口定义文件，生成 Swagger 文档,用于接口测试,与前端对接
 
 * [Gin](https://github.com/gin-gonic/gin) http 框架
 
