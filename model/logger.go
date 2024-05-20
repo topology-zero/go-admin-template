@@ -21,12 +21,9 @@ type gormLogger struct {
 }
 
 func NewLogger(config logger.Config) logger.Interface {
-	newLog := *logrus.StandardLogger()
-	newLog.SetReportCaller(false)
-	newLog.SetLevel(logrus.TraceLevel)
 	return &gormLogger{
 		config: config,
-		log:    &newLog,
+		log:    logrus.StandardLogger(),
 	}
 }
 
