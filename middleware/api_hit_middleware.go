@@ -18,13 +18,13 @@ func ApiHitRecord(c *gin.Context) {
 		return
 	}
 
-	if c.Request.URL.Path == "/metrics" {
+	if c.FullPath() == "/metrics" {
 		return
 	}
 
 	// 只记录合法操作
 	prometheus.ApiHit.With(map[string]string{
-		"api":    c.Request.URL.Path,
+		"api":    c.FullPath(),
 		"method": c.Request.Method,
 	}).Observe(float64(time.Since(startTime).Milliseconds()))
 }
