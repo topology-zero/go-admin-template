@@ -8,6 +8,8 @@ import (
 	"strings"
 	"time"
 
+	"go-admin-template/config"
+	internalLogger "go-admin-template/pkg/logger"
 	"go-admin-template/pkg/util"
 
 	"github.com/pkg/errors"
@@ -20,10 +22,26 @@ type gormLogger struct {
 	log    *logrus.Logger
 }
 
-func NewLogger(config logger.Config) logger.Interface {
+func NewLogger(cfg logger.Config) logger.Interface {
+	log := logrus.New()
+	level, _ := logrus.ParseLevel(config.LogConf.Level)
+	log.SetLevel(level)
+
+	//设置日志格式
+	log.SetFormatter(&logrus.TextFormatter{
+		ForceQuote:      false,
+		DisableQuote:    true,
+		TimestampFormat: "2006-01-02 15:04:05.000",
+	})
+
+	// 取消线程安全
+	log.SetNoLock()
+
+	log.AddHook(&internalLogger.RotateHook{})
+
 	return &gormLogger{
-		config: config,
-		log:    logrus.StandardLogger(),
+		config: cfg,
+		log:    log,
 	}
 }
 
