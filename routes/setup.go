@@ -7,11 +7,13 @@ import (
 	adminLogin "go-admin-template/routes/admin/login"
 	adminRole "go-admin-template/routes/admin/role"
 	adminUser "go-admin-template/routes/admin/user"
+	common "go-admin-template/routes/common"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Setup(e *gin.Engine) {
+	common.RegisterCommonRoute(e)
 	adminLogin.RegisterAdminLoginRoute(e)
 	adminUser.RegisterAdminUserRoute(e)
 	adminRole.RegisterAdminRoleRoute(e)

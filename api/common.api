@@ -14,3 +14,15 @@ type (
         Name string `json:"name"`
     }
 )
+
+@server(
+    jwt: Jwt
+    group: common
+    swtags: 通用接口
+)
+
+service go-admin-template {
+    @doc "上传图片"
+    @handler uploadImage
+    post /upload/image returns (string)
+}
