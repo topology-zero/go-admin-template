@@ -1,11 +1,13 @@
 package svc
 
 import (
+	"net/http/httptest"
 	"time"
 
 	"go-admin-template/pkg/util"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 )
 
@@ -20,6 +22,15 @@ func NewServiceContext(c *gin.Context) *ServiceContext {
 	return &ServiceContext{
 		GinContext: c,
 		Log:        logrus.WithField(util.TraceId, traceId.(string)),
+	}
+}
+
+func NewServiceContextWithoutGin() *ServiceContext {
+	gin.SetMode(gin.ReleaseMode)
+	ginCtx, _ := gin.CreateTestContext(httptest.NewRecorder())
+	return &ServiceContext{
+		GinContext: ginCtx,
+		Log:        logrus.WithField(util.TraceId, uuid.New().String()),
 	}
 }
 
