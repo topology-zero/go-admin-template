@@ -1,5 +1,13 @@
 package config
 
+type Cfg struct {
+	Server Server
+	Jwt    Jwt
+	Log    Log
+	Mysql  Mysql
+	Redis  Redis
+}
+
 type Server struct {
 	Name string
 	Host string
