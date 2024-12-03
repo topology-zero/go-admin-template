@@ -9,19 +9,19 @@ import (
 )
 
 // Edit 编辑权限
-func Edit(ctx *svc.ServiceContext, req *types.AuthEditRequest) error {
-	authModel := query.AdminAuthModel
-	_, err := authModel.WithContext(ctx).Where(authModel.ID.Eq(req.ID)).UpdateSimple(
-		authModel.Pid.Value(req.Pid),
-		authModel.Key.Value(req.Key),
-		authModel.Name.Value(req.Name),
-		authModel.IsMenu.Value(req.IsMenu),
-		authModel.API.Value(req.API),
-		authModel.Action.Value(req.Action),
+func Edit(ctx *svc.ServiceContext, req *types.AdminAuthEditRequest) error {
+	adminAuthModel := query.AdminAuthModel
+
+	_, err := adminAuthModel.WithContext(ctx).Where(adminAuthModel.ID.Eq(req.ID)).UpdateColumnSimple(
+		adminAuthModel.Pid.Value(req.Pid),
+		adminAuthModel.Key.Value(req.Key),
+		adminAuthModel.Name.Value(req.Name),
+		adminAuthModel.IsMenu.Value(req.IsMenu),
+		adminAuthModel.API.Value(req.API),
+		adminAuthModel.Action.Value(req.Action),
 	)
 	if err != nil {
-		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
-		err = errors.New("系统错误")
+		ctx.Log.Errorf("%+v", errors.WithStack(err))
 	}
 	return err
 }

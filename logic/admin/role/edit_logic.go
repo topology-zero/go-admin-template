@@ -14,16 +14,17 @@ import (
 )
 
 // Edit 编辑角色
-func Edit(ctx *svc.ServiceContext, req *types.RoleEditRequest) error {
+func Edit(ctx *svc.ServiceContext, req *types.AdminRoleEditRequest) error {
 	if req.ID == config.SuperAdminRoleID {
 		return errors.New("无法修改超级管理员角色")
 	}
 
-	roleModel := query.AdminRoleModel
-	roleInfo, _ := roleModel.WithContext(ctx).
+	adminRoleModel := query.AdminRoleModel
+
+	roleInfo, _ := adminRoleModel.WithContext(ctx).
 		Where(
-			roleModel.Name.Eq(req.Name),
-			roleModel.ID.Neq(req.ID),
+			adminRoleModel.Name.Eq(req.Name),
+			adminRoleModel.ID.Neq(req.ID),
 		).
 		First()
 	if roleInfo != nil {
@@ -37,10 +38,12 @@ func Edit(ctx *svc.ServiceContext, req *types.RoleEditRequest) error {
 	defer model.Enforcer.LoadPolicy()
 
 	err := query.Q.Transaction(func(tx *query.Query) error {
-		_, err := tx.AdminRoleModel.WithContext(ctx).Where(tx.AdminRoleModel.ID.Eq(req.ID)).UpdateSimple(
-			tx.AdminRoleModel.Name.Value(req.Name),
-			tx.AdminRoleModel.Auth.Value(authStr),
-		)
+		_, err := tx.AdminRoleModel.WithContext(ctx).
+			Where(tx.AdminRoleModel.ID.Eq(req.ID)).
+			UpdateSimple(
+				tx.AdminRoleModel.Name.Value(req.Name),
+				tx.AdminRoleModel.Auth.Value(authStr),
+			)
 		if err != nil {
 			return err
 		}
@@ -58,7 +61,9 @@ func Edit(ctx *svc.ServiceContext, req *types.RoleEditRequest) error {
 
 		// 重新加入casbin表
 		var rules []*model.AdminCasbinRuleModel
-		authModels, _ := tx.AdminAuthModel.WithContext(ctx).Where(tx.AdminAuthModel.ID.In(req.Auth...)).Find()
+		authModels, _ := tx.AdminAuthModel.WithContext(ctx).
+			Where(tx.AdminAuthModel.ID.In(req.Auth...)).
+			Find()
 		for _, a := range authModels {
 			if a.IsMenu == 1 {
 				continue
@@ -72,11 +77,11 @@ func Edit(ctx *svc.ServiceContext, req *types.RoleEditRequest) error {
 			})
 		}
 
-		return tx.AdminCasbinRuleModel.WithContext(ctx).CreateInBatches(rules, 100)
+		return tx.AdminCasbinRuleModel.WithContext(ctx).
+			CreateInBatches(rules, 100)
 	})
 	if err != nil {
-		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
-		err = errors.New("系统错误")
+		ctx.Log.Errorf("%+v", errors.WithStack(err))
 	}
 	return err
 }

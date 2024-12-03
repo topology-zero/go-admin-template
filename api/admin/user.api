@@ -1,51 +1,43 @@
 syntax = "v1"
 
 type (
-    UserListRequest {
+    AdminUserListRequest {
         Page int `form:"page"`         // 分页
         PageSize int `form:"pageSize"` // 每页条数
     }
 
-    UserListResponse {
-        Total int `json:"total"`       // 总条数
-        Data []UserList `json:"data"`  // 具体数据
+    AdminUserListResponse {
+        Total int `json:"total"`            // 总条数
+        Data []AdminUserList `json:"data"`  // 具体数据
     }
 
-    UserList {
+    AdminUserList {
         ID int `json:"id"`
         Username string `json:"username"` // 用户名
         Realname string `json:"realname"` // 真实姓名
+        RoleID int `json:"roleId"`        // 角色ID
         Rolename string `json:"rolename"` // 角色名
         Status int `json:"status"`        // 状态 0:未启用 1:正常
         Phone string `json:"phone"`       // 手机号
     }
 
-    UserDetailResponse {
-        ID int `json:"id"`
-        Username string `json:"username"` // 用户名
-        Realname string `json:"realname"` // 真实姓名
-        Phone string `json:"phone"`       // 手机号
-        RoleID int `json:"roleId"`        // 角色ID
-        Status int `json:"status"`        // 状态 0:未启用 1:正常
+    AdminUserCommon {
+        Username string `json:"username" binding:"required"` // 用户名
+        Realname string `json:"realname" binding:"required"` // 真实姓名
+        Phone string `json:"phone" binding:"required"`       // 手机号
+        RoleID int `json:"roleId" binding:"required"`        // 角色ID
+        Status int `json:"status" binding:"oneof=0 1"`       // 状态 0:未启用 1:正常
     }
 
-    UserAddRequest {
-        Username string `json:"username" binding:"required"`                // 用户名
-        Realname string `json:"realname" binding:"required"`                // 真实姓名
-        Phone string `json:"phone" binding:"required"`                      // 手机号
-        RoleID int `json:"roleId" binding:"required"`                       // 角色ID
-        Password string `json:"password" binding:"required,min=6,max=255"`  // 密码
-        Status int `json:"status" binding:"oneof=0 1"`                      // 状态 0:未启用 1:正常
+    AdminUserAddRequest {
+        AdminUserCommon
+        Password string `json:"password" binding:"required,min=6,max=255"` // 密码
     }
 
-    UserEditRequest {
+    AdminUserEditRequest {
         PathID
-        Username string `json:"username" binding:"required"`  // 用户名
-        Realname string `json:"realname" binding:"required"`  // 真实姓名
-        Phone string `json:"phone" binding:"required"`        // 手机号
-        RoleID int `json:"roleId" binding:"required"`         // 角色ID
-        Password string `json:"password"`                     // 密码
-        Status int `json:"status" binding:"oneof=0 1"`        // 状态 0:未启用 1:正常
+        AdminUserCommon
+        Password string `json:"password"` // 密码
     }
 )
 
@@ -59,21 +51,17 @@ type (
 service go-admin-template {
     @doc "用户列表"
     @handler list
-    get /user (UserListRequest) returns (UserListResponse)
-
-    @doc "用户详情"
-    @handler detail
-    get /user/:id (PathID) returns (UserDetailResponse)
+    get /admin/user (AdminUserListRequest) returns (AdminUserListResponse)
 
     @doc "添加用户"
     @handler add
-    post /user (UserAddRequest)
+    post /admin/user (AdminUserAddRequest)
 
     @doc "编辑用户"
     @handler edit
-    put /user/:id (UserEditRequest)
+    put /admin/user/:id (AdminUserEditRequest)
 
     @doc "删除用户"
     @handler del
-    delete /user/:id (PathID)
+    delete /admin/user/:id (PathID)
 }

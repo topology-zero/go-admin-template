@@ -11,7 +11,7 @@ import (
 
 // ListHandle 角色列表
 func ListHandle(c *gin.Context) {
-	var req types.RoleListRequest
+	var req types.AdminRoleListRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

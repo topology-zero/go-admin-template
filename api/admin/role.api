@@ -1,35 +1,35 @@
 syntax = "v1"
 
 type (
-    RoleListRequest {
+    AdminRoleListRequest {
         Page int `form:"page"`         // 分页
         PageSize int `form:"pageSize"` // 每页条数
     }
 
-    RoleListResponse {
+    AdminRoleListResponse {
         Total int `json:"total"`       // 总条数
-        Data []RoleList `json:"data"`  // 具体数据
+        Data []AdminRoleList `json:"data"`  // 具体数据
     }
 
-    RoleList {
+    AdminRoleList {
         ID int `json:"id"`
         Name string `json:"name"` // 角色名
     }
 
-    RoleDetailResponse {
+    AdminRoleDetailResponse {
         ID int `json:"id"`
         Name string `json:"name"` // 角色名
         Auth []int `json:"auth"`  // 权限ID
     }
 
-    RoleAddRequest {
+    AdminRoleAddRequest {
         Name string `json:"name" binding:"required"`      // 角色名
         Auth []int `json:"auth" binding:"required,min=1"` // 权限ID
     }
 
-    RoleEditRequest {
+    AdminRoleEditRequest {
         PathID
-        RoleAddRequest
+        AdminRoleAddRequest
     }
 )
 
@@ -43,21 +43,21 @@ type (
 service go-admin-template {
     @doc "角色列表"
     @handler list
-    get /role (RoleListRequest) returns (RoleListResponse)
+    get /admin/role (AdminRoleListRequest) returns (AdminRoleListResponse)
 
     @doc "角色详情"
     @handler detail
-    get /role/:id (PathID) returns (RoleDetailResponse)
+    get /admin/role/:id (PathID) returns (AdminRoleDetailResponse)
 
     @doc "添加角色"
     @handler add
-    post /role (RoleAddRequest)
+    post /admin/role (AdminRoleAddRequest)
 
     @doc "编辑角色"
     @handler edit
-    put /role/:id (RoleEditRequest)
+    put /admin/role/:id (AdminRoleEditRequest)
 
     @doc "删除角色"
     @handler del
-    delete /role/:id (PathID)
+    delete /admin/role/:id (PathID)
 }

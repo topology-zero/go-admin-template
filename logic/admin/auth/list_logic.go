@@ -8,20 +8,20 @@ import (
 )
 
 // List 权限列表
-func List(ctx *svc.ServiceContext) (resp []types.AuthListResponse, err error) {
-	authModel := query.AdminAuthModel
-	auths, _ := authModel.WithContext(ctx).Find()
+func List(ctx *svc.ServiceContext) (resp []types.AdminAuthListResponse, err error) {
+	adminAuthModel := query.AdminAuthModel
+	auths, _ := adminAuthModel.WithContext(ctx).Find()
 	resp = authTree(0, auths)
 	return
 }
 
-func authTree(pid int, auths []*model.AdminAuthModel) []types.AuthListResponse {
-	var data []types.AuthListResponse
+func authTree(pid int, auths []*model.AdminAuthModel) []types.AdminAuthListResponse {
+	var data []types.AdminAuthListResponse
 	for _, v := range auths {
 		if v.Pid != pid {
 			continue
 		}
-		data = append(data, types.AuthListResponse{
+		data = append(data, types.AdminAuthListResponse{
 			ID:       v.ID,
 			Pid:      v.Pid,
 			Name:     v.Name,

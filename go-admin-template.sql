@@ -57,7 +57,7 @@ CREATE TABLE `admin_auth`  (
   `delete_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `key`(`key`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admin_auth
@@ -80,8 +80,6 @@ INSERT INTO `admin_auth` VALUES (17, 16, '权限列表', 'admin:auth:list', 0, '
 INSERT INTO `admin_auth` VALUES (18, 16, '添加权限', 'admin:auth:add', 0, '/auth', 'post', NULL, NULL, NULL);
 INSERT INTO `admin_auth` VALUES (19, 16, '编辑权限', 'admin:auth:edit', 0, '/auth/:id', 'put', NULL, NULL, NULL);
 INSERT INTO `admin_auth` VALUES (20, 16, '删除权限', 'admin:auth:del', 0, '/auth/:id', 'delete', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (21, 0, '用户管理', 'member', 1, '', '', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (22, 0, '订单管理', 'order', 1, '', '', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for admin_casbin_rule

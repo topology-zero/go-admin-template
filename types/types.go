@@ -30,96 +30,88 @@ type LoginResponse struct {
 	Jwt string `json:"jwt"` // jwt 凭证
 }
 
-type UserListRequest struct {
+type AdminUserListRequest struct {
 	Page     int `form:"page" label:"分页"`       // 分页
 	PageSize int `form:"pageSize" label:"每页条数"` // 每页条数
 }
 
-type UserListResponse struct {
-	Total int        `json:"total"` // 总条数
-	Data  []UserList `json:"data"`  // 具体数据
+type AdminUserListResponse struct {
+	Total int             `json:"total"` // 总条数
+	Data  []AdminUserList `json:"data"`  // 具体数据
 }
 
-type UserList struct {
+type AdminUserList struct {
 	ID       int    `json:"id"`
 	Username string `json:"username"` // 用户名
 	Realname string `json:"realname"` // 真实姓名
+	RoleID   int    `json:"roleId"`   // 角色ID
 	Rolename string `json:"rolename"` // 角色名
 	Status   int    `json:"status"`   // 状态 0:未启用 1:正常
 	Phone    string `json:"phone"`    // 手机号
 }
 
-type UserDetailResponse struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"` // 用户名
-	Realname string `json:"realname"` // 真实姓名
-	Phone    string `json:"phone"`    // 手机号
-	RoleID   int    `json:"roleId"`   // 角色ID
-	Status   int    `json:"status"`   // 状态 0:未启用 1:正常
+type AdminUserCommon struct {
+	Username string `json:"username" binding:"required"` // 用户名
+	Realname string `json:"realname" binding:"required"` // 真实姓名
+	Phone    string `json:"phone" binding:"required"`    // 手机号
+	RoleID   int    `json:"roleId" binding:"required"`   // 角色ID
+	Status   int    `json:"status" binding:"oneof=0 1"`  // 状态 0:未启用 1:正常
 }
 
-type UserAddRequest struct {
-	Username string `json:"username" binding:"required" label:"用户名"`              // 用户名
-	Realname string `json:"realname" binding:"required" label:"真实姓名"`             // 真实姓名
-	Phone    string `json:"phone" binding:"required" label:"手机号"`                 // 手机号
-	RoleID   int    `json:"roleId" binding:"required" label:"角色ID"`               // 角色ID
+type AdminUserAddRequest struct {
+	AdminUserCommon
 	Password string `json:"password" binding:"required,min=6,max=255" label:"密码"` // 密码
-	Status   int    `json:"status" binding:"oneof=0 1" label:"状态 0:未启用 1:正常"`     // 状态 0:未启用 1:正常
 }
 
-type UserEditRequest struct {
+type AdminUserEditRequest struct {
 	PathID
-	Username string `json:"username" binding:"required" label:"用户名"`          // 用户名
-	Realname string `json:"realname" binding:"required" label:"真实姓名"`         // 真实姓名
-	Phone    string `json:"phone" binding:"required" label:"手机号"`             // 手机号
-	RoleID   int    `json:"roleId" binding:"required" label:"角色ID"`           // 角色ID
-	Password string `json:"password" label:"密码"`                              // 密码
-	Status   int    `json:"status" binding:"oneof=0 1" label:"状态 0:未启用 1:正常"` // 状态 0:未启用 1:正常
+	AdminUserCommon
+	Password string `json:"password" label:"密码"` // 密码
 }
 
-type RoleListRequest struct {
+type AdminRoleListRequest struct {
 	Page     int `form:"page" label:"分页"`       // 分页
 	PageSize int `form:"pageSize" label:"每页条数"` // 每页条数
 }
 
-type RoleListResponse struct {
-	Total int        `json:"total"` // 总条数
-	Data  []RoleList `json:"data"`  // 具体数据
+type AdminRoleListResponse struct {
+	Total int             `json:"total"` // 总条数
+	Data  []AdminRoleList `json:"data"`  // 具体数据
 }
 
-type RoleList struct {
+type AdminRoleList struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"` // 角色名
 }
 
-type RoleDetailResponse struct {
+type AdminRoleDetailResponse struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"` // 角色名
 	Auth []int  `json:"auth"` // 权限ID
 }
 
-type RoleAddRequest struct {
+type AdminRoleAddRequest struct {
 	Name string `json:"name" binding:"required" label:"角色名"`        // 角色名
 	Auth []int  `json:"auth" binding:"required,min=1" label:"权限ID"` // 权限ID
 }
 
-type RoleEditRequest struct {
+type AdminRoleEditRequest struct {
 	PathID
-	RoleAddRequest
+	AdminRoleAddRequest
 }
 
-type AuthListResponse struct {
-	ID       int                `json:"id"`
-	Pid      int                `json:"pid"`
-	Key      string             `json:"key"`      // 权限标识
-	Name     string             `json:"name"`     // 节点名
-	IsMenu   int                `json:"isMenu"`   // 是否是菜单栏 0：否 1：是
-	API      string             `json:"api"`      // 接口
-	Action   string             `json:"action"`   // 操作方法
-	Children []AuthListResponse `json:"children"` // 子节点
+type AdminAuthListResponse struct {
+	ID       int                     `json:"id"`
+	Pid      int                     `json:"pid"`
+	Key      string                  `json:"key"`      // 权限标识
+	Name     string                  `json:"name"`     // 节点名
+	IsMenu   int                     `json:"isMenu"`   // 是否是菜单栏 0：否 1：是
+	API      string                  `json:"api"`      // 接口
+	Action   string                  `json:"action"`   // 操作方法
+	Children []AdminAuthListResponse `json:"children"` // 子节点
 }
 
-type AuthAddRequest struct {
+type AdminAuthAddRequest struct {
 	Pid    int    `json:"pid" binding:"min=0"`
 	Name   string `json:"name" binding:"required" label:"节点名"`               // 节点名
 	Key    string `json:"key" binding:"required" label:"权限标识"`               // 权限标识
@@ -128,9 +120,9 @@ type AuthAddRequest struct {
 	Action string `json:"action" label:"操作方法"`                               // 操作方法
 }
 
-type AuthEditRequest struct {
+type AdminAuthEditRequest struct {
 	PathID
-	AuthAddRequest
+	AdminAuthAddRequest
 }
 
 type BaseAuthResponse struct {

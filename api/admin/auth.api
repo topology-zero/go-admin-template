@@ -1,7 +1,7 @@
 syntax = "v1"
 
 type (
-    AuthListResponse {
+    AdminAuthListResponse {
         ID int `json:"id"`
         Pid int `json:"pid"`
         Key string `json:"key"`                         // 权限标识
@@ -9,10 +9,10 @@ type (
         IsMenu int `json:"isMenu"`                      // 是否是菜单栏 0：否 1：是
         API string `json:"api"`                         // 接口
         Action string `json:"action"`                   // 操作方法
-        Children []AuthListResponse `json:"children"`   // 子节点
+        Children []AdminAuthListResponse `json:"children"`   // 子节点
     }
 
-    AuthAddRequest {
+    AdminAuthAddRequest {
         Pid int `json:"pid" binding:"min=0"`
         Name string `json:"name" binding:"required"`      // 节点名
         Key string `json:"key" binding:"required"`        // 权限标识
@@ -21,9 +21,9 @@ type (
         Action string `json:"action"`                     // 操作方法
     }
 
-    AuthEditRequest {
+    AdminAuthEditRequest {
         PathID
-        AuthAddRequest
+        AdminAuthAddRequest
     }
 )
 
@@ -37,17 +37,17 @@ type (
 service go-admin-template {
     @doc "权限列表"
     @handler list
-    get /auth returns ([]AuthListResponse)
+    get /admin/auth returns ([]AdminAuthListResponse)
 
     @doc "添加权限"
     @handler add
-    post /auth (AuthAddRequest)
+    post /admin/auth (AdminAuthAddRequest)
 
     @doc "编辑权限"
     @handler edit
-    put /auth/:id (AuthEditRequest)
+    put /admin/auth/:id (AdminAuthEditRequest)
 
     @doc "删除权限"
     @handler del
-    delete /auth/:id (PathID)
+    delete /admin/auth/:id (PathID)
 }

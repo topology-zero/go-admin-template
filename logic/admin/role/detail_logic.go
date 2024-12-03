@@ -9,7 +9,7 @@ import (
 )
 
 // Detail 角色详情
-func Detail(ctx *svc.ServiceContext, req *types.PathID) (resp types.RoleDetailResponse, err error) {
+func Detail(ctx *svc.ServiceContext, req *types.PathID) (resp types.AdminRoleDetailResponse, err error) {
 	roleModel := query.AdminRoleModel
 	authModel := query.AdminAuthModel
 	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.ID.Eq(req.ID)).First()

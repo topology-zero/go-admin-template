@@ -13,9 +13,10 @@ import (
 )
 
 // Add 添加角色
-func Add(ctx *svc.ServiceContext, req *types.RoleAddRequest) error {
-	roleModel := query.AdminRoleModel
-	roleInfo, _ := roleModel.WithContext(ctx).Where(roleModel.Name.Eq(req.Name)).First()
+func Add(ctx *svc.ServiceContext, req *types.AdminRoleAddRequest) error {
+	adminRoleModel := query.AdminRoleModel
+
+	roleInfo, _ := adminRoleModel.WithContext(ctx).Where(adminRoleModel.Name.Eq(req.Name)).First()
 	if roleInfo != nil {
 		return errors.New("该角色已存在")
 	}
@@ -54,8 +55,7 @@ func Add(ctx *svc.ServiceContext, req *types.RoleAddRequest) error {
 		return tx.AdminCasbinRuleModel.WithContext(ctx).CreateInBatches(rules, 100)
 	})
 	if err != nil {
-		ctx.Log.Errorf("数据库异常：%+v", errors.WithStack(err))
-		err = errors.New("系统错误")
+		ctx.Log.Errorf("%+v", errors.WithStack(err))
 	}
 	return err
 }

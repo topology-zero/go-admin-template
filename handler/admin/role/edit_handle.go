@@ -11,7 +11,7 @@ import (
 
 // EditHandle 编辑角色
 func EditHandle(c *gin.Context) {
-	var req types.RoleEditRequest
+	var req types.AdminRoleEditRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

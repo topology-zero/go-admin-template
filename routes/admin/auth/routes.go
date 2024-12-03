@@ -11,8 +11,8 @@ import (
 func RegisterAdminAuthRoute(e *gin.Engine) {
 	g := e.Group("")
 	g.Use(middleware.JwtMiddleware, middleware.AuthMiddleware)
-	g.GET("/auth", auth.ListHandle)
-	g.POST("/auth", auth.AddHandle)
-	g.PUT("/auth/:id", auth.EditHandle)
-	g.DELETE("/auth/:id", auth.DelHandle)
+	g.GET("/admin/auth", auth.ListHandle)
+	g.POST("/admin/auth", auth.AddHandle)
+	g.PUT("/admin/auth/:id", auth.EditHandle)
+	g.DELETE("/admin/auth/:id", auth.DelHandle)
 }

@@ -12,7 +12,7 @@ import (
 
 // EditHandle 编辑用户
 func EditHandle(c *gin.Context) {
-	var req types.UserEditRequest
+	var req types.AdminUserEditRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

@@ -11,7 +11,7 @@ import (
 
 // AddHandle 添加角色
 func AddHandle(c *gin.Context) {
-	var req types.RoleAddRequest
+	var req types.AdminRoleAddRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

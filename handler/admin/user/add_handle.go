@@ -11,7 +11,7 @@ import (
 
 // AddHandle 添加用户
 func AddHandle(c *gin.Context) {
-	var req types.UserAddRequest
+	var req types.AdminUserAddRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return

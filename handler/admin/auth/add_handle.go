@@ -12,7 +12,7 @@ import (
 
 // AddHandle 添加权限
 func AddHandle(c *gin.Context) {
-	var req types.AuthAddRequest
+	var req types.AdminAuthAddRequest
 	if err := c.ShouldBind(&req); err != nil {
 		response.HandleResponse(c, nil, err)
 		return
