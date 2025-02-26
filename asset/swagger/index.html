@@ -36,6 +36,7 @@
         const ui = SwaggerUIBundle({
             "dom_id": "#swagger-ui",
             deepLinking: true,
+            defaultModelsExpandDepth: -1, // 不显示 Models / Schemas
             presets: [
                 SwaggerUIBundle.presets.apis,
                 SwaggerUIStandalonePreset
