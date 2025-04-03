@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 
@@ -13,7 +13,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var writeList = []string{"/login"}
+var writeList = []string{
+	"/login",
+	"/metrics",
+}
 
 func RequestLog(c *gin.Context) {
 	if c.Request.Method == http.MethodOptions {
@@ -28,8 +31,8 @@ func RequestLog(c *gin.Context) {
 	} else {
 		switch c.ContentType() {
 		case binding.MIMEJSON:
-			body, _ := ioutil.ReadAll(c.Request.Body)
-			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+			body, _ := io.ReadAll(c.Request.Body)
+			c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 			requestBody = string(body)
 		case binding.MIMEPOSTForm:
 			c.Request.ParseForm()

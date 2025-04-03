@@ -63,23 +63,27 @@ CREATE TABLE `admin_auth`  (
 -- Records of admin_auth
 -- ----------------------------
 INSERT INTO `admin_auth` VALUES (1, 0, '后台管理', 'admin', 1, '', '', NULL, NULL, NULL);
+
 INSERT INTO `admin_auth` VALUES (2, 1, '用户管理', 'admin:user', 1, '', '', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (3, 2, '用户列表', 'admin:user:list', 0, '/user', 'get', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (4, 2, '添加用户', 'admin:user:add', 0, '/user', 'post', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (7, 1, '角色管理', 'admin:role', 1, '', '', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (8, 7, '角色列表', 'admin:role:list', 0, '/role', 'get', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (9, 2, '编辑用户', 'admin:user:edit', 0, '/user/:id', 'put', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (10, 2, '获取用户详情', 'admin:user:detail', 0, '/user/:id', 'get', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (11, 2, '删除用户', 'admin:user:del', 0, '/user/:id', 'delete', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (12, 7, '角色详情', 'admin:role:detail', 0, '/role/:id', 'get', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (13, 7, '添加角色', 'admin:role:add', 0, '/role', 'post', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (14, 7, '编辑角色', 'admin:role:edit', 0, '/role/:id', 'put', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (15, 7, '删除角色', 'admin:role:del', 0, '/role/:id', 'delete', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (16, 1, '权限管理', 'admin:auth', 1, '', '', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (17, 16, '权限列表', 'admin:auth:list', 0, '/auth', 'get', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (18, 16, '添加权限', 'admin:auth:add', 0, '/auth', 'post', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (19, 16, '编辑权限', 'admin:auth:edit', 0, '/auth/:id', 'put', NULL, NULL, NULL);
-INSERT INTO `admin_auth` VALUES (20, 16, '删除权限', 'admin:auth:del', 0, '/auth/:id', 'delete', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (3, 1, '角色管理', 'admin:role', 1, '', '', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (4, 1, '权限管理', 'admin:auth', 1, '', '', NULL, NULL, NULL);
+
+INSERT INTO `admin_auth` VALUES (5, 2, '用户列表', 'admin:user:list', 0, '/admin/user', 'get', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (6, 2, '添加用户', 'admin:user:add', 0, '/admin/user', 'post', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (7, 2, '用户详情', 'admin:user:detail', 0, '/admin/user/:id', 'get', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (8, 2, '删除用户', 'admin:user:del', 0, '/admin/user/:id', 'delete', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (9, 2, '编辑用户', 'admin:user:edit', 0, '/admin/user/:id', 'put', NULL, NULL, NULL);
+
+INSERT INTO `admin_auth` VALUES (10, 3, '角色列表', 'admin:role:list', 0, '/admin/role', 'get', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (11, 3, '角色详情', 'admin:role:detail', 0, '/admin/role/:id', 'get', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (12, 3, '添加角色', 'admin:role:add', 0, '/admin/role', 'post', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (13, 3, '编辑角色', 'admin:role:edit', 0, '/admin/role/:id', 'put', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (14, 3, '删除角色', 'admin:role:del', 0, '/admin/role/:id', 'delete', NULL, NULL, NULL);
+
+INSERT INTO `admin_auth` VALUES (15, 4, '权限列表', 'admin:auth:list', 0, '/admin/auth', 'get', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (16, 4, '添加权限', 'admin:auth:add', 0, '/admin/auth', 'post', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (17, 4, '编辑权限', 'admin:auth:edit', 0, '/admin/auth/:id', 'put', NULL, NULL, NULL);
+INSERT INTO `admin_auth` VALUES (18, 4, '删除权限', 'admin:auth:del', 0, '/admin/auth/:id', 'delete', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for admin_casbin_rule
