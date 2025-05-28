@@ -9,7 +9,7 @@ import (
 
 // UserInfo 获取用户信息
 func UserInfo(ctx *svc.ServiceContext) (resp types.UserInfoResponse, err error) {
-	user, _ := ctx.GinContext.Get("userInfo")
+	user, _ := ctx.GinContext.Get(jwt.UserInfo)
 	claims := user.(*jwt.Claims)
 	userModel := query.AdminUserModel
 	resp = userModel.WithContext(ctx).GetUserInfo(claims.Id)

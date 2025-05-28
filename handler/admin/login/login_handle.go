@@ -20,8 +20,8 @@ func LoginHandle(c *gin.Context) {
 	}
 	resp, err := login.Login(svc.NewServiceContext(c), &req)
 	if err == nil {
-		c.SetCookie(jwt.JwtName, resp.Jwt, config.JwtConf.Expire*3600, "/", "127.0.0.1", true, true)
-		c.SetCookie(jwt.JwtName, resp.Jwt, config.JwtConf.Expire*3600, "/", "localhost", true, true)
+		c.SetCookie(jwt.AuthorizationName, resp.Jwt, config.JwtConf.Expire*3600, "/", "127.0.0.1", true, true)
+		c.SetCookie(jwt.AuthorizationName, resp.Jwt, config.JwtConf.Expire*3600, "/", "localhost", true, true)
 	}
 	response.HandleResponse(c, resp, err)
 }

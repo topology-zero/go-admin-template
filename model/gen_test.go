@@ -60,7 +60,7 @@ func TestGEN(t *testing.T) {
 		return db.Config.NamingStrategy.SchemaName(tableName) + "Model"
 	})
 
-	//不需要将数据库中的 int 转换成 struct 的 int32
+	// 不需要将数据库中的 int 转换成 struct 的 int32
 	g.WithDataTypeMap(map[string]func(columnType gorm.ColumnType) (dataType string){
 		"int": func(columnType gorm.ColumnType) (dataType string) {
 			return "int"
@@ -77,7 +77,7 @@ func TestGEN(t *testing.T) {
 	g.UseDB(db)
 
 	// 生成全部表的 model
-	g.GenerateAllTable()
+	// g.GenerateAllTable()
 
 	// 创建模型, 不创建 query 文件
 	// g.GenerateModel("admin_user")

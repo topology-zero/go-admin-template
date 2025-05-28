@@ -5,19 +5,22 @@ import (
 
 	"go-admin-template/config"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 )
 
-const JwtName = "Authorization"
+const (
+	AuthorizationName = "Authorization"
+	UserInfo          = "userInfo"
+)
 
 type Claims struct {
 	Id     int    `json:"id"`
 	RoleId int    `json:"roleId"`
 	Phone  string `json:"phone"`
-	jwt.StandardClaims
+	jwt.RegisteredClaims
 }
 
 // MakeToken 生成 jwt 令牌
@@ -28,8 +31,8 @@ func MakeToken(id, roleId int, phone string) (string, error) {
 		Id:     id,
 		RoleId: roleId,
 		Phone:  phone,
-		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: expTime.Unix(),
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(expTime),
 			Subject:   config.ServerConf.Name,
 		},
 	})
@@ -57,14 +60,19 @@ func ParseToken(token string) (*Claims, error) {
 
 // GetToken 各种方法获取 token
 func GetToken(c *gin.Context) (string, error) {
-	if token := c.GetHeader(JwtName); token != "" {
+	if token := c.GetHeader(AuthorizationName); token != "" {
 		return token, nil
 	}
 
-	if token, _ := c.Cookie(JwtName); token != "" {
+	if token, _ := c.Cookie(AuthorizationName); token != "" {
 		return token, nil
 	}
-	return "", errors.New("没有找到" + JwtName)
+
+	if token := c.Query(AuthorizationName); token != "" {
+		return token, nil
+	}
+	
+	return "", errors.New("没有找到" + AuthorizationName)
 }
 
 // GetAndParseToken 对 GetToken 和 ParseToken 的封装

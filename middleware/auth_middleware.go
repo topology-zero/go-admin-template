@@ -13,7 +13,7 @@ import (
 )
 
 func AuthMiddleware(c *gin.Context) {
-	user, _ := c.Get("userInfo")
+	user, _ := c.Get(jwt.UserInfo)
 	claims := user.(*jwt.Claims)
 	roleStr := "role:" + strconv.Itoa(claims.RoleId)
 	ok, _ := model.Enforcer.Enforce(roleStr, c.FullPath(), strings.ToLower(c.Request.Method))

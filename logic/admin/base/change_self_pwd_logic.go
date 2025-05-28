@@ -12,7 +12,7 @@ import (
 
 // ChangeSelfPwd 修改自己的密码
 func ChangeSelfPwd(ctx *svc.ServiceContext, req *types.ChangeSelfPwdRequest) error {
-	user, _ := ctx.GinContext.Get("userInfo")
+	user, _ := ctx.GinContext.Get(jwt.UserInfo)
 	claims := user.(*jwt.Claims)
 
 	userModel := query.AdminUserModel

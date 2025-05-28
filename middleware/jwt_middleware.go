@@ -20,13 +20,15 @@ func JwtMiddleware(c *gin.Context) {
 		response.HandleAbortResponse(c, "鉴权失败，请重新登录", response.WithCode(401))
 		return
 	}
-	if time.Now().Unix() > claims.ExpiresAt {
+
+	expTime, _ := claims.GetExpirationTime()
+	if time.Now().Unix() > expTime.Unix() {
 		response.HandleAbortResponse(c, "鉴权失败，请重新登录", response.WithCode(401))
 		return
 	}
 
 	// 保存进该请求的上下文
-	c.Set("userInfo", claims)
+	c.Set(jwt.UserInfo, claims)
 
 	c.Next()
 }
