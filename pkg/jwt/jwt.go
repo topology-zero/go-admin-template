@@ -71,15 +71,6 @@ func GetToken(c *gin.Context) (string, error) {
 	if token := c.Query(AuthorizationName); token != "" {
 		return token, nil
 	}
-	
-	return "", errors.New("没有找到" + AuthorizationName)
-}
 
-// GetAndParseToken 对 GetToken 和 ParseToken 的封装
-func GetAndParseToken(c *gin.Context) (*Claims, error) {
-	token, err := GetToken(c)
-	if err != nil {
-		return nil, err
-	}
-	return ParseToken(token)
+	return "", errors.New("没有找到" + AuthorizationName)
 }

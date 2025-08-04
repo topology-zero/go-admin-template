@@ -93,3 +93,16 @@ func RandomString(n int) string {
 	}
 	return sb.String()
 }
+
+// RFC3339toDateTime 将 RFC3339 格式转换为 DateTime 格式
+func RFC3339toDateTime(s string) string {
+	if len(s) == 0 {
+		return s
+	}
+
+	t, err := time.ParseInLocation(time.RFC3339, s, time.Local)
+	if err != nil {
+		return s
+	}
+	return t.Format(time.DateTime)
+}
