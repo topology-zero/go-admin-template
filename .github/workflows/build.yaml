@@ -24,5 +24,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }} # 密码
           registry: registry.cn-hangzhou.aliyuncs.com # 腾讯云Registry
           dockerfile: Dockerfile # 指定 Dockerfile 的位置
-          tags: "latest,${{ github.ref_name }}"
+          tags: "${{ github.ref_name }}"
 
