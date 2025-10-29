@@ -65,9 +65,11 @@ func TestGEN(t *testing.T) {
 		},
 	})
 
-	// 默认 deleted_at 字段是 gorm.Delete 类型, 如果其他字段需要实现软删除, 则需要将这个设置
 	g.WithOpts(
+		// 默认 deleted_at 字段是 gorm.Delete 类型, 如果其他字段需要实现软删除, 则需要将这个设置
 		gen.FieldType("delete_time", "gorm.DeletedAt"),
+
+		// 不需要 json tag
 		gen.FieldModify(func(field gen.Field) gen.Field {
 			field.Tag.Remove("json")
 			return field
