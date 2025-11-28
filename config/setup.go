@@ -1,11 +1,9 @@
 package config
 
 import (
-	"image/color"
 	"log"
 	"strings"
 
-	"github.com/mojocn/base64Captcha"
 	"github.com/spf13/viper"
 )
 
@@ -16,22 +14,7 @@ var (
 	LogConf    = Log{}
 	MysqlConf  = Mysql{}
 	RedisConf  = Redis{}
-	Captcha    *base64Captcha.Captcha
 )
-
-func init() {
-	Captcha = base64Captcha.NewCaptcha(base64Captcha.NewDriverString(
-		50,
-		150,
-		100,
-		3,
-		4,
-		"234567890abcdefghjkmnpqrstuvwxyz",
-		&color.RGBA{R: 240, G: 240, B: 246, A: 246},
-		nil,
-		[]string{"wqy-microhei.ttc"},
-	), base64Captcha.DefaultMemStore)
-}
 
 func Setup(fileName string) {
 	viper.SetConfigFile(fileName)

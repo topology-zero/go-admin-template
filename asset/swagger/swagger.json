@@ -40,7 +40,7 @@
                     "后台权限相关"
                 ],
                 "summary": "权限列表",
-                "operationId": "cda8d6ed-3ed7-4b11-8d7c-b1f34a126c7d",
+                "operationId": "d9e840e7-1357-4697-97c6-6818cee469d0",
                 "responses": {
                     "200": {
                         "content": {
@@ -62,7 +62,7 @@
                     "后台权限相关"
                 ],
                 "summary": "添加权限",
-                "operationId": "1125750d-433a-445b-9494-fdeaecacf11b",
+                "operationId": "14bf7cc5-ad56-439d-bf09-bd4cc67e5ee6",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -80,7 +80,7 @@
                     "后台权限相关"
                 ],
                 "summary": "编辑权限",
-                "operationId": "3af3bdd0-1703-4b25-8dd0-db1febaec229",
+                "operationId": "60c9983d-b9d4-4b1c-949d-7190a22820c8",
                 "parameters": [
                     {
                         "name": "id",
@@ -103,7 +103,7 @@
                     "后台权限相关"
                 ],
                 "summary": "删除权限",
-                "operationId": "5c5a3437-f615-44a5-b2f6-81b9a5bcb42f",
+                "operationId": "33d8c512-9fa8-4212-83c9-1bee64bf000c",
                 "parameters": [
                     {
                         "name": "id",
@@ -119,7 +119,7 @@
                     "后台角色相关"
                 ],
                 "summary": "角色列表",
-                "operationId": "91cad1a5-3e97-4eb2-bdca-76ab7798122a",
+                "operationId": "e5cae561-3e1a-4709-bbfe-611d45471cba",
                 "parameters": [
                     {
                         "name": "page",
@@ -150,7 +150,7 @@
                     "后台角色相关"
                 ],
                 "summary": "添加角色",
-                "operationId": "85c5e585-f1c7-4933-81a8-da0af63981da",
+                "operationId": "99b57cf9-068d-479c-b5e2-108a5ab74bb9",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -168,7 +168,7 @@
                     "后台角色相关"
                 ],
                 "summary": "角色详情",
-                "operationId": "c52e2376-a172-40db-a749-33a32022c0a2",
+                "operationId": "436bee3b-1773-40ad-9eec-b0ebc6b4da31",
                 "parameters": [
                     {
                         "name": "id",
@@ -194,7 +194,7 @@
                     "后台角色相关"
                 ],
                 "summary": "编辑角色",
-                "operationId": "2e70aa35-bb37-4ffe-9efb-b36bf27fee38",
+                "operationId": "48f5e07a-6c88-46bd-b8a3-56db630891fd",
                 "parameters": [
                     {
                         "name": "id",
@@ -217,7 +217,7 @@
                     "后台角色相关"
                 ],
                 "summary": "删除角色",
-                "operationId": "67341691-11e2-41e4-83fc-e18b5a6f2879",
+                "operationId": "d74013d4-0eee-460c-9379-d108dc346d01",
                 "parameters": [
                     {
                         "name": "id",
@@ -233,7 +233,7 @@
                     "后台用户相关"
                 ],
                 "summary": "用户列表",
-                "operationId": "3f5bef86-7aee-401a-b991-a56257d60570",
+                "operationId": "141afd30-c468-4e95-b595-5a9c08a72a06",
                 "parameters": [
                     {
                         "name": "page",
@@ -264,7 +264,7 @@
                     "后台用户相关"
                 ],
                 "summary": "添加用户",
-                "operationId": "bea46416-6744-4d71-86cd-29cfa1dc65c8",
+                "operationId": "26a54902-1fa5-4a3e-85f5-27db25eae733",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -282,7 +282,7 @@
                     "后台用户相关"
                 ],
                 "summary": "编辑用户",
-                "operationId": "7d61e9ae-67a1-4069-a4e7-72aaaf561efc",
+                "operationId": "c8a2dae9-467e-40ca-9c67-980f190015eb",
                 "parameters": [
                     {
                         "name": "id",
@@ -305,7 +305,7 @@
                     "后台用户相关"
                 ],
                 "summary": "删除用户",
-                "operationId": "9af6c836-3d50-43fe-8791-777352583645",
+                "operationId": "4d5de022-22ff-4263-8f02-edafb0a0f24b",
                 "parameters": [
                     {
                         "name": "id",
@@ -321,7 +321,7 @@
                     "基础接口相关"
                 ],
                 "summary": "获取所有权限",
-                "operationId": "09c54bbb-2d96-4d1b-88fb-5289113b46b7",
+                "operationId": "a2c00629-90c2-4d16-9ae8-3e0915b89827",
                 "responses": {
                     "200": {
                         "content": {
@@ -345,7 +345,7 @@
                     "基础接口相关"
                 ],
                 "summary": "修改自己的密码",
-                "operationId": "c229cffe-8bf9-45fc-a8fc-577bddcb0177",
+                "operationId": "a7433fd9-59dd-4882-a398-6ad906389fb0",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -363,7 +363,7 @@
                     "基础接口相关"
                 ],
                 "summary": "获取所有角色",
-                "operationId": "a14900fe-4df1-4206-ac30-aafa46745c0c",
+                "operationId": "b546d9a7-6550-439c-8804-b7ebcf643a41",
                 "responses": {
                     "200": {
                         "content": {
@@ -387,7 +387,7 @@
                     "基础接口相关"
                 ],
                 "summary": "获取用户信息",
-                "operationId": "b8a493dc-8f95-4b74-9641-9038f385b0b4",
+                "operationId": "319dc433-8c79-4be5-ae92-78ae0a821b54",
                 "responses": {
                     "200": {
                         "content": {
@@ -408,7 +408,7 @@
                     "登录相关"
                 ],
                 "summary": "获取验证码",
-                "operationId": "954ed8e1-124c-4157-b7b6-0ab061982a2b",
+                "operationId": "76106923-1fd4-4c30-b939-62aa455bc3f8",
                 "responses": {
                     "200": {
                         "content": {
@@ -429,7 +429,7 @@
                     "登录相关"
                 ],
                 "summary": "登录",
-                "operationId": "77a676bc-c852-4137-88d9-2f0083ec6ea6",
+                "operationId": "415df102-0c69-4fee-9490-a892537f7027",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -459,7 +459,7 @@
                     "登录相关"
                 ],
                 "summary": "退出登录",
-                "operationId": "bdcef5ce-74ad-46f5-bdd4-56d42bb4c8bc"
+                "operationId": "101b5cdb-f807-41f1-a3e4-4c27e73887d5"
             }
         },
         "/upload/image": {
@@ -468,7 +468,7 @@
                     "通用接口"
                 ],
                 "summary": "上传图片",
-                "operationId": "52199be6-d8ba-42a7-8be9-d945afa79243",
+                "operationId": "e24453bf-831b-4f8d-be0b-b55180c6114b",
                 "responses": {
                     "200": {
                         "content": {
@@ -900,13 +900,30 @@
                 "type": "object",
                 "title": "CodeResponse",
                 "properties": {
-                    "id": {
-                        "description": "在登录时提交",
+                    "captchaKey": {
                         "type": "string"
                     },
-                    "image": {
-                        "description": "验证码 base64 格式",
+                    "imageBase64": {
                         "type": "string"
+                    },
+                    "tileBase64": {
+                        "type": "string"
+                    },
+                    "tileHeight": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "tileWidth": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "tileX": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "tileY": {
+                        "type": "integer",
+                        "format": "int32"
                     }
                 }
             },

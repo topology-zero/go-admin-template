@@ -15,14 +15,19 @@ type IDAndName struct {
 }
 
 type CodeResponse struct {
-	ID    string `json:"id"`    // 在登录时提交
-	Image string `json:"image"` // 验证码 base64 格式
+	CaptchaKey  string `json:"captchaKey"`
+	ImageBase64 string `json:"imageBase64"`
+	TileBase64  string `json:"tileBase64"`
+	TileHeight  int    `json:"tileHeight"`
+	TileWidth   int    `json:"tileWidth"`
+	TileX       int    `json:"tileX"`
+	TileY       int    `json:"tileY"`
 }
 
 type LoginRequest struct {
 	Username string `json:"username" binding:"required" label:"用户名"`      // 用户名
 	Password string `json:"password" binding:"required,min=6" label:"密码"` // 密码
-	Code     string `json:"code" binding:"required,len=4" label:"验证码"`    // 验证码
+	Code     string `json:"code" binding:"required" label:"验证码"`          // 验证码
 	CodeID   string `json:"codeId" binding:"required" label:"获取验证码时的ID"`  // 获取验证码时的ID
 }
 

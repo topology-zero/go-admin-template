@@ -1,23 +1,39 @@
 package login
 
 import (
+	"strconv"
 	"strings"
 
 	"go-admin-template/config"
 	"go-admin-template/pkg/jwt"
+	"go-admin-template/pkg/redis"
 	"go-admin-template/query"
 	"go-admin-template/svc"
 	"go-admin-template/types"
 
 	"github.com/pkg/errors"
+	"github.com/wenlng/go-captcha/v2/slide"
 	"golang.org/x/crypto/bcrypt"
 )
 
 // Login 登录
 func Login(ctx *svc.ServiceContext, req *types.LoginRequest) (resp types.LoginResponse, err error) {
-	req.Code = strings.ToLower(req.Code)
-	match := config.Captcha.Verify(req.CodeID, req.Code, true)
-	if !match {
+	captchaKey := config.ServerConf.Name + ":CAPTCHAKEY:" + req.CodeID
+	dbCode, _ := redis.Client.Get(ctx, captchaKey).Result()
+	if len(dbCode) == 0 {
+		err = errors.New("验证码已过期")
+		return
+	}
+	redis.Client.Del(ctx, captchaKey) // 只允许用一次
+	userCodeArr := strings.Split(req.Code, ",")
+	dbCodeArr := strings.Split(dbCode, ",")
+
+	userCodeX, _ := strconv.Atoi(userCodeArr[0])
+	userCodeY, _ := strconv.Atoi(userCodeArr[1])
+	dbCodeX, _ := strconv.Atoi(dbCodeArr[0])
+	dbCodeY, _ := strconv.Atoi(dbCodeArr[1])
+
+	if !slide.Validate(userCodeX, userCodeY, dbCodeX, dbCodeY, 5) {
 		err = errors.New("验证码错误")
 		return
 	}
