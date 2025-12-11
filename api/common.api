@@ -13,6 +13,10 @@ type (
         ID int `json:"id"`
         Name string `json:"name"`
     }
+
+    UploadImageRequest {
+        File string `form:"file" file:"-"`
+    }
 )
 
 @server(
@@ -24,5 +28,5 @@ type (
 service go-admin-template {
     @doc "上传图片"
     @handler uploadImage
-    post /upload/image returns (string)
+    post /upload/image(UploadImageRequest) returns (string)
 }

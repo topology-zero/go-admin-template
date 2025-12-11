@@ -40,7 +40,7 @@
                     "后台权限相关"
                 ],
                 "summary": "权限列表",
-                "operationId": "d9e840e7-1357-4697-97c6-6818cee469d0",
+                "operationId": "fea9e407-2fd3-4bb4-a54d-0f79f1b305f4",
                 "responses": {
                     "200": {
                         "content": {
@@ -62,7 +62,7 @@
                     "后台权限相关"
                 ],
                 "summary": "添加权限",
-                "operationId": "14bf7cc5-ad56-439d-bf09-bd4cc67e5ee6",
+                "operationId": "c406ee3d-7553-41a2-8494-67a3ad724662",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -80,7 +80,7 @@
                     "后台权限相关"
                 ],
                 "summary": "编辑权限",
-                "operationId": "60c9983d-b9d4-4b1c-949d-7190a22820c8",
+                "operationId": "b323b0b4-b1fe-41dd-9df7-46333d0582ec",
                 "parameters": [
                     {
                         "name": "id",
@@ -103,7 +103,7 @@
                     "后台权限相关"
                 ],
                 "summary": "删除权限",
-                "operationId": "33d8c512-9fa8-4212-83c9-1bee64bf000c",
+                "operationId": "ef1aa823-8535-433b-acb6-57258dd572d1",
                 "parameters": [
                     {
                         "name": "id",
@@ -119,7 +119,7 @@
                     "后台角色相关"
                 ],
                 "summary": "角色列表",
-                "operationId": "e5cae561-3e1a-4709-bbfe-611d45471cba",
+                "operationId": "ae233c82-1c31-422e-8a48-31e0e41c5f1a",
                 "parameters": [
                     {
                         "name": "page",
@@ -150,7 +150,7 @@
                     "后台角色相关"
                 ],
                 "summary": "添加角色",
-                "operationId": "99b57cf9-068d-479c-b5e2-108a5ab74bb9",
+                "operationId": "6d2d21a7-4acb-4785-a8f0-127b78017996",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -168,7 +168,7 @@
                     "后台角色相关"
                 ],
                 "summary": "角色详情",
-                "operationId": "436bee3b-1773-40ad-9eec-b0ebc6b4da31",
+                "operationId": "1a9f46fb-aa5a-4061-b330-ad614c30601b",
                 "parameters": [
                     {
                         "name": "id",
@@ -194,7 +194,7 @@
                     "后台角色相关"
                 ],
                 "summary": "编辑角色",
-                "operationId": "48f5e07a-6c88-46bd-b8a3-56db630891fd",
+                "operationId": "c11d4186-cf7d-47a8-af57-26991cfa0a45",
                 "parameters": [
                     {
                         "name": "id",
@@ -217,7 +217,7 @@
                     "后台角色相关"
                 ],
                 "summary": "删除角色",
-                "operationId": "d74013d4-0eee-460c-9379-d108dc346d01",
+                "operationId": "4d15e37f-2d6e-41d4-ac6c-469545618bff",
                 "parameters": [
                     {
                         "name": "id",
@@ -233,7 +233,7 @@
                     "后台用户相关"
                 ],
                 "summary": "用户列表",
-                "operationId": "141afd30-c468-4e95-b595-5a9c08a72a06",
+                "operationId": "64617b25-23a8-4aed-b088-7db67454a886",
                 "parameters": [
                     {
                         "name": "page",
@@ -264,7 +264,7 @@
                     "后台用户相关"
                 ],
                 "summary": "添加用户",
-                "operationId": "26a54902-1fa5-4a3e-85f5-27db25eae733",
+                "operationId": "47fa4bc3-b4a8-4246-a704-af558cb72fd2",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -282,7 +282,7 @@
                     "后台用户相关"
                 ],
                 "summary": "编辑用户",
-                "operationId": "c8a2dae9-467e-40ca-9c67-980f190015eb",
+                "operationId": "23562c1f-2995-42b2-854b-1af347321d19",
                 "parameters": [
                     {
                         "name": "id",
@@ -305,7 +305,7 @@
                     "后台用户相关"
                 ],
                 "summary": "删除用户",
-                "operationId": "4d5de022-22ff-4263-8f02-edafb0a0f24b",
+                "operationId": "993c26aa-caa1-4863-a6a2-4bb1a228333f",
                 "parameters": [
                     {
                         "name": "id",
@@ -321,7 +321,7 @@
                     "基础接口相关"
                 ],
                 "summary": "获取所有权限",
-                "operationId": "a2c00629-90c2-4d16-9ae8-3e0915b89827",
+                "operationId": "4c1645cd-708b-44c2-8e0a-9c730ea53ac8",
                 "responses": {
                     "200": {
                         "content": {
@@ -345,7 +345,7 @@
                     "基础接口相关"
                 ],
                 "summary": "修改自己的密码",
-                "operationId": "a7433fd9-59dd-4882-a398-6ad906389fb0",
+                "operationId": "d09167d7-ef1c-4488-a282-002552a74a45",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -363,7 +363,7 @@
                     "基础接口相关"
                 ],
                 "summary": "获取所有角色",
-                "operationId": "b546d9a7-6550-439c-8804-b7ebcf643a41",
+                "operationId": "1f75f8a4-ff81-464a-b739-27974f7e5ee5",
                 "responses": {
                     "200": {
                         "content": {
@@ -387,7 +387,7 @@
                     "基础接口相关"
                 ],
                 "summary": "获取用户信息",
-                "operationId": "319dc433-8c79-4be5-ae92-78ae0a821b54",
+                "operationId": "5b8a76ed-e887-407b-97cb-94ebe5aba71a",
                 "responses": {
                     "200": {
                         "content": {
@@ -408,7 +408,7 @@
                     "登录相关"
                 ],
                 "summary": "获取验证码",
-                "operationId": "76106923-1fd4-4c30-b939-62aa455bc3f8",
+                "operationId": "d789bdfb-dd29-4d12-81fb-9561a476c09a",
                 "responses": {
                     "200": {
                         "content": {
@@ -429,7 +429,7 @@
                     "登录相关"
                 ],
                 "summary": "登录",
-                "operationId": "415df102-0c69-4fee-9490-a892537f7027",
+                "operationId": "0861a780-3203-4cac-92dc-c016935de426",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -459,7 +459,7 @@
                     "登录相关"
                 ],
                 "summary": "退出登录",
-                "operationId": "101b5cdb-f807-41f1-a3e4-4c27e73887d5"
+                "operationId": "53e70926-4ae4-4a0c-bb50-50d4e1ae8be1"
             }
         },
         "/upload/image": {
@@ -468,7 +468,16 @@
                     "通用接口"
                 ],
                 "summary": "上传图片",
-                "operationId": "e24453bf-831b-4f8d-be0b-b55180c6114b",
+                "operationId": "eff13edc-1065-44c1-90ec-0dc835ccfb17",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UploadImageRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "content": {
@@ -979,6 +988,15 @@
                     "id": {
                         "type": "integer",
                         "format": "int32"
+                    }
+                }
+            },
+            "UploadImageRequest": {
+                "type": "object",
+                "title": "UploadImageRequest",
+                "properties": {
+                    "file": {
+                        "type": "file"
                     }
                 }
             },
