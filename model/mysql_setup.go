@@ -7,7 +7,7 @@ import (
 
 	"go-admin-template/config"
 
-	"github.com/casbin/casbin/v2"
+	"github.com/casbin/casbin/v3"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
