@@ -106,3 +106,77 @@ func RFC3339toDateTime(s string) string {
 	}
 	return t.Format(time.DateTime)
 }
+
+// MaskData 数据脱敏
+func MaskData[T any](src T) T {
+	value := maskValue(reflect.ValueOf(src))
+	return value.Interface().(T)
+}
+
+func maskValue(v reflect.Value) reflect.Value {
+	if !v.IsValid() {
+		return v
+	}
+
+	switch v.Kind() {
+	case reflect.Pointer:
+		if v.IsNil() {
+			return v
+		}
+		p := reflect.New(v.Elem().Type())
+		p.Elem().Set(maskValue(v.Elem()))
+		return p
+	case reflect.Struct:
+		dst := reflect.New(v.Type()).Elem()
+
+		for i := 0; i < v.NumField(); i++ {
+
+			field := v.Type().Field(i)
+			value := v.Field(i)
+
+			// string 根据 tag 脱敏
+			if value.Kind() == reflect.String {
+				dst.Field(i).SetString(doMask(
+					field.Tag.Get("mask"),
+					value.String(),
+				))
+				continue
+			}
+			// 嵌套 struct / pointer
+			switch value.Kind() {
+			case reflect.Struct, reflect.Pointer:
+				dst.Field(i).Set(maskValue(value))
+			default:
+				dst.Field(i).Set(value)
+			}
+		}
+		return dst
+	default:
+		return v
+	}
+}
+
+func doMask(rule, value string) string {
+	switch rule {
+	case "phone":
+		if len(value) >= 7 {
+			return value[:3] + "****" + value[len(value)-4:]
+		}
+	case "email":
+		if i := strings.Index(value, "@"); i > 1 {
+			return value[:1] + strings.Repeat("*", i-1) + value[i:]
+		}
+	case "name":
+		r := []rune(value)
+		if len(r) > 1 {
+			return string(r[:1]) + strings.Repeat("*", len(r)-1)
+		}
+	case "idcard":
+		if len(value) > 8 {
+			return value[:4] + strings.Repeat("*", len(value)-8) + value[len(value)-4:]
+		}
+	case "password":
+		return "******"
+	}
+	return value
+}
